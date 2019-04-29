@@ -26,7 +26,7 @@ void Console::mainMenu(){
     
     if(i == 1){
        
-        std::cout<< "\nStarting a New Game" << std::endl;
+        std::cout<< "\nStarting a New Game I changed something" << std::endl;
         //call the new game method on the view
         
     }else if (i==2){

@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55245614227297EF001B8787 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524560C227297EF001B8787 /* Tile.cpp */; };
-		55245615227297EF001B8787 /* qwirkle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524560F227297EF001B8787 /* qwirkle.cpp */; };
-		55245616227297EF001B8787 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 55245610227297EF001B8787 /* Makefile */; };
-		55245617227297EF001B8787 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55245611227297EF001B8787 /* Node.cpp */; };
-		55245618227297EF001B8787 /* LinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55245613227297EF001B8787 /* LinkedList.cpp */; };
+		5524563022729AC4001B8787 /* Tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524562722729AC3001B8787 /* Tile.cpp */; };
+		5524563122729AC4001B8787 /* LinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524562822729AC3001B8787 /* LinkedList.cpp */; };
+		5524563222729AC4001B8787 /* qwirkle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524562A22729AC3001B8787 /* qwirkle.cpp */; };
+		5524563322729AC4001B8787 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 5524562C22729AC3001B8787 /* Makefile */; };
+		5524563422729AC4001B8787 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524562D22729AC3001B8787 /* Node.cpp */; };
+		552456372272CE1E001B8787 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552456352272CE1E001B8787 /* Console.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,15 +29,17 @@
 
 /* Begin PBXFileReference section */
 		5524560122729796001B8787 /* cBot Assignment 2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cBot Assignment 2"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5524560B227297EF001B8787 /* TileCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileCodes.h; sourceTree = "<group>"; };
-		5524560C227297EF001B8787 /* Tile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tile.cpp; sourceTree = "<group>"; };
-		5524560D227297EF001B8787 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		5524560E227297EF001B8787 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
-		5524560F227297EF001B8787 /* qwirkle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = qwirkle.cpp; sourceTree = "<group>"; };
-		55245610227297EF001B8787 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		55245611227297EF001B8787 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
-		55245612227297EF001B8787 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
-		55245613227297EF001B8787 /* LinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinkedList.cpp; sourceTree = "<group>"; };
+		5524562722729AC3001B8787 /* Tile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tile.cpp; path = src/Tile.cpp; sourceTree = SOURCE_ROOT; };
+		5524562822729AC3001B8787 /* LinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LinkedList.cpp; path = src/LinkedList.cpp; sourceTree = SOURCE_ROOT; };
+		5524562922729AC3001B8787 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = src/Node.h; sourceTree = SOURCE_ROOT; };
+		5524562A22729AC3001B8787 /* qwirkle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = qwirkle.cpp; path = src/qwirkle.cpp; sourceTree = SOURCE_ROOT; };
+		5524562B22729AC3001B8787 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tile.h; path = src/Tile.h; sourceTree = SOURCE_ROOT; };
+		5524562C22729AC3001B8787 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = src/Makefile; sourceTree = SOURCE_ROOT; };
+		5524562D22729AC3001B8787 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = src/Node.cpp; sourceTree = SOURCE_ROOT; };
+		5524562E22729AC3001B8787 /* TileCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileCodes.h; path = src/TileCodes.h; sourceTree = SOURCE_ROOT; };
+		5524562F22729AC4001B8787 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinkedList.h; path = src/LinkedList.h; sourceTree = SOURCE_ROOT; };
+		552456352272CE1E001B8787 /* Console.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Console.cpp; path = src/Console.cpp; sourceTree = SOURCE_ROOT; };
+		552456362272CE1E001B8787 /* Console.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Console.hpp; path = src/Console.hpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,15 +72,17 @@
 		5524560322729796001B8787 /* cBot Assignment 2 */ = {
 			isa = PBXGroup;
 			children = (
-				55245613227297EF001B8787 /* LinkedList.cpp */,
-				5524560E227297EF001B8787 /* LinkedList.h */,
-				55245610227297EF001B8787 /* Makefile */,
-				55245611227297EF001B8787 /* Node.cpp */,
-				5524560D227297EF001B8787 /* Node.h */,
-				5524560F227297EF001B8787 /* qwirkle.cpp */,
-				5524560C227297EF001B8787 /* Tile.cpp */,
-				55245612227297EF001B8787 /* Tile.h */,
-				5524560B227297EF001B8787 /* TileCodes.h */,
+				5524562822729AC3001B8787 /* LinkedList.cpp */,
+				5524562F22729AC4001B8787 /* LinkedList.h */,
+				5524562C22729AC3001B8787 /* Makefile */,
+				5524562D22729AC3001B8787 /* Node.cpp */,
+				5524562922729AC3001B8787 /* Node.h */,
+				5524562A22729AC3001B8787 /* qwirkle.cpp */,
+				5524562722729AC3001B8787 /* Tile.cpp */,
+				5524562B22729AC3001B8787 /* Tile.h */,
+				5524562E22729AC3001B8787 /* TileCodes.h */,
+				552456352272CE1E001B8787 /* Console.cpp */,
+				552456362272CE1E001B8787 /* Console.hpp */,
 			);
 			path = "cBot Assignment 2";
 			sourceTree = "<group>";
@@ -138,11 +143,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55245614227297EF001B8787 /* Tile.cpp in Sources */,
-				55245616227297EF001B8787 /* Makefile in Sources */,
-				55245615227297EF001B8787 /* qwirkle.cpp in Sources */,
-				55245618227297EF001B8787 /* LinkedList.cpp in Sources */,
-				55245617227297EF001B8787 /* Node.cpp in Sources */,
+				5524563122729AC4001B8787 /* LinkedList.cpp in Sources */,
+				5524563022729AC4001B8787 /* Tile.cpp in Sources */,
+				5524563322729AC4001B8787 /* Makefile in Sources */,
+				552456372272CE1E001B8787 /* Console.cpp in Sources */,
+				5524563222729AC4001B8787 /* qwirkle.cpp in Sources */,
+				5524563422729AC4001B8787 /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

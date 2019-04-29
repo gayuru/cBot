@@ -5,13 +5,24 @@
 #include "Node.h"
 
 class LinkedList {
-public:
+  public:
+    LinkedList();
+    ~LinkedList();
 
-   LinkedList();
-   ~LinkedList();
+    int size();
+    void clear();
+    Tile* get(int i);
 
-private:
-   Node* head;
+    void addFront(Tile* data);
+    void addBack(Tile* data);
+
+    void deleteFront();
+    void deleteBack();
+
+    private:
+    Node* head;
+    Node* back;
+    int counter;
 };
 
 #endif // ASSIGN2_LINKEDLIST_H

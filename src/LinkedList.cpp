@@ -28,14 +28,13 @@ Tile* LinkedList::get(int i){
 }
 
 void LinkedList::clear(){
-   Node* node = this->head->next;
-   for(int i = 1; i != this->size(); i++){
-      Node* storage = node->next;
-      delete node;
-      node = storage;
-   }
-   head = nullptr;
-   back = nullptr; //changed
+    while(this->head != nullptr){
+        Node* node = this->head;
+        this->head = node->next;
+        delete node;
+    }
+    head = nullptr;
+    back = nullptr;
 }
 
 void LinkedList::addBack(Tile* data){

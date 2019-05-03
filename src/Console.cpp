@@ -8,13 +8,20 @@
 
 #include "Console.hpp"
 #include <iostream>
+#include "TileBag.hpp"
 
 void Console::runGame(){
     
     std::cout<< "\nWelcome to Qwirkle!\n-------------------\n" << std::endl;
-    mainMenu();
+//    mainMenu();
+    testing();
 }
 
+void Console::testing(){
+    
+    TileBag* bag = new TileBag();
+    bag->getRandomTiles();
+}
 void Console::mainMenu(){
     
     int i;
@@ -28,6 +35,7 @@ void Console::mainMenu(){
        
         std::cout<< "\nStarting a New Game I changed something" << std::endl;
         //call the new game method on the view
+        //create a new game object and start 
         
     }else if (i==2){
         

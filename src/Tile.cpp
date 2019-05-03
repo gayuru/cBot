@@ -3,6 +3,7 @@
 
 // Empty... for now?
 
+using std::string;
 
 Tile::Tile(Colour colour, Shape shape) {
     this->colour = colour;
@@ -18,10 +19,12 @@ Shape Tile::getShape() {
 }
 
 std::string Tile::toString() {
-    std::string thisString =  std::to_string(colour);
-    thisString += shape;
+//    std::string thisString =  std::to_string(colour);
+//    thisString += shape;
+    std::string thisString = "";
+    thisString+=colour;
+    thisString += std::to_string(shape);
     return thisString;
-
 }
 
 

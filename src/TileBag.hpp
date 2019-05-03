@@ -11,4 +11,14 @@
 
 #include <stdio.h>
 
+
+class TileBag{
+    
+public:
+    void getRandomTiles();
+    void getRandomSingleTile();
+
+};
+
+
 #endif /* TileBag_hpp */

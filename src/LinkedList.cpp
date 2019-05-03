@@ -34,15 +34,21 @@ void LinkedList::clear(){
       delete node;
       node = storage;
    }
-   delete head;
-   delete back;
+   head = nullptr;
+   back = nullptr; //changed
 }
 
 void LinkedList::addBack(Tile* data){
-   Node* storage = back;
-   Node* node = new Node(data, nullptr);
-   back = node;
-   storage->next = back;
+   if(this->size() == 0){
+      Node* node = new Node(data, nullptr);
+      back = node;
+      head = node;
+   }else{
+      Node* storage = back;
+      Node* node = new Node(data, nullptr);
+      back = node;
+      storage->next = node;
+   }
    this->counter++;
 }
 
@@ -60,16 +66,47 @@ void LinkedList::addFront(Tile* data){
 }
 
 void LinkedList::deleteFront(){
-   Node* storage = head->next;
-   delete head;
-   head = storage;
+   if(this->size() == 1){
+      delete head;
+      head = nullptr;
+      back = nullptr;
+   }else{
+      Node* storage = head->next;
+      delete head;
+      head = storage;
+   }
+   this->counter--;
 }
 
 void LinkedList::deleteBack(){
-   Node* node = head;
-   for(int i = 0; i != this->size() - 1; i++){
-      node = node->next;
+   if(this->size() == 1){
+      delete head;
+      head = nullptr;
+      back = nullptr;
+   }else{
+      Node* node = head;
+      for(int i = 0; i != this->size() - 1; i++){
+         node = node->next;
+      }
+      delete back;
+      back = node;
    }
-   delete back;
-   back = node;
+   this->counter--;
+}
+
+void LinkedList::deleteAt(int i){
+   if(i == 0){
+      deleteFront();
+   }else if(i < this->size() - 1){
+      Node* node = this->head;
+      Node* storage = nullptr;
+      for(int j = 0; j < i; j++){
+         storage = node;
+         node = node->next;
+      }
+      storage->next = node->next;
+      delete node;
+   }else if(i == this->size() - 1){
+      deleteBack();
+   }
 }

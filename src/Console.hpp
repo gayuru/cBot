@@ -17,6 +17,7 @@ public:
     void runGame();
     void mainMenu();
     void showStudentInfo();
+    void testing();
 };
 
     

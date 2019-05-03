@@ -11,13 +11,14 @@ typedef int Shape;
 class Tile {
 public:
    Tile(Colour colour, Shape shape);
+    Colour getColour();
+    Shape getShape();
+    std::string toString();
 private:
    Colour colour;
    Shape  shape;
 
-   Colour getColour();
-   Shape getShape();
-   std::string toString();
+ 
 
 
 };

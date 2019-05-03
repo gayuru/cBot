@@ -18,6 +18,7 @@ class LinkedList {
 
     void deleteFront();
     void deleteBack();
+    void deleteAt(int i);
 
     private:
     Node* head;

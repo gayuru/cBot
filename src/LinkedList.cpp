@@ -34,8 +34,8 @@ void LinkedList::clear(){
       delete node;
       node = storage;
    }
-   delete head;
-   delete back;
+   head = nullptr;
+   back = nullptr; //changed
 }
 
 void LinkedList::addBack(Tile* data){
@@ -92,4 +92,21 @@ void LinkedList::deleteBack(){
       back = node;
    }
    this->counter--;
+}
+
+void LinkedList::deleteAt(int i){
+   if(i == 0){
+      deleteFront();
+   }else if(i < this->size() - 1){
+      Node* node = this->head;
+      Node* storage = nullptr;
+      for(int j = 0; j < i; j++){
+         storage = node;
+         node = node->next;
+      }
+      storage->next = node->next;
+      delete node;
+   }else if(i == this->size() - 1){
+      deleteBack();
+   }
 }

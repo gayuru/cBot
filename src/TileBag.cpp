@@ -27,6 +27,10 @@ TileBag::TileBag() {
 
 }
 
+TileBag::~TileBag() {
+    delete[] tiles;
+}
+
 void TileBag::generateRandomTiles(){
     
     //shuffling an array

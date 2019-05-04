@@ -16,6 +16,7 @@ class TileBag{
     
 public:
     TileBag();
+    ~TileBag();
     void generateRandomTiles();
     Tile* replaceTile(Tile* tile);
     void fillPlayerHand(LinkedList* hand);
@@ -24,7 +25,7 @@ public:
 private:
     LinkedList* tiles;
     Tile* getRandomSingleTile();
-    
+
 };
 
 

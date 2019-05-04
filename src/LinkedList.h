@@ -12,13 +12,14 @@ class LinkedList {
     int size();
     void clear();
     Tile* get(int i);
-
+    Tile* getFront();
     void addFront(Tile* data);
     void addBack(Tile* data);
 
     void deleteFront();
     void deleteBack();
     void deleteAt(int i);
+    void printLinkedList();
 
     private:
     Node* head;

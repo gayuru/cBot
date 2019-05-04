@@ -20,7 +20,7 @@ void Console::runGame(){
 void Console::testing(){
     
     TileBag* bag = new TileBag();
-    bag->getRandomTiles();
+    bag->generateRandomTiles();
 }
 void Console::mainMenu(){
     

@@ -1,6 +1,6 @@
 
 #include "LinkedList.h"
-
+#include <iostream>
 LinkedList::LinkedList() {
    head = nullptr;
    back = nullptr;
@@ -27,6 +27,12 @@ Tile* LinkedList::get(int i){
    return value;
 }
 
+//Tile* LinkedList::getFront(){
+//    return head;
+//
+//}
+
+
 void LinkedList::clear(){
     while(this->head != nullptr){
         Node* node = this->head;
@@ -52,16 +58,15 @@ void LinkedList::addBack(Tile* data){
 }
 
 void LinkedList::addFront(Tile* data){
-   if(this->size() == 0){
-      Node* node = new Node(data, nullptr);
-      head = node;
-      back = node;
-   }else{
-      Node* storage = head->next;
-      Node* node = new Node(data, storage);
-      head = node;
-   }
-   this->counter++;
+    if(this->size() == 0){
+        Node* node = new Node(data, nullptr);
+        head = node;
+        back = node;
+    }else{
+        Node* node = new Node(data, this->head);
+        head = node;
+    }
+    this->counter++;
 }
 
 void LinkedList::deleteFront(){
@@ -109,3 +114,14 @@ void LinkedList::deleteAt(int i){
       deleteBack();
    }
 }
+
+void LinkedList::printLinkedList(){
+    
+    for(int i=0;i<this->size();++i){
+        
+        std::cout<< "Tile "<< i <<" : "<<this->get(i)->toString()<<std::endl;
+    }
+    
+}
+
+

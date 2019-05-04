@@ -10,13 +10,16 @@
 #define TileBag_hpp
 
 #include <stdio.h>
-
+#include "LinkedList.h"
 
 class TileBag{
     
 public:
-    void getRandomTiles();
+    void generateRandomTiles();
     void getRandomSingleTile();
+    bool exists(int arr,int val);
+private:
+    LinkedList* tiles;
 
 };
 

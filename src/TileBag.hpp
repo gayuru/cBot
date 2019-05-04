@@ -11,6 +11,19 @@
 
 #include <stdio.h>
 #include "LinkedList.h"
+#include <iostream>
+#include <string>
+#include <random>
+#include <algorithm>
+#include <chrono>       // std::chrono::system_clock
+#include "Tile.h"
+
+#include <set>
+
+using std::cout;
+using std::endl;
+using std::find;
+using std::set;
 
 class TileBag{
     
@@ -26,8 +39,7 @@ private:
     LinkedList* tiles;
     Tile* getRandomSingleTile();
     bool isEmpty(LinkedList* hand);
-
+    
 };
-
 
 #endif /* TileBag_hpp */

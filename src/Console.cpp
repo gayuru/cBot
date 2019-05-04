@@ -9,34 +9,40 @@
 #include "Console.hpp"
 #include <iostream>
 #include "TileBag.hpp"
+#include "Game.hpp"
 
 void Console::runGame(){
-    
     std::cout<< "\nWelcome to Qwirkle!\n-------------------\n" << std::endl;
-//    mainMenu();
-    testing();
+    mainMenu();
+    //testing();
 }
 
 void Console::testing(){
     
     TileBag* bag = new TileBag();
-    bag->generateRandomTiles();
+    LinkedList* lol = new LinkedList();
+    
+    bag->fillPlayerHand(lol);
+    lol->printLinkedList();
+    
 }
+
 void Console::mainMenu(){
     
     int i;
     
     std::cout<< "Menu\n----" << std::endl;
-    std::cout<< "1. New Game\n2. Load Game\n3. Show Student Information\n4. Quit \n\n" << std::endl;
+    std::cout<< "1. New Game\n2. Load Game\n3. Show Student Information\n4. Quit \n" << std::endl;
     std::cout<<"> ";
     std::cin>>i;
     
     if(i == 1){
-       
-        std::cout<< "\nStarting a New Game I changed something" << std::endl;
-        //call the new game method on the view
-        //create a new game object and start 
         
+        std::cout<< "\nStarting a New Game\n" << std::endl;
+        //call the new game method on the view
+        Game* qwirkle = new Game();
+        qwirkle->newGame();
+       
     }else if (i==2){
         
         //load a Game

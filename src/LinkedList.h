@@ -5,6 +5,7 @@
 #include "Node.h"
 
 class LinkedList {
+    
   public:
     LinkedList();
     ~LinkedList();

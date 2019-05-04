@@ -19,8 +19,6 @@ Shape Tile::getShape() {
 }
 
 std::string Tile::toString() {
-//    std::string thisString =  std::to_string(colour);
-//    thisString += shape;
     std::string thisString = "";
     thisString+=colour;
     thisString += std::to_string(shape);

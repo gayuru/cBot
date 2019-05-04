@@ -10,5 +10,16 @@
 #define Game_hpp
 
 #include <stdio.h>
+#include <iostream>
 
+using std::cout;
+using std::endl;
+
+class Game{
+    
+public:
+    Game();
+    void newGame();
+    
+};
 #endif /* Game_hpp */

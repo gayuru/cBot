@@ -9,19 +9,17 @@ typedef char Colour;
 typedef int Shape;
 
 class Tile {
+    
 public:
-   Tile(Colour colour, Shape shape);
+    Tile(Colour colour, Shape shape);
     Colour getColour();
     Shape getShape();
     std::string toString();
+    
 private:
-   Colour colour;
-   Shape  shape;
-
- 
-
-
+    Colour colour;
+    Shape  shape;
+    
 };
-
 
 #endif // ASSIGN2_TILE_H

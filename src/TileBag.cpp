@@ -132,18 +132,34 @@ Tile* TileBag::getRandomSingleTile() {
     return frontTile;
 }
 
-//adds the tile from the player's hand to the back of the list and bag returns a tile from the front of the list
-Tile* TileBag::replaceTile(Tile* tile) {
-    tiles->addBack(tile);
-    return getRandomSingleTile();
+//adds the tile from the player's hand to the back of the list and bag returns a tile that is added to the player's hand at the front, returns false if bag is empty.
+bool TileBag::replaceTile(Tile* tile, LinkedList* hand) {
+    if(!isEmpty(tiles)) {
+        tiles->addBack(tile);
+        hand->addFront(getRandomSingleTile());
+    }
+    return !isEmpty(tiles);
 }
 
-//gets the hand from the player and fills it
-void TileBag::fillPlayerHand(LinkedList* hand) {
+//gets the hand from the player and fills it, returns false if bag is empty
+bool TileBag::fillPlayerHand(LinkedList* hand) {
     for(int i = hand->size(); i < 6 ; i++) {
-       hand->addFront(getRandomSingleTile());
+        if(!isEmpty(tiles)) {
+            hand->addFront(getRandomSingleTile());
+        }
+        else break;
     }
+    return !isEmpty(tiles);
 }
+
+bool TileBag::isEmpty(LinkedList* hand) {
+    if(tiles->size() == 0) {
+        return true;
+    }
+    return false;
+}
+
+
 //returns string format of bag: for writing
 std::string TileBag::toString() {
     std::string thisString = "";

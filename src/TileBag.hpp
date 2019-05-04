@@ -18,13 +18,14 @@ public:
     TileBag();
     ~TileBag();
     void generateRandomTiles();
-    Tile* replaceTile(Tile* tile);
-    void fillPlayerHand(LinkedList* hand);
+    bool replaceTile(Tile* tile, LinkedList* hand);
+    bool fillPlayerHand(LinkedList* hand);
     std::string toString();
     // bool exists(int arr,int val);
 private:
     LinkedList* tiles;
     Tile* getRandomSingleTile();
+    bool isEmpty(LinkedList* hand);
 
 };
 

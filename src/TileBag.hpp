@@ -15,12 +15,16 @@
 class TileBag{
     
 public:
+    TileBag();
     void generateRandomTiles();
-    void getRandomSingleTile();
-    bool exists(int arr,int val);
+    Tile* replaceTile(Tile* tile);
+    void fillPlayerHand(LinkedList* hand);
+    std::string toString();
+    // bool exists(int arr,int val);
 private:
     LinkedList* tiles;
-
+    Tile* getRandomSingleTile();
+    
 };
 
 

@@ -38,7 +38,7 @@ public:
 private:
     LinkedList* tiles;
     Tile* getRandomSingleTile();
-    bool isEmpty(LinkedList* hand);
+    bool isEmpty();
     
 };
 

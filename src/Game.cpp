@@ -23,14 +23,19 @@ void Game::newGame(){
     cout<<"👤 Enter a name for Player 1 (uppercase characters only)"<<endl;
     std::cout<<"> ";
     std::cin>>str;
+    players[0] = new Player(str);
     
     //create new Player1 using the name and initialise it
     
     cout<<"\n👤 Enter a name for Player 2 (uppercase characters only)"<<endl;
     std::cout<<"> ";
     std::cin>>str;
-    
+    players[1] = new Player(str);
     //create new Player2 using the name and initialise it
+
+    board = new Board();
+
+    tilebag = new TileBag();
     
     cout<<"\n👉 Let's Play 👈\n"<<endl;
     

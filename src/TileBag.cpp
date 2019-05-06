@@ -93,25 +93,26 @@ Tile* TileBag::getRandomSingleTile() {
 
 //adds the tile from the player's hand to the back of the list and bag returns a tile that is added to the player's hand at the front, returns false if bag is empty.
 bool TileBag::replaceTile(Tile* tile, LinkedList* hand) {
-    if(!isEmpty(tiles)) {
+    if(!isEmpty()) {
         tiles->addBack(tile);
         hand->addFront(getRandomSingleTile());
     }
-    return !isEmpty(tiles);
+    return !isEmpty();
 }
 
 //gets the hand from the player and fills it, returns false if bag is empty
 bool TileBag::fillPlayerHand(LinkedList* hand) {
     for(int i = hand->size(); i < 6 ; i++) {
-        if(!isEmpty(tiles)) {
+        if(!isEmpty()) {
             hand->addFront(getRandomSingleTile());
         }
         else break;
     }
-    return !isEmpty(tiles);
+    return !isEmpty();
 }
 
-bool TileBag::isEmpty(LinkedList* hand) {
+//checks if the tile bag is empty.
+bool TileBag::isEmpty() {
     if(tiles->size() == 0) {
         return true;
     }

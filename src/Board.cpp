@@ -6,5 +6,7 @@ Board::Board(){
             board[j][i] = nullptr;
         }
     }
+    
+    //slack integration
 
 }

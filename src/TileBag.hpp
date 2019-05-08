@@ -34,10 +34,11 @@ public:
     bool replaceTile(Tile* tile, LinkedList* hand);
     bool fillPlayerHand(LinkedList* hand);
     std::string toString();
+    Tile* getRandomSingleTile();
     // bool exists(int arr,int val);
 private:
     LinkedList* tiles;
-    Tile* getRandomSingleTile();
+    
     bool isEmpty();
     
 };

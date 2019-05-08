@@ -39,4 +39,5 @@ void Game::newGame(){
     
     cout<<"\n👉 Let's Play 👈\n"<<endl;
     
+    board->printBoard();
 }

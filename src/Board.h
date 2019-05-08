@@ -1,5 +1,6 @@
 #include "Tile.h"
 #include <iostream>
+#include "Player.h"
 using std::cout;
 using std::endl;
 
@@ -13,4 +14,5 @@ public:
     Board();
     ~Board();
     void printBoard();
+    bool makeMove(int column,char cRow,Tile* tile,Player& player);
 };

@@ -15,5 +15,6 @@ public:
     Board();
     ~Board();
     void printBoard();
-    bool makeMove(int column,char cRow,Tile* tile,Player& player);
+    bool makeMove(int column,char cRow,Tile* tile,Player &player);
+    bool checkValidity(int column,int row,Tile* tile);
 };

@@ -54,7 +54,8 @@ void Board::printBoard(){
 //    board[0][2] = &tile;
 //    tile = bag->getRandomSingleTile();
 //    board[4][6] = &tile;
-     TileBag* bag = new TileBag();
+/*
+   TileBag* bag = new TileBag();
    Tile* tile = bag->getRandomSingleTile();
    board[23][12] = &tile;
 
@@ -69,21 +70,25 @@ void Board::printBoard(){
 
    Tile* tileFour = bag->getRandomSingleTile();
    board[4][6] = &tileFour;
+*/  
     
-    
-    char labels[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    char labels[MAX_BOARD_SIZE_ROW_COL] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
-    cout<<"    0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25"<<endl;
-    cout<<"  ----------------------------------------------------------------------------------------------------------"<<endl;
+    cout<<"   0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25"<<endl;
+    cout<<"  ------------------------------------------------------------------------------------------------"<<endl;
     
-    char cha = 'A';
-    for (int row = 0; row <MAX_BOARD_SIZE_ROW_COL; ++row) {
+    //char cha = 'A';
+    for (int row = 0; row<MAX_BOARD_SIZE_ROW_COL; ++row) {
         cout << labels[row]<<" "; // Print y-axis labels
-        cout<< cha++ << " "; 
+        //cout<< cha++ << " "; 
         for (int column = 0; column < MAX_BOARD_SIZE_ROW_COL; ++column) {
             cout << '|';
             if(board[row][column] == nullptr){
-                cout << "   ";
+                if(column >= 10) {
+                    cout << "   ";
+                } else {
+                    cout << "  ";
+                }
             }else{
                 currTile = *board[row][column];
                 cout << " "<<currTile->toString();

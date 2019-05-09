@@ -9,7 +9,6 @@
 #ifndef Game_hpp
 #define Game_hpp
 
-#include "Player.h"
 #include "Board.h"
 #include "TileBag.hpp"
 #include <stdio.h>

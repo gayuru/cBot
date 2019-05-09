@@ -20,19 +20,13 @@ Tile* LinkedList::get(int i){
    Tile* value = nullptr;
    if(i >= 0){
       Node* node = this->head;
-      for(int j = 0; j != i; j++){
+      for(int j = 0; j != i; ++j){
          node = node->next;
       }
       value = node->tile;
    }
    return value;
 }
-
-//Tile* LinkedList::getFront(){
-//    return head;
-//
-//}
-
 
 void LinkedList::clear(){
     while(this->head != nullptr){
@@ -55,7 +49,7 @@ void LinkedList::addBack(Tile* data){
       back = node;
       storage->next = node;
    }
-   this->counter++;
+   ++this->counter;
 }
 
 void LinkedList::addFront(Tile* data){
@@ -67,7 +61,7 @@ void LinkedList::addFront(Tile* data){
         Node* node = new Node(data, this->head);
         head = node;
     }
-    this->counter++;
+    ++this->counter;
 }
 
 void LinkedList::deleteFront(){
@@ -80,7 +74,7 @@ void LinkedList::deleteFront(){
       delete head;
       head = storage;
    }
-   this->counter--;
+   --this->counter;
 }
 
 void LinkedList::deleteBack(){
@@ -90,13 +84,13 @@ void LinkedList::deleteBack(){
       back = nullptr;
    }else{
       Node* node = head;
-      for(int i = 0; i != this->size() - 1; i++){
+      for(int i = 0; i != this->size() - 1; ++i){
          node = node->next;
       }
       delete back;
       back = node;
    }
-   this->counter--;
+   --this->counter;
 }
 
 void LinkedList::deleteAt(int i){
@@ -105,7 +99,7 @@ void LinkedList::deleteAt(int i){
    }else if(i < this->size() - 1){
       Node* node = this->head;
       Node* storage = nullptr;
-      for(int j = 0; j < i; j++){
+      for(int j = 0; j < i; ++j){
          storage = node;
          node = node->next;
       }
@@ -118,9 +112,7 @@ void LinkedList::deleteAt(int i){
 }
 
 void LinkedList::printLinkedList(){
-    
-    for(int i=0;i<this->size();++i){
-        
+    for(int i=0;i<this->size();++i) {
         std::cout<< "Tile "<< i <<" : "<<this->get(i)->toString()<<std::endl;
     }
     

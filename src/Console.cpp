@@ -18,13 +18,10 @@ void Console::runGame(){
 }
 
 void Console::testing(){
-    
     TileBag* bag = new TileBag();
     LinkedList* lol = new LinkedList();
-    
     bag->fillPlayerHand(lol);
-    lol->printLinkedList();
-    
+    lol->printLinkedList();   
 }
 
 void Console::mainMenu(){

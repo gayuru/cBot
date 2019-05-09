@@ -114,6 +114,7 @@ void LinkedList::deleteAt(int i){
    }else if(i == this->size() - 1){
       deleteBack();
    }
+   this->counter--;
 }
 
 void LinkedList::printLinkedList(){

@@ -36,6 +36,9 @@ void Game::newGame(){
     board = new Board();
 
     tilebag = new TileBag();
+
+    tilebag->fillPlayerHand(players[0]->getHand());
+    tilebag->fillPlayerHand(players[1]->getHand());
     
     cout<<"\n👉 Let's Play 👈\n"<<endl;
     

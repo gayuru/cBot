@@ -1,0 +1,10 @@
+2
+AddTileTest.save
+place P5 at A4
+place Y5 at D4
+place R5 at E4
+place O5 at F4
+place R2 at E1
+place A1 at G6
+place B2 at A0
+^D

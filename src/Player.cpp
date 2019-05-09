@@ -18,6 +18,10 @@ int Player::getScore(){
     return score;
 }
 
+LinkedList* Player::getHand(){
+    return hand;
+}
+
 void Player::addPoints(int points){
     score += points;
 }

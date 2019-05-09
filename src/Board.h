@@ -10,7 +10,7 @@ class Board
 private:
     Tile** board[MAX_BOARD_SIZE_ROW_COL][MAX_BOARD_SIZE_ROW_COL];
     Tile* currTile;
-     // std::vector<std::vector<*Tile> > vBoard;
+    // std::vector<std::vector<*Tile> > vBoard;
 public:
     Board();
     ~Board();

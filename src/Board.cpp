@@ -39,8 +39,10 @@ bool Board::makeMove(int column,char cRow,Tile* tile,Player &player){
     return false;
 }
 
-void Board::printBoard(){
+bool Board::makeMove(int column,char cRow,Tile* tile,Player &player){
     
+    //conversion of char to a place in the alphabet
+    int row = cRow - 'A';
     
     //fill out the board for testing
 //    TileBag* bag = new TileBag();

@@ -27,7 +27,7 @@ class Game{
 public:
     Game();
     void newGame();
-    void loadGame();
+    void loadGame(std::string filename);
     void saveGame();
     
 };

@@ -1,0 +1,114 @@
+
+Welcome to Qwirkle!
+-------------------
+
+Menu
+----
+1. New Game
+2. Load Game
+3. Show Student Information
+4. Quit
+
+>
+
+Enter the filename from which to load a game
+
+>
+
+Qwirkle game successfully loaded
+
+BOB, it's your turn
+Score for BOB: 8
+Score for MIKE: 10
+  0  1  2  3  4  5 
+--------------------
+A|  |  |  |  |  |  |
+B|  |  |B4|B6|B5|  |
+C|  |  |R4|  |G5|  |
+D|  |Y1|Y4|Y2|  |  |
+E|  |  |  |  |  |  |
+F|  |  |  |  |  |  |
+Your hand is
+P5,R5,O3,P6,Y2,R1
+
+>
+
+MIKE, it's your turn
+Score for BOB: 11
+Score for MIKE: 12
+  0  1  2  3  4  5 
+--------------------
+A|  |  |  |  |P5|  |
+B|  |  |B4|B6|B5|  |
+C|  |  |R4|  |G5|  |
+D|  |Y1|Y4|Y2|  |  |
+E|  |  |  |  |  |  |
+F|  |  |  |  |  |  |
+Your hand is
+B4,B2,Y5,G6,G5,R2
+
+>
+
+BOB, it's your turn
+Score for BOB: 11
+Score for MIKE: 20
+  0  1  2  3  4  5 
+--------------------
+A|  |  |  |  |P5|  |
+B|  |  |B4|B6|B5|  |
+C|  |  |R4|  |G5|  |
+D|  |Y1|Y4|Y2|Y5|  |
+E|  |  |  |  |  |  |
+F|  |  |  |  |  |  |
+Your hand is
+R5,O3,P6,Y2,R1,O2
+
+>
+
+MIKE, it's your turn
+Score for BOB: 16
+Score for MIKE: 20
+  0  1  2  3  4  5 
+--------------------
+A|  |  |  |  |P5|  |
+B|  |  |B4|B6|B5|  |
+C|  |  |R4|  |G5|  |
+D|  |Y1|Y4|Y2|Y5|  |
+E|  |  |  |  |R5|  |
+F|  |  |  |  |  |  |
+Your hand is
+B4,B2,G6,G5,R2,O5
+
+>
+
+QWIRKLE!!!
+
+BOB, it's your turn
+Score for BOB: 16
+Score for MIKE: 32
+  0  1  2  3  4  5 
+--------------------
+A|  |  |  |  |P5|  |
+B|  |  |B4|B6|B5|  |
+C|  |  |R4|  |G5|  |
+D|  |Y1|Y4|Y2|Y5|  |
+E|  |  |  |  |R5|  |
+F|  |  |  |  |O5|  |
+Your hand is
+O3,P6,Y2,R1,O2,P1
+
+>
+
+Invalid placement. Please try again
+
+>
+
+You do not have that tile. Please try again
+
+>
+
+Invalid placement. Please try again
+
+>
+
+Goodbye

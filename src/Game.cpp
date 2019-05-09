@@ -41,5 +41,36 @@ void Game::playerNamePlay(std::string playerName) {
             }
         }
     }
+    
+    cout<<players[0]->getName()<<"its your turn"<<endl;
+    
+    players[0]->getHand()->printLinkedList();
+    
+
+    cout<<"Please enter your move:"<<endl;
+    
+    std::string place;
+    std::string tileStr;
+    std::string location;
+    std::string at;
+    
+    if (cin >>place>>tileStr>>at>>location) {
+        
+        //        Colour* colour = new Colour(tileStr[0]);
+        //        Shape* shape = new Shape(tileStr[1]);
+        
+        Colour* colour = new Colour('R');
+        Shape* shape = new Shape(2);
+        
+        Tile* tile = new Tile(*colour,*shape);
+        
+        bool val = board->makeMove(location[1]-48, location[0], tile, *players[0]);
+        
+        cout<<val<<endl;
+    } else {
+        cout << endl << "Invalid input. Try again." << endl << endl;
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
     cout<<"\n👉 Let's Play 👈\n"<<endl;
 }

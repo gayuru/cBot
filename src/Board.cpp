@@ -21,7 +21,7 @@ Board::Board(){
 bool Board::makeMove(int column,char cRow,Tile* tile,Player &player){
     //conversion of char to a place in the alphabet
     int row = cRow - 'A';
-    if(board[row][column] !=  nullptr){
+    if(board[row][column] ==  nullptr){
         
         board[row][column] = &tile;
         
@@ -130,11 +130,31 @@ bool Board::checkValidity(int column,int row,Tile* tile){
     
     bool result=false;
     
+    Tile* currTileRight;
+    Tile* currTileLeft;
+    Tile* currTileUp;
+    Tile* currTileDown ;
     
-    Tile* currTileRight = *board[row][column+1];
-    Tile* currTileLeft = *board[row][column-1];
-    Tile* currTileUp = *board[row-1][column+1];
-    Tile* currTileDown = *board[row+1][column-1];
+    Colour* tmpC = new Colour('R');
+    Shape* tmpS = new Shape(2);
+    Tile* tmpTile = new Tile(*tmpC,*tmpS);
+    
+    board[row][column+1] = &tmpTile;
+    
+    if(board[row][column+1] != nullptr){
+        currTileRight = *board[row][column+1];
+    }
+    if(board[row][column-1] != nullptr){
+        currTileRight = *board[row][column-1];
+    }
+    if(board[row-1][column] != nullptr){
+        currTileRight = *board[row-1][column];
+    }
+    if(board[row+2][column] != nullptr){
+        currTileRight = *board[row+2][column];
+    }
+    
+   
     
     if(currTileRight->getColour() == tile->getColour() || currTileRight->getShape() == tile->getShape()){
         result = true;

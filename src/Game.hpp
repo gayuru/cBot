@@ -28,6 +28,6 @@ public:
     void newGame();
     void loadGame(std::string filename);
     void saveGame();
-    
+    void playerNamePlay(std::string playerName);
 };
 #endif /* Game_hpp */

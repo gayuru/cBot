@@ -38,10 +38,10 @@ public:
     bool fillPlayerHand(LinkedList* hand);
     std::string toString();
     Tile* getRandomSingleTile();
+    bool isEmpty();
     // bool exists(int arr,int val);
 private:
     LinkedList* tiles;
-    bool isEmpty();
 };
 
 #endif /* TileBag_hpp */

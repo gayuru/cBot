@@ -291,7 +291,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     for(int i = row - 1; i > 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            delete thisBox;
                             break;
                         }
                         else {
@@ -299,7 +298,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
-                        delete thisBox;
                     }
                 }
                 //checks all the connections on rhs
@@ -307,7 +305,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     for(int i = row; i < maxRowSize; i++) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            delete thisBox;
                             break;
                         }
                         else {
@@ -315,7 +312,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
-                        delete thisBox;
                     }
                 }
                 //checks all the connections on up
@@ -324,7 +320,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     for(int i = col; i > 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            delete thisBox;
                             break;
                         }
                         else {
@@ -332,7 +327,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
-                        delete thisBox;
                     }
                 }
                 //checks all the connections on down
@@ -340,7 +334,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     for(int i = col; i < maxColSize; i++) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            delete thisBox;
                             break;
                         }
                         else {
@@ -348,7 +341,6 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
-                        delete thisBox;
                     }
                 }
                 return true;

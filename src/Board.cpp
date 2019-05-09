@@ -13,9 +13,9 @@ Board::Board(){
         board[row][column] = nullptr;
         }
     }
-    // std::vector<*Tile>temp;
-    // temp.push_back(nullptr);
-    // vBoard.push_back(temp);
+    std::vector<Tile*>temp;
+    temp.push_back(nullptr);
+    vBoard.push_back(temp);
 }
 
 bool Board::makeMove(int column,char cRow,Tile* tile,Player &player){
@@ -101,6 +101,27 @@ void Board::printBoard(){
         }
         cout << endl;
     }
+    char cha = 'A';
+    int row1 = vBoard.size();
+    cout<<"  ------------------------------------------------------------------------------------------------"<<endl;
+    
+    for (int row = 0; row < row1; row++) {
+        int col1 = vBoard[row].size();
+        cout<< cha++ << " ";
+        for (int col = 0; col < col1; col++) {
+            cout << '|';
+            if(vBoard[row][col] == nullptr){
+                cout << "  ";
+            }else{
+                currTile = vBoard[row][col];
+                cout << currTile->toString();
+            }
+            if(col == col1 - 1) {
+                cout << '|';
+            }
+        }
+        cout << endl;
+    }             
     
 }
 
@@ -128,4 +149,63 @@ bool Board::checkValidity(int column,int row,Tile* tile){
     
     return result;
     
+}
+
+//use this method everytime a piece is placed on a board
+void Board::resizeBoard(char cRow, int col) {
+    int thisSize = vBoard.size();
+    int row = cRow - 'A';
+    if(thisSize == 1) {
+        if(vBoard[0][0] != nullptr) {
+            vBoard[0].push_back(nullptr);
+            vBoard[0].push_back(nullptr);
+            std::rotate(vBoard[0].rbegin(), vBoard[0].rbegin() + 1, vBoard[0].rend());
+
+            std::vector<Tile*>temp;
+            std::vector<Tile*>temp1;
+            for(int i = 0; i < 3; i++) {
+                temp.push_back(nullptr);
+                temp1.push_back(nullptr);
+
+            }
+            vBoard.push_back(temp);
+            vBoard.push_back(temp1);
+            std::rotate(vBoard.rbegin(), vBoard.rbegin() + 1, vBoard.rend());
+        } 
+    }
+    else {
+        int colMinPoint = 0;
+        int rowMinPoint = 0;
+        int rowMaxPoint = thisSize;
+        int colMaxPoint = vBoard[0].size();
+
+        //if left needs to be resized
+        if(row == rowMinPoint) {
+            //adds col to the front
+            for(std::vector<Tile*> row: vBoard) {
+                row.push_back(nullptr);
+                std::rotate(row.rbegin(), row.rbegin() + 1, row.rend());
+            }
+        }
+        //if right needs to be resized
+        else if (row == rowMaxPoint) {
+            //adds col to the back
+            for(std::vector<Tile*> row: vBoard) {
+                row.push_back(nullptr);
+            }
+        }
+
+        //if top needs to be resized
+        else if (col == colMinPoint) {
+            std::vector<Tile*>temp;
+            vBoard.push_back(temp);
+            std::rotate(vBoard.rbegin(), vBoard.rbegin() + 1, vBoard.rend());
+        }
+        //if bot needs to be resized
+        else if (col == colMaxPoint) {
+            std::vector<Tile*>temp;
+            vBoard.push_back(temp);
+        }
+
+    }
 }

@@ -71,6 +71,7 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
          calculateDirection(row, col);   
         }
         counter++;
+        resizeBoard(row, col);
         return true;
     }
     else return false;
@@ -358,9 +359,8 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
 }
 
 //use this method everytime a piece is placed on a board
-void Board::resizeBoard(char cRow, int col) {
+void Board::resizeBoard(int row, int col) {
     int thisSize = vBoard.size();
-    int row = cRow - 'A';
     if(thisSize == 1) {
         if(vBoard[0][0] != nullptr) {
             vBoard[0].push_back(nullptr);

@@ -24,7 +24,7 @@ private:
     int counter;
     int direction;
     std::vector<std::vector<Tile*> > vBoard;
-    void resizeBoard(char cRow, int col);
+    void resizeBoard(int row, int col);
     bool checkValidityV(int col, int row, Tile*tile);
     bool colorShapeCheckV(Tile* tile, Tile* box, int fixType);
     void calculateDirection(int row, int col);

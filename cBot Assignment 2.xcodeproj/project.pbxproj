@@ -13,6 +13,10 @@
 		5524563322729AC4001B8787 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 5524562C22729AC3001B8787 /* Makefile */; };
 		5524563422729AC4001B8787 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524562D22729AC3001B8787 /* Node.cpp */; };
 		552456372272CE1E001B8787 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552456352272CE1E001B8787 /* Console.cpp */; };
+		55ED6A3C2284FD8B000E963A /* TileBag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ED6A342284FD8A000E963A /* TileBag.cpp */; };
+		55ED6A3D2284FD8B000E963A /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ED6A362284FD8B000E963A /* Board.cpp */; };
+		55ED6A3E2284FD8B000E963A /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ED6A382284FD8B000E963A /* Game.cpp */; };
+		55ED6A3F2284FD8B000E963A /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ED6A3B2284FD8B000E963A /* Player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +44,18 @@
 		5524562F22729AC4001B8787 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinkedList.h; path = src/LinkedList.h; sourceTree = SOURCE_ROOT; };
 		552456352272CE1E001B8787 /* Console.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Console.cpp; path = src/Console.cpp; sourceTree = SOURCE_ROOT; };
 		552456362272CE1E001B8787 /* Console.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Console.hpp; path = src/Console.hpp; sourceTree = SOURCE_ROOT; };
+		55ED6A2F2284FD8A000E963A /* qwirkle */ = {isa = PBXFileReference; lastKnownFileType = file; name = qwirkle; path = src/qwirkle; sourceTree = SOURCE_ROOT; };
+		55ED6A312284FD8A000E963A /* AddTileTest.save */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTileTest.save; sourceTree = "<group>"; };
+		55ED6A322284FD8A000E963A /* AddTileTest.input */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTileTest.input; sourceTree = "<group>"; };
+		55ED6A332284FD8A000E963A /* AddTileTest.output */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTileTest.output; sourceTree = "<group>"; };
+		55ED6A342284FD8A000E963A /* TileBag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TileBag.cpp; path = src/TileBag.cpp; sourceTree = SOURCE_ROOT; };
+		55ED6A352284FD8B000E963A /* TileBag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TileBag.hpp; path = src/TileBag.hpp; sourceTree = SOURCE_ROOT; };
+		55ED6A362284FD8B000E963A /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Board.cpp; path = src/Board.cpp; sourceTree = SOURCE_ROOT; };
+		55ED6A372284FD8B000E963A /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Game.hpp; path = src/Game.hpp; sourceTree = SOURCE_ROOT; };
+		55ED6A382284FD8B000E963A /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = src/Game.cpp; sourceTree = SOURCE_ROOT; };
+		55ED6A392284FD8B000E963A /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = src/Board.h; sourceTree = SOURCE_ROOT; };
+		55ED6A3A2284FD8B000E963A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = src/Player.h; sourceTree = SOURCE_ROOT; };
+		55ED6A3B2284FD8B000E963A /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = src/Player.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +88,16 @@
 		5524560322729796001B8787 /* cBot Assignment 2 */ = {
 			isa = PBXGroup;
 			children = (
+				55ED6A362284FD8B000E963A /* Board.cpp */,
+				55ED6A392284FD8B000E963A /* Board.h */,
+				55ED6A382284FD8B000E963A /* Game.cpp */,
+				55ED6A372284FD8B000E963A /* Game.hpp */,
+				55ED6A3B2284FD8B000E963A /* Player.cpp */,
+				55ED6A3A2284FD8B000E963A /* Player.h */,
+				55ED6A2F2284FD8A000E963A /* qwirkle */,
+				55ED6A302284FD8A000E963A /* Tests */,
+				55ED6A342284FD8A000E963A /* TileBag.cpp */,
+				55ED6A352284FD8B000E963A /* TileBag.hpp */,
 				5524562822729AC3001B8787 /* LinkedList.cpp */,
 				5524562F22729AC4001B8787 /* LinkedList.h */,
 				5524562C22729AC3001B8787 /* Makefile */,
@@ -86,6 +112,17 @@
 			);
 			path = "cBot Assignment 2";
 			sourceTree = "<group>";
+		};
+		55ED6A302284FD8A000E963A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				55ED6A312284FD8A000E963A /* AddTileTest.save */,
+				55ED6A322284FD8A000E963A /* AddTileTest.input */,
+				55ED6A332284FD8A000E963A /* AddTileTest.output */,
+			);
+			name = Tests;
+			path = src/Tests;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -143,10 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55ED6A3E2284FD8B000E963A /* Game.cpp in Sources */,
 				5524563122729AC4001B8787 /* LinkedList.cpp in Sources */,
 				5524563022729AC4001B8787 /* Tile.cpp in Sources */,
+				55ED6A3D2284FD8B000E963A /* Board.cpp in Sources */,
+				55ED6A3F2284FD8B000E963A /* Player.cpp in Sources */,
 				5524563322729AC4001B8787 /* Makefile in Sources */,
 				552456372272CE1E001B8787 /* Console.cpp in Sources */,
+				55ED6A3C2284FD8B000E963A /* TileBag.cpp in Sources */,
 				5524563222729AC4001B8787 /* qwirkle.cpp in Sources */,
 				5524563422729AC4001B8787 /* Node.cpp in Sources */,
 			);

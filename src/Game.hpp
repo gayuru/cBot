@@ -16,6 +16,7 @@
 
 using std::cout;
 using std::endl;
+using std::cin;
 
 class Game{
     private:
@@ -28,6 +29,9 @@ public:
     void newGame();
     void loadGame(std::string filename);
     void saveGame();
-    
+    void playerNamePlay(std::string playerName);
+    void playerTurn();
+    void playerAction();
+    void displayPlayersScore();
 };
 #endif /* Game_hpp */

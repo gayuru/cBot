@@ -20,26 +20,25 @@ TileBag::~TileBag() {
 void TileBag::generateRandomTiles(){
     
     tiles = new LinkedList();
-    Colour colours[6] = {'R', 'O', 'Y', 'G', 'B','P'};
-    Tile* tilesAr[72];
+    Colour colours[MAX_NUM_COLOUR_SHAPE] = {'R', 'O', 'Y', 'G', 'B','P'};
+    Tile* tilesAr[MAX_NUM_TILES];
     int counter = 0;
     
-    for(int i=1;i<=6;++i){
-        for(int j=0;j<6;++j){
+    for(int i=1;i<=MAX_NUM_COLOUR_SHAPE;++i){
+        for(int j=0;j<MAX_NUM_COLOUR_SHAPE;++j){
             Colour tempColour = colours[j];
             Shape tempShape = i;
             Tile* tile = new Tile(tempColour,tempShape);
             Tile* tileDuplicate = new Tile(tempColour,tempShape);
-            
-            tilesAr[counter++] = tile;
-            tilesAr[counter++] = tileDuplicate;
+            tilesAr[++counter] = tile;
+            tilesAr[++counter] = tileDuplicate;
         }
     }
     
     std::vector<int> arr;
     
     int min = 0;
-    int max = 71;
+    int max = MAX_NUM_TILES-1;
     
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine engine(seed);
@@ -47,19 +46,15 @@ void TileBag::generateRandomTiles(){
     
     int value = -1;
     
-    for (int i = 0; i != 72; ++i) {
-        
-        bool is_in=false;
-        value = uniform_dist(engine);
+    for (int i = 0; i != MAX_NUM_TILES; ++i) {
+        bool is_in = false;
+        value = uniform_dist(engine);    
         is_in = std::find(arr.begin(), arr.end(), value) != arr.end();
-        
         while(is_in == true){
-            value= uniform_dist(engine);
+            value = uniform_dist(engine);
             is_in = std::find(arr.begin(), arr.end(), value) != arr.end();
         }
-        
         tiles->addFront(tilesAr[value]);
-        //arr.push_back(value);
     }
     
     /*
@@ -102,13 +97,12 @@ bool TileBag::replaceTile(Tile* tile, LinkedList* hand) {
 
 //gets the hand from the player and fills it, returns false if bag is empty
 bool TileBag::fillPlayerHand(LinkedList* hand) {
-    for(int i = hand->size(); i < 6 ; i++) {
-        if(!isEmpty()) {
+    if(!isEmpty()) {
+        for(int i = hand->size(); i < MAX_NUM_COLOUR_SHAPE ;++i) {
             hand->addFront(getRandomSingleTile());
         }
-        else break;
     }
-    return !isEmpty();
+    return false;
 }
 
 //checks if the tile bag is empty.
@@ -122,7 +116,7 @@ bool TileBag::isEmpty() {
 //returns string format of bag: for writing
 std::string TileBag::toString() {
     std::string thisString = "";
-    for(int i = 0; i < tiles->size(); i++) {
+    for(int i = 0; i < tiles->size(); ++i) {
         thisString += tiles->get(i)->toString();
         if(i < tiles->size() - 1) {
             thisString += ",";

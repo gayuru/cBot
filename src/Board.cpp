@@ -288,12 +288,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 int fixType = 2;
                 //checks all the connections on lhs
                 if(leftBox != nullptr) {
+                    bool fin = false;
                     for(int i = row - 1; i > 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            break;
+                            fin = true;
+                            // break;
                         }
-                        else {
+                        if(!fin) {
                             if(!colorShapeCheckV(tile, thisBox, fixType)) {
                                 return false;
                             }
@@ -302,12 +304,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 }
                 //checks all the connections on rhs
                 if(rightBox != nullptr) {
+                    bool fin = false;
                     for(int i = row; i < maxRowSize; i++) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            break;
+                            fin = true;
+                            // break;
                         }
-                        else {
+                        if(!fin) {
                             if(!colorShapeCheckV(tile, thisBox, fixType)) {
                                 return false;
                             }
@@ -317,12 +321,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 //checks all the connections on up
                 if(upBox != nullptr) {
                     fixType = 2;
+                    bool fin = false;
                     for(int i = col; i > 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            break;
+                            fin = true;
+                            // break;
                         }
-                        else {
+                        if(!fin) {
                             if(!colorShapeCheckV(tile, thisBox, fixType)) {
                                 return false;
                             }
@@ -331,12 +337,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 }
                 //checks all the connections on down
                 if(downBox != nullptr) {
+                    bool fin = false;
                     for(int i = col; i < maxColSize; i++) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
-                            break;
+                            // break;
+                            fin = true;
                         }
-                        else {
+                        if(!fin) {
                             if(!colorShapeCheckV(tile, thisBox, fixType)) {
                                 return false;
                             }

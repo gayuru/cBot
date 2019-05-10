@@ -32,5 +32,6 @@ public:
     void playerNamePlay(std::string playerName);
     void playerTurn();
     void playerAction();
+    void displayPlayersScore();
 };
 #endif /* Game_hpp */

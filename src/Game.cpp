@@ -17,7 +17,7 @@ Game::Game(){
 void Game::newGame(){
     std::string playerName;
     playerNamePlay(playerName);
-    board->printBoard();
+    playerTurn();
 }
 
 void Game::playerNamePlay(std::string playerName) {
@@ -41,14 +41,32 @@ void Game::playerNamePlay(std::string playerName) {
             }
         }
     }
-    
-    cout<<players[0]->getName()<<"its your turn"<<endl;
-    
-    players[0]->getHand()->printLinkedList();
-    
+    cout<<"\n👉 Let's Play 👈\n"<<endl;
+}
 
-    cout<<"Please enter your move:"<<endl;
-    
+void Game::playerTurn() {
+    int count = 0;
+    while(count < 1) { // Change this to keep looping while the tilebag is not empty
+        for(int playerNum = 0; playerNum < 2; ++playerNum) {
+            std::cout<<players[playerNum]->getName()<<", it's your turn"<<endl;
+            //display score for both players
+            board->printBoard();
+            std::cout<<std::endl;
+            std::cout<<"Your hand is "<<std::endl;
+            players[playerNum]->getHand()->printLinkedList();
+            std::cout<<std::endl;
+            //playerAction(); E.g. place bet
+        }
+        ++count;
+    }
+}
+
+void playerAction() {
+    //std::string playerAction;    
+    std::cout<<"> ";
+    //std::cin>>playerAction;
+    //std:cout<<playerAction<<std::endl;
+    /*
     std::string place;
     std::string tileStr;
     std::string location;
@@ -72,5 +90,6 @@ void Game::playerNamePlay(std::string playerName) {
         cin.clear();
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    cout<<"\n👉 Let's Play 👈\n"<<endl;
+    */
 }
+

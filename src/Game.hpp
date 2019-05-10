@@ -30,5 +30,7 @@ public:
     void loadGame(std::string filename);
     void saveGame();
     void playerNamePlay(std::string playerName);
+    void playerTurn();
+    void playerAction();
 };
 #endif /* Game_hpp */

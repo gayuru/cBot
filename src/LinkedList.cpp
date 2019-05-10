@@ -113,9 +113,11 @@ void LinkedList::deleteAt(int i){
 
 void LinkedList::printLinkedList(){
     for(int i=0;i<this->size();++i) {
-        std::cout<< "Tile "<< i <<" : "<<this->get(i)->toString()<<std::endl;
+      std::cout<< this->get(i)->toString();  
+      if(i < this->size()-1) {
+         std::cout<< ",";
+      }  
     }
-    
 }
 
 

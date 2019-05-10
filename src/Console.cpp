@@ -45,6 +45,12 @@ void Console::mainMenu(){
        
     }else if (i==2){
         
+        cout << "Enter the filename from which to load a game:" << endl;
+        cout << "> ";
+        std::string filename;
+        std::cin >> filename;
+        Game* qwirkle = new Game();
+        qwirkle->loadGame(filename);
         //load a Game
         
     }else if (i==3){

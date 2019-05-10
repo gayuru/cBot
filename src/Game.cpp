@@ -7,6 +7,8 @@
 //
 
 #include "Game.hpp"
+#include <iostream>
+#include <fstream>
 
 Game::Game(){
     
@@ -42,5 +44,33 @@ void Game::newGame(){
     
     cout<<"\n👉 Let's Play 👈\n"<<endl;
     
-    board->printBoard();
+}
+
+void Game::loadGame(std::string filename){
+    std::ifstream inFile;
+    inFile.open(filename);
+    //if(inFile.fail){
+        //throw std::runtime_error("Unable to open file");
+    //}
+    std::string line;
+    for(int p = 0; p != 2; p++){
+        getline(inFile, line);
+        players[p] = new Player(line);
+        int score;
+        if(inFile >> score){
+            players[p]->addPoints(score);
+        }
+        getline(inFile, line);
+        char colours[6];
+        int shapes[6];
+        char comma;
+        for(int i = 0; i != 6; i++){
+            inFile >> colours[i] >> shapes[i] >> comma;
+        }
+        for(int j = 0; j != 6; j++){
+            players[p]->addTile(new Tile(colours[j], shapes[j]));
+        }
+    }
+    players[0]->getHand()->printLinkedList();
+    cout << players[0]->getScore() << endl;
 }

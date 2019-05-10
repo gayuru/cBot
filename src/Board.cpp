@@ -77,8 +77,17 @@ void Board::refresh() {
 //needs to be implemented
 void Board::calcPoints(Player &player) {
     //implement me!
+    int maxRowSize = vBoard.size();
+    int maxColSize = vBoard[0].size();
+    //left check
     
-    //resets
+    //right check
+
+    //upcheck
+
+    //downcheck
+
+    //resets 
     refresh();
 }
 

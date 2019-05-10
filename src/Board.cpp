@@ -189,6 +189,29 @@ bool Board::colorShapeCheckV(Tile* tile, Tile* box, int fixType) {
     return false;
 }
 
+bool Board::noDuplicateCheck(int min, int max, int row, int col, bool rowCheck) {
+    //checking the row
+    if(rowCheck) {
+        for(int i = min; i < max; i++) {
+            for(int j = i + 1; j <= max; j++) {
+                if(vBoard[row][i]->getColour() == vBoard[row][j]->getColour() && vBoard[row][i]->getShape() == vBoard[row][j]->getShape()) {
+                    return false;
+                }
+            }
+        }
+    }
+    else {
+        for(int i = min; i < max; i++) {
+            for(int j = i + 1; j <= max; j++) {
+                if(vBoard[i][col]->getColour() == vBoard[j][col]->getColour() && vBoard[i][col]->getShape() == vBoard[j][col]->getShape()) {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
 //Validity for vertex
 bool Board::checkValidityV(int col, int row, Tile* tile) {
     //check if tile is within the range of the board
@@ -208,13 +231,20 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 Tile* rightBox = vBoard[row + 1][col];
                 Tile* upBox = vBoard[row][col - 1];
                 Tile* downBox = vBoard[row][col + 1];
+                //cannot place a tile that has no tile next to it
+                if (leftBox == nullptr && rightBox == nullptr && upBox == nullptr && downBox == nullptr) {
+                    return false;
+                }
                 int fixType = 2;
+                int minRange = 0;
+                int maxRange = 0;
                 //checks all the connections on lhs
                 if(leftBox != nullptr) {
                     bool fin = false;
                     for(int i = row - 1; i > 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
+                            minRange = i + 1;
                             fin = true;
                             // break;
                         }
@@ -231,6 +261,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     for(int i = row; i < maxRowSize; i++) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
+                            maxRange = i - 1;
                             fin = true;
                             // break;
                         }
@@ -241,13 +272,19 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                         }
                     }
                 }
+                if(!noDuplicateCheck(minRange, maxRange, row, col, true)) {
+                    return false;
+                }
+                fixType = 2;
+                minRange = 0;
+                maxRange = 0;
                 //checks all the connections on up
                 if(upBox != nullptr) {
-                    fixType = 2;
                     bool fin = false;
                     for(int i = col; i > 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
+                            minRange = i + 1;
                             fin = true;
                             // break;
                         }
@@ -265,6 +302,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
                             // break;
+                            maxRange = i -1;
                             fin = true;
                         }
                         if(!fin) {
@@ -273,6 +311,9 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                             }
                         }
                     }
+                }
+                if(!noDuplicateCheck(minRange, maxRange, row, col, false)) {
+                    return false;
                 }
                 return true;
             }

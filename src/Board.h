@@ -9,7 +9,7 @@ using std::endl;
 using std::cout;
 
 #define MAX_BOARD_SIZE_ROW_COL    26
-#define FIX_COLOR  0
+    #define FIX_COLOR  0
 #define FIX_SHAPE  1
 #define HORIZONTAL 1
 #define VERTICAL   2
@@ -27,6 +27,7 @@ private:
     void resizeBoard(int row, int col);
     bool checkValidityV(int col, int row, Tile*tile);
     bool colorShapeCheckV(Tile* tile, Tile* box, int fixType);
+    bool noDuplicateCheck(int min, int max, int row, int col, bool rowCheck);
     void calculateDirection(int row, int col);
     void refresh();
     bool directionCheck(int row, int col);

@@ -66,32 +66,37 @@ void Game::playerTurn() {
 void Game::playerAction() {
     std::string playerAction;    
     std::cout<<"> ";
-    std::cin>>playerAction;
-    /*
+   
+    
     std::string place;
     std::string tileStr;
     std::string location;
     std::string at;
-    
+
     if (cin >>place>>tileStr>>at>>location) {
-        
+
         //        Colour* colour = new Colour(tileStr[0]);
         //        Shape* shape = new Shape(tileStr[1]);
-        
+
         Colour* colour = new Colour('R');
         Shape* shape = new Shape(2);
-        
+
         Tile* tile = new Tile(*colour,*shape);
         
-        bool val = board->makeMove(location[1]-48, location[0], tile, *players[0]);
         
+        //location0 -> row
+        //location[1] -> column
+
+        bool val = board->makeMoveV( location[0],location[1]-48, tile);
+
         cout<<val<<endl;
+        
     } else {
         cout << endl << "Invalid input. Try again." << endl << endl;
         cin.clear();
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    */
+    
 }
 
 void Game::displayPlayersScore() {

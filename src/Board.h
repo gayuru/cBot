@@ -38,5 +38,5 @@ public:
     bool checkValidity(int column,int row,Tile* tile);
     bool makeMoveV(char cRow, int col, Tile* tile);
     //call this once the player is done
-    int getPoints(Player &player);
+    void calcPoints(Player &player);
 };

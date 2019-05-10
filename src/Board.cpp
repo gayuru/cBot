@@ -97,15 +97,17 @@ bool Board::directionCheck(int row, int col) {
     }
     return false;
 }
+//
 void Board::refresh() {
     counter = 0;
     direction = 0;
 }
-
-int Board::getPoints(Player &player) {
+//needs to be implemented
+void Board::calcPoints(Player &player) {
+    //implement me!
+    
     //resets 
     refresh();
-    return 0;
 }
 
 void Board::printBoard(){
@@ -267,11 +269,12 @@ bool Board::colorShapeCheckV(Tile* tile, Tile* box, int fixType) {
     }
     return false;
 }
-
+//Validity for vertex
 bool Board::checkValidityV(int col, int row, Tile* tile) {
     //check if tile is within the range of the board
     int maxRowSize = vBoard.size();
     int maxColSize = vBoard[0].size();
+    //if the row and col is within the range
     if (row <= maxRowSize && row >= 0 && col <= maxColSize && col >= 0) {
         //if the tile place selected is a nullptr
         if(vBoard[row][col] == nullptr) {
@@ -361,6 +364,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
 //use this method everytime a piece is placed on a board
 void Board::resizeBoard(int row, int col) {
     int thisSize = vBoard.size();
+    //first condition: when there is of size 1 x 1
     if(thisSize == 1) {
         if(vBoard[0][0] != nullptr) {
             vBoard[0].push_back(nullptr);

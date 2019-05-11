@@ -74,6 +74,7 @@ void Board::refresh() {
     direction = 0;
 }
 
+/* COMMENTED FOR COMPILATIONR REASONS
 //needs to be implemented
 void Board::calcPoints(Player &player) {
     //implement me!
@@ -90,6 +91,7 @@ void Board::calcPoints(Player &player) {
     //resets 
     refresh();
 }
+*/
 
 void Board::printBoard(){
     

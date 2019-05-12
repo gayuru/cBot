@@ -22,11 +22,9 @@ Board::Board(){
 
 //when a player makes a move it checks for validation
 bool Board::makeMoveV(char cRow, int col, Tile* tile) {
-//    cout<<cRow<<endl;
-//    int row = cRow - 'A';
-//    cout<< row<<" - Row | Column - "<<col<<" Tile-> "<<tile->toString()<<endl;
-    col=0;
-    int row = 0;
+   
+    int row = cRow - 'A';
+  
     if(counter > 1) {
         if(!directionCheck(row, col)) {
             return false;

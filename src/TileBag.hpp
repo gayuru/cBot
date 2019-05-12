@@ -32,6 +32,7 @@ class TileBag{
     
 public:
     TileBag();
+    TileBag(LinkedList* load);
     ~TileBag();
     void generateRandomTiles();
     bool replaceTile(Tile* tile, LinkedList* hand);
@@ -39,6 +40,7 @@ public:
     std::string toString();
     Tile* getRandomSingleTile();
     bool isEmpty();
+    void addTile(Tile* tile);
     // bool exists(int arr,int val);
 private:
     LinkedList* tiles;

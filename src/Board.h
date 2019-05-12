@@ -1,12 +1,10 @@
-#include "Tile.h"
-#include <iostream>
 #include "Player.h"
-using std::cout;
-using std::endl;
+//using std::cout;
+//using std::endl;
 #include <vector>
 #include <string>
 #include <algorithm>
-using std::cout;
+//using std::cout;
 
 #define MAX_BOARD_SIZE_ROW_COL    26
 #define FIX_COLOR  0
@@ -39,4 +37,5 @@ public:
     bool makeMoveV(char cRow, int col, Tile* tile);
     //call this once the player is done
     void calcPoints(Player &player);
+    std::string getRow(int row);
 };

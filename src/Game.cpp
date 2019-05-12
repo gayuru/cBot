@@ -118,16 +118,92 @@ void Game::loadGame(std::string filename){
             players[p]->addPoints(score);
         }
         getline(inFile, line);
+        getline(inFile, line);
         char colours[6];
         int shapes[6];
-        char comma;
         for(int i = 0; i != 6; i++){
-            inFile >> colours[i] >> shapes[i] >> comma;
-        }
-        for(int j = 0; j != 6; j++){
-            players[p]->addTile(new Tile(colours[j], shapes[j]));
+            colours[i] = line[3 * i];
+            shapes[i] = line[3 * i + 1] - '0';
+            players[p]->addTile(new Tile(colours[i], shapes[i]));
         }
     }
-    players[0]->getHand()->printLinkedList();
+
+    cout << players[0]->getName() << endl;
     cout << players[0]->getScore() << endl;
+    players[0]->getHand()->printLinkedList();
+    cout << endl;
+    cout << players[1]->getName() << endl;
+    cout << players[1]->getScore() << endl;
+    players[1]->getHand()->printLinkedList();
+    cout << endl;
+
+    board = new Board();
+    int tilesOnBoard = 0;
+    char next;
+    inFile >> next;
+    if(next == '0'){
+        getline(inFile, line);
+        cout << "  " << next << line << endl;
+        inFile >> next;
+        if(next == '-'){
+            getline(inFile, line);
+            cout << next << line << endl;
+            getline(inFile, line);
+            while(line[1] == '|'){
+                for(unsigned int i = 2; i != line.length(); i++){
+                    if(line[i] > 'A' && line[i] < 'Z'){
+                        // char colour = line[i];
+                        // int shape = line[i + 1] - '0';
+                        // Tile* tile = new Tile(colour, shape);
+                        //int row = line[0] - 'A';
+                        //board->placeTile();
+                        tilesOnBoard++;
+                    }
+                }
+                cout << line << endl;
+                getline(inFile, line);
+            }
+        }else{
+            //incorrect file format
+        }
+    }else{
+        //incorrect file format
+    }
+    cout << tilesOnBoard << endl;
+    getline(inFile, line);
+    LinkedList* tiles = new LinkedList();
+    char colours[60 - tilesOnBoard];
+    int shapes[60 - tilesOnBoard];
+    for(int i = 0; i != 60 - tilesOnBoard; i++){
+        colours[i] = line[3 * i];
+        shapes[i] = line[3 * i + 1] - '0';
+        tiles->addBack(new Tile(colours[i], shapes[i]));
+    }
+    tilebag = new TileBag(tiles);
+    cout << tilebag->toString() << endl;
+}
+
+void Game::saveGame(){
+    std::string filename;
+    cout << "Enter the name of the file to save:" << endl;
+    cout << "> ";
+    cin >> filename;
+    std::ofstream outFile;
+    outFile.open(filename);
+
+    for(int p = 0; p != 2; p++){
+        outFile << players[p]->getName() << endl;
+        outFile << players[p]->getScore() << endl;
+        outFile << players[p]->getHand()->toString() << endl;
+    }
+
+    outFile << "   0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25" <<endl;
+    outFile << "  ------------------------------------------------------------------------------" <<endl;
+    for(int i = 0; i < 26; i++){
+        char letter = 'A' + i;
+        outFile << letter;
+        outFile << board->getRow(i) << endl;
+    }
+
+    outFile << tilebag->toString() << endl;
 }

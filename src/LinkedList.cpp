@@ -120,4 +120,15 @@ void LinkedList::printLinkedList(){
     }
 }
 
+std::string LinkedList::toString(){
+   std::string thisString = "";
+    for(int i = 0; i < this->size(); ++i) {
+        thisString += this->get(i)->toString();
+        if(i < this->size() - 1) {
+            thisString += ",";
+        }
+    }
+    return thisString;
+}
+
 

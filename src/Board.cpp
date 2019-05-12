@@ -105,8 +105,8 @@ void Board::refresh() {
 //needs to be implemented
 void Board::calcPoints(Player &player) {
     //implement me!
-    int maxRowSize = vBoard.size();
-    int maxColSize = vBoard[0].size();
+    //int maxRowSize = vBoard.size();
+    //int maxColSize = vBoard[0].size();
     //left check
     
     //right check
@@ -427,4 +427,22 @@ void Board::resizeBoard(int row, int col) {
         }
 
     }
+}
+
+std::string Board::getRow(int row){
+    std::string outString = "";
+    for (int column = 0; column < MAX_BOARD_SIZE_ROW_COL; ++column) {
+            outString += '|';
+            if(board[row][column] == nullptr){
+                    outString += "  ";
+            }else{
+                currTile = *board[row][column];
+                outString += " ";
+                outString += currTile->toString();
+            }
+            if(column == MAX_BOARD_SIZE_ROW_COL-1) { //For last column
+                outString += '|';
+            }
+        }
+        return outString;
 }

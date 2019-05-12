@@ -12,6 +12,10 @@ TileBag::TileBag() {
     generateRandomTiles();
 }
 
+TileBag::TileBag(LinkedList* load){
+    tiles = load;
+}
+
 TileBag::~TileBag() {
     delete[] tiles;
 }
@@ -123,5 +127,10 @@ std::string TileBag::toString() {
         }
     }
     return thisString;
+}
+
+//adds a single tile to the back of the tile bag
+void TileBag::addTile(Tile* tile){
+    tiles->addBack(tile);
 }
 

@@ -21,6 +21,7 @@ class LinkedList {
     void deleteBack();
     void deleteAt(int i);
     void printLinkedList();
+    std::string toString();
 
     private:
     Node* head;

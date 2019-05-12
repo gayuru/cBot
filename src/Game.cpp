@@ -85,15 +85,26 @@ int Game::playerAction(Player* player, int playerNum) {
         std::cout<<tilePlacementLoc;
         return playerNum;
     } else if(playerAction.substr(0,7) == "replace") {
+        //bool isTileValid = false;
+        int linkedListCounter = 0;
         for(unsigned int charPos = 7; charPos < playerAction.length(); ++charPos) {
             if(!isspace(playerAction[charPos])) {
                 tilePlacementLoc += toupper(playerAction[charPos]);
             }
         }
-        std::cout<<tilePlacementLoc;
-        //TileBag -> replaceTile(player->getHand());
+        while(linkedListCounter < player->getHand()->size()) {
+            Tile* checkTile = player->getHand()->get(linkedListCounter);
+            if(checkTile->toString() == tilePlacementLoc.substr(0,2)) {
+                player->getHand()->deleteAt(linkedListCounter);
+                tilebag->replaceTile(checkTile, player->getHand());
+                linkedListCounter = player->getHand()->size();// BUG TO BE FIXED: removing 2 tiles at once
+            }
+            ++linkedListCounter;
+        }
+        player->getHand()->printLinkedList();
         return playerNum;
     } else {
+        std::cout << "Error : Please enter replace or place followed by a tile from player's hand!" <<std::endl;
         if(playerNum == 1) {
             return 0;
         } else {

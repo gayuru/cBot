@@ -13,6 +13,8 @@
 #include "TileBag.hpp"
 #include <stdio.h>
 #include <iostream>
+#include <algorithm>
+#include <string> 
 
 using std::cout;
 using std::endl;
@@ -31,7 +33,7 @@ public:
     void saveGame();
     void playerNamePlay(std::string playerName);
     void playerTurn();
-    void playerAction();
+    int playerAction(int playerNum);
     void displayPlayersScore();
 };
 #endif /* Game_hpp */

@@ -82,7 +82,14 @@ int Game::playerAction(Player* player, int playerNum) {
                 tilePlacementLoc += toupper(playerAction[charPos]);
             }
         }
-        std::cout<<tilePlacementLoc;
+     
+        Colour* tmpColour =new Colour(tilePlacementLoc[0]);
+        Shape* tmpShape = new Shape(tilePlacementLoc[1]-'0');
+        
+        Tile* tile = new Tile(*tmpColour,*tmpShape);
+        
+        board->makeMoveV(tilePlacementLoc[5], tilePlacementLoc[4], tile);
+        
         return playerNum;
     } else if(playerAction.substr(0,7) == "replace") {
         //bool isTileValid = false;

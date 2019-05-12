@@ -30,8 +30,13 @@ void Game::playerNamePlay(std::string playerName) {
             cout<<"👤 Enter a name for Player " << playerNo << " (uppercase characters only)"<<endl;
             std::cout<<"> ";
             std::cin>>playerName;
+            cin.ignore();
             if(all_of(playerName.begin(), playerName.end(), &::islower)) { //need to change this -> check whether input contains all UPPER letters
-                playerNum = 2;
+                if(playerNum == 1) {
+                  playerNum = 0;  
+                } else {
+                  playerNum = 2;
+                }
                 std::cout << "Error : Please enter the Player names in Uppercase !" <<std::endl;
             } else {
                 players[playerNum] = new Player(playerName);
@@ -50,7 +55,6 @@ void Game::playerTurn() {
     int count = 0;
     while(count < 1) { // Change this to keep looping while the tilebag is not empty
         for(int playerNum = 0; playerNum < 2; ++playerNum) {
-            std::cout<<playerNum;
             std::cout<<players[playerNum]->getName()<<", it's your turn"<<endl;
             displayPlayersScore();
             std::cout<<std::endl;
@@ -60,53 +64,42 @@ void Game::playerTurn() {
             players[playerNum]->getHand()->printLinkedList();
             std::cout<<std::endl;
             std::cout<<std::endl;
-            playerNum = playerAction(playerNum);
+            playerNum = playerAction(players[playerNum], playerNum);
         }
         ++count;
     }
 }
 
-int Game::playerAction(int playerNum) {
-    std::string playerAction;    
+int Game::playerAction(Player* player, int playerNum) {
+    std::string playerAction;
+    std::string tilePlacementLoc;    
     std::cout<<"> ";
-    std::cin>>playerAction;
+    getline(std::cin, playerAction);
     std::transform(playerAction.begin(), playerAction.end(), playerAction.begin(), ::tolower);
     if(playerAction.substr(0,5) == "place") {
-        std::cout<<"place";
+        for(unsigned int charPos = 5; charPos < playerAction.length(); ++charPos) {
+            if(!isspace(playerAction[charPos])) {
+                tilePlacementLoc += toupper(playerAction[charPos]);
+            }
+        }
+        std::cout<<tilePlacementLoc;
         return playerNum;
     } else if(playerAction.substr(0,7) == "replace") {
-        std::cout<<"replace";
+        for(unsigned int charPos = 7; charPos < playerAction.length(); ++charPos) {
+            if(!isspace(playerAction[charPos])) {
+                tilePlacementLoc += toupper(playerAction[charPos]);
+            }
+        }
+        std::cout<<tilePlacementLoc;
+        //TileBag -> replaceTile(player->getHand());
         return playerNum;
     } else {
-        std::cout<<"GET OUT";
-        return -1;
+        if(playerNum == 1) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
-        /*
-
-    std::string place;
-    std::string tileStr;
-    std::string location;
-    std::string at;
-    
-    if (cin >>place>>tileStr>>at>>location) {
-        
-        //        Colour* colour = new Colour(tileStr[0]);
-        //        Shape* shape = new Shape(tileStr[1]);
-        
-        Colour* colour = new Colour('R');
-        Shape* shape = new Shape(2);
-        
-        Tile* tile = new Tile(*colour,*shape);
-        
-        bool val = board->makeMove(location[1]-48, location[0], tile, *players[0]);
-        
-        cout<<val<<endl;
-    } else {
-        cout << endl << "Invalid input. Try again." << endl << endl;
-        cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-    */
 }
 
 void Game::displayPlayersScore() {

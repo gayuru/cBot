@@ -33,7 +33,7 @@ public:
     void saveGame();
     void playerNamePlay(std::string playerName);
     void playerTurn();
-    int playerAction(int playerNum);
+    int playerAction(Player* player, int playerNum);
     void displayPlayersScore();
 };
 #endif /* Game_hpp */

@@ -53,7 +53,7 @@ void Game::playerNamePlay(std::string playerName) {
 
 void Game::playerTurn() {
     int count = 0;
-    while(count < 1) { // Change this to keep looping while the tilebag is not empty
+    while(count < 62) { // Change this to keep looping while the tilebag is not empty
         for(int playerNum = 0; playerNum < 2; ++playerNum) {
             std::cout<<players[playerNum]->getName()<<", it's your turn"<<endl;
             displayPlayersScore();

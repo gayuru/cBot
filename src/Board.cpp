@@ -245,7 +245,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 //checks all the connections on lhs
                 if(leftBox != nullptr) {
                     bool fin = false;
-                    for(int i = row - 1; i > 0; i--) {
+                    for(int i = row - 1; i >= 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
                             minRange = i + 1;
@@ -257,12 +257,13 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
+                        delete thisBox;
                     }
                 }
                 //checks all the connections on rhs
                 if(rightBox != nullptr) {
                     bool fin = false;
-                    for(int i = row; i < maxRowSize; i++) {
+                    for(int i = row; i <= maxRowSize; i++) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
                             maxRange = i - 1;
@@ -274,6 +275,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
+                        delete thisBox;
                     }
                 }
                 if(!noDuplicateCheck(minRange, maxRange, row, col, true)) {
@@ -285,7 +287,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 //checks all the connections on up
                 if(upBox != nullptr) {
                     bool fin = false;
-                    for(int i = col; i > 0; i--) {
+                    for(int i = col; i >= 0; i--) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
                             minRange = i + 1;
@@ -297,12 +299,13 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
+                        delete thisBox;
                     }
                 }
                 //checks all the connections on down
                 if(downBox != nullptr) {
                     bool fin = false;
-                    for(int i = col; i < maxColSize; i++) {
+                    for(int i = col; i <= maxColSize; i++) {
                         Tile* thisBox = vBoard[i][col];
                         if(thisBox == nullptr) {
                             // break;
@@ -314,6 +317,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 return false;
                             }
                         }
+                        delete thisBox;
                     }
                 }
                 if(!noDuplicateCheck(minRange, maxRange, row, col, false)) {

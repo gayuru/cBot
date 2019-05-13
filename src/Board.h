@@ -25,10 +25,11 @@ private:
     void resizeBoard(int row, int col);
     bool checkValidityV(int col, int row, Tile*tile);
     bool colorShapeCheckV(Tile* tile, Tile* box, int fixType);
-    bool noDuplicateCheck(int min, int max, int row, int col, bool rowCheck);
+    bool noDuplicateCheck(int min, int max, int row, int col, Tile* tile, bool rowCheck);
     void calculateDirection(int row, int col);
     void refresh();
     bool directionCheck(int row, int col);
+    Tile* inBoundCheck(int row, int col);
 public:
     Board();
     ~Board();

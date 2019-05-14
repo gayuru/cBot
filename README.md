@@ -1,14 +1,13 @@
-# cBot : [![CodeFactor](https://www.codefactor.io/repository/github/gayuru/cbot/badge/master)](https://www.codefactor.io/repository/github/gayuru/cbot/overview/master) 
+# cBot
+cBot is a command-line game inspired by the board game Qwirkle written in C++.
 
-cBot is a command-line game inspired by the board game Qwirkle.
+[![CodeFactor](https://www.codefactor.io/repository/github/gayuru/cbot/badge/master)](https://www.codefactor.io/repository/github/gayuru/cbot/overview/master)
 
-#### Contact info
-
-* **Developers;** 
-[Gayuru Gunawardena](https://gayurug.com)
-[Minh Le](https://github.com/rmit-s3722599-Minh-Le)
-[Sean Lokke](https://github.com/seanlokeee)
-[Drew Holland](https://github.com/drewlholland)
+* **Developers;** <br/>
+[Gayuru Gunawardena](https://gayurug.com)<br/>
+[Minh Le](https://github.com/rmit-s3722599-Minh-Le)<br/>
+[Sean Lokke](https://github.com/seanlokeee)<br/>
+[Drew Holland](https://github.com/drewlholland)<br/>
                
 
 

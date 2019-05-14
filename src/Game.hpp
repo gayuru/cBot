@@ -28,10 +28,10 @@ public:
     void loadGame(std::string filename);
     void saveGame();
     void playerNamePlay(std::string playerName);
-    bool doesStringContainLetters(const std::string & toCheck);
-    bool isAllLettersUppercase(const std::string & toCheck);
+    bool isPlayerNameValid(const std::string & playerName);
     int  playerBreakLoop(int playerNum);
     void playerTurn();
+    std::string buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc);
     void playerTurnPrintDetails(Player* player);
     void displayPlayersScore();
 };

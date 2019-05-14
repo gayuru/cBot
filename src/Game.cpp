@@ -31,39 +31,25 @@ void Game::playerNamePlay(std::string playerName) {
             std::cout<<"> ";
             std::cin>>playerName;
             std::cin.ignore();
-            if(doesStringContainLetters(playerName)) {
-                if(!isAllLettersUppercase(playerName)) {
-                    playerNum = playerBreakLoop(playerNum);
-                    std::cout << "Error : Please enter the Player names in Uppercase !" <<std::endl;
-                } else {
-                    players[playerNum] = new Player(playerName);
-                    tilebag->fillPlayerHand(players[playerNum]->getHand());
-                    ++playerNo;
-                    if(playerNum == 1) {
-                        isNameUpper = true;
-                    }
-                }
-            } else {
+            if(!isPlayerNameValid(playerName)) {
                 playerNum = playerBreakLoop(playerNum);
-                std::cout << "Error : Please enter only uppercase alphabets !" <<std::endl;
-            }            
+                std::cout << "Error : Please enter the Player names in Uppercase !" <<std::endl;
+            } else {
+                players[playerNum] = new Player(playerName);
+                tilebag->fillPlayerHand(players[playerNum]->getHand());
+                ++playerNo;
+                if(playerNum == 1) {
+                    isNameUpper = true;
+                }
+            }
         }
     }
     cout<<"\n👉 Let's Play 👈\n"<<endl;
 }
 
-bool Game::doesStringContainLetters(const std::string & toCheck) {
-    for(unsigned int charPos = 0; charPos < toCheck.length(); ++charPos) {
-        if(!isalpha(toCheck[charPos])) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool Game::isAllLettersUppercase(const std::string & toCheck) {
-    for(unsigned int charPos = 0; charPos < toCheck.length(); ++charPos) {
-        if(!isupper(toCheck[charPos])) {
+bool Game::isPlayerNameValid(const std::string & playerName) {
+    for(unsigned int charPos = 0; charPos < playerName.length(); ++charPos) {
+        if(!isalpha(playerName[charPos]) || !isupper(playerName[charPos])) {
             return false;
         }
     }
@@ -81,7 +67,7 @@ int Game::playerBreakLoop(int playerNum) {
 
 void Game::playerTurn() {
     int count = 0;
-    while(!tilebag->isEmpty()) { // Change this to keep looping while the tilebag is not empty
+    while(count < 1) { // Change this to keep looping while the tilebag is not empty !tilebag->isEmpty()
         for(int playerNum = 0; playerNum < 2; ++playerNum) {
             std::string playerAction;
             std::string tilePlacementLoc;   
@@ -108,17 +94,12 @@ void Game::playerTurn() {
                     std::cout<<"That piece can't go there. Try again."<<std::endl;
                     //loop through until val is true 
                 }
-               
-                
-                
             } else if(playerAction.substr(0,7) == "replace") {
                 //bool isTileValid = false;
-                int linkedListCounter = 0; 
-                for(unsigned int charPos = 7; charPos < playerAction.length(); ++charPos) {
-                    if(!isspace(playerAction[charPos])) {
-                        tilePlacementLoc += toupper(playerAction[charPos]);
-                    }
-                }
+                int linkedListCounter = 0;
+                tilePlacementLoc = buildReplaceTileString(playerAction, tilePlacementLoc);
+                std::cout<< tilePlacementLoc << std::endl;
+                std::cout<< std::endl; 
                 while(linkedListCounter < players[playerNum]->getHand()->size()) {
                     Tile* checkTile = players[playerNum]->getHand()->get(linkedListCounter);
                     if(checkTile->toString() == tilePlacementLoc.substr(0,2)) {
@@ -138,6 +119,15 @@ void Game::playerTurn() {
         ++count;
     }
 }
+
+std::string Game::buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc) {
+    for(unsigned int charPos = 7; charPos < playerAction.length(); ++charPos) {
+        if(isalpha(playerAction[charPos]) || isdigit(playerAction[charPos])) {
+            tilePlacementLoc += toupper(playerAction[charPos]);
+        }
+    }
+    return tilePlacementLoc;
+} 
 
 void Game::playerTurnPrintDetails(Player* player) {
     std::cout<<player->getName()<<", it's your turn"<<endl;
@@ -159,12 +149,24 @@ void Game::displayPlayersScore() {
 }
 
 
-void Game::loadGame(std::string filename){
+void Game::loadGame(std::string filename) {
+    //Open the given file name for reading
+
+    // if(filename.length() < 6){
+    //     throw std::runtime_error("File entered is not a .save file");
+    // }
+    // std::string extension = filename.substr(filename.length() - 6, 5);
+    // if(extension[0] != '.' || extension[1] != 's' || extension[2] != 'a' || extension[3] != 'v' || extension[4] != 'e'){
+    //     cout << "File entered is not a .save file" << endl; 
+    //     throw std::runtime_error("File entered is not a .save file");
+    //}
+
     std::ifstream inFile;
     inFile.open(filename);
-    //if(inFile.fail){
-        //throw std::runtime_error("Unable to open file");
-    //}
+    if(inFile.fail()){
+        throw std::runtime_error("Unable to open file");
+    }
+    //Read the players' information and store it in the player array
     std::string line;
     for(int p = 0; p != 2; p++){
         getline(inFile, line);
@@ -208,22 +210,24 @@ void Game::loadGame(std::string filename){
             while(line[1] == '|'){
                 for(unsigned int i = 2; i != line.length(); i++){
                     if(line[i] > 'A' && line[i] < 'Z'){
-                        // char colour = line[i];
-                        // int shape = line[i + 1] - '0';
-                        // Tile* tile = new Tile(colour, shape);
-                        //int row = line[0] - 'A';
-                        //board->placeTile();
+                        char colour = line[i];
+                        int shape = line[i + 1] - '0';
+                        Tile* tile = new Tile(colour, shape);
+                        board->makeMoveV(line[0], i - 2, tile);
                         tilesOnBoard++;
                     }
                 }
                 std::cout << line << endl;
                 getline(inFile, line);
             }
+            board->printBoard();
         }else{
             //incorrect file format
+            throw std::runtime_error("Unable to open file");
         }
     }else{
         //incorrect file format
+        throw std::runtime_error("Unable to open file");
     }
     std::cout << tilesOnBoard << endl;
     getline(inFile, line);
@@ -244,6 +248,7 @@ void Game::saveGame(){
     std::cout << "Enter the name of the file to save:" << endl;
     std::cout << "> ";
     std::cin >> filename;
+    filename += ".save";
     std::ofstream outFile;
     outFile.open(filename);
 
@@ -253,8 +258,24 @@ void Game::saveGame(){
         outFile << players[p]->getHand()->toString() << endl;
     }
 
-    outFile << "   0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25" <<endl;
-    outFile << "  ------------------------------------------------------------------------------" <<endl;
+    std::string row = board->getRow(0);
+    int cols = (row.length() - 2) / 3;
+    outFile << "  0";
+    for(int c = 1; c != cols; c++){
+        if(c < 10){
+            outFile << "  ";
+        }else{
+            outFile << " ";
+        }
+        outFile << c;
+    }
+    outFile << endl;
+    outFile << "  -";
+    for(int c = 1; c != cols; c++){
+        outFile << "---";
+    }
+    outFile << endl;
+
     for(int i = 0; i < 26; i++){
         char letter = 'A' + i;
         outFile << letter;

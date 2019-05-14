@@ -99,11 +99,13 @@ void Game::playerTurn() {
                 Shape* tmpShape = new Shape(tilePlacementLoc[1]-'0');
                 Tile* tile = new Tile(*tmpColour,*tmpShape);
               
-                bool val = board->makeMoveV(tilePlacementLoc[4], tilePlacementLoc[5]-48, tile);
+                bool val = board->makeMoveV(tilePlacementLoc[4], tilePlacementLoc[5]-'0', tile);
                 
                 if(val){
                     std::cout<<"Player Move Valid"<<std::endl;
-                     board->calcPoints(*players[playerNum],tilePlacementLoc[4], tilePlacementLoc[5]-48);
+                     //board->calcPoints(*players[playerNum],tilePlacementLoc[4], tilePlacementLoc[5]-'0');
+                     players[playerNum]->addPoints(board->getTurnPoints());
+                     board->refreshTurn();
                 }else{
                     std::cout<<"That piece can't go there. Try again."<<std::endl;
                     //loop through until val is true 
@@ -130,6 +132,8 @@ void Game::playerTurn() {
                 }
                 players[playerNum]->getHand()->printLinkedList();
                 std::cout<< std::endl;
+            } else if(playerAction.substr(0,4) == "save"){
+                saveGame();
             } else {
                 std::cout << "Error : Please enter replace or place followed by a tile from player's hand!" <<std::endl;
                 playerNum = playerBreakLoop(playerNum);

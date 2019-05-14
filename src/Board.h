@@ -22,7 +22,7 @@ private:
     int prevRow;
     int counter;
     int direction;
-    int counterPoints;
+    int turnPoints;
     std::vector<std::vector<Tile*> > vBoard;
     void resizeBoard(int row, int col);
     bool checkValidityV(int col, int row, Tile*tile);
@@ -32,6 +32,7 @@ private:
     void refresh();
     bool directionCheck(int row, int col);
     Tile* inBoundCheck(int row, int col);
+    int calcPoints(int row,int col);
     int getVerticalRun(int row,int col);
     int getHorizontalRun(int row,int col);
 public:
@@ -42,6 +43,7 @@ public:
     bool checkValidity(int column,int row,Tile* tile);
     bool makeMoveV(char cRow, int col, Tile* tile);
     //call this once the player is done
-    void calcPoints(Player &player,int row,int col);
+    int getTurnPoints();
+    void refreshTurn();
     std::string getRow(int row);
 };

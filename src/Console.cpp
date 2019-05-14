@@ -58,9 +58,7 @@ void Console::mainMenu(){
             }
         }
     }else if (i==3){
-        
         showStudentInfo();
-        
     }else if(i==4){
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
         

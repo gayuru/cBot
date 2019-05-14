@@ -18,7 +18,7 @@ Board::Board(){
     vBoard.push_back(temp);
     counter = 0;
     direction = 0;
-    counterPoints =0;
+    turnPoints =0;
 }
 
 //when a player makes a move it checks for validation
@@ -44,6 +44,7 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
             if(counter == 1) {
                 calculateDirection(row, col);
             }
+            turnPoints = calcPoints(row,col);
             cout<<"tile is being placed"<<endl;
             vBoard[row][col] = tile;
             cout<<"tile is placed"<<endl;
@@ -96,42 +97,39 @@ void Board::refresh() {
 
 
 //needs to be implemented
-void Board::calcPoints(Player &player,int cRow,int col) {
+int Board::calcPoints(const int row, const int col) {
     int sum=0;
-    int row = cRow - 'A';
     
     int pointsVertical=0;
     int pointsHorizontal=0;
     
     //first tile point calculation
-    if(counterPoints == 0){
-        sum += 1;
-    }else{
-        
-        pointsVertical = getVerticalRun(row, col);
-        pointsHorizontal = getHorizontalRun(row, col);
-        
-        if(pointsVertical || pointsHorizontal == 1){
-            sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
-        }else{
-            sum = pointsVertical + pointsHorizontal;
-        }
-        
-        //update points for a qwirkle
-        if(pointsVertical || pointsHorizontal == 6){
-            sum += 6;
-        }
-        
+    // if(counterPoints == 0){
+    //     sum += 1;
+    // }else{
+    pointsVertical = getVerticalRun(row, col);
+    pointsHorizontal = getHorizontalRun(row, col);
+    
+    if(pointsVertical == 1 || pointsHorizontal == 1){
+        sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
+    } else {
+        sum = pointsVertical + pointsHorizontal;
     }
     
-    player.addPoints(sum);
-    counterPoints++;
+    //update points for a qwirkle
+    if(pointsVertical == 6 || pointsHorizontal == 6){
+        sum += 6;
+    }
+    // }
+    return sum;
+    //player.addPoints(sum);
+    //counterPoints++;
     //resets 
     refresh();
 }
 
 
-int Board::getVerticalRun(int row,int col){
+int Board::getVerticalRun(const int row, const int col){
     
     int runUp = row;
     int runDown = row;
@@ -142,7 +140,7 @@ int Board::getVerticalRun(int row,int col){
     while(run){
         if(inBoundCheck(runUp -1,col)!=nullptr){
             if(vBoard[runUp-1][col] != nullptr){
-                runUp--;
+                --runUp;
             }else{
                 run = false;
             }
@@ -150,14 +148,12 @@ int Board::getVerticalRun(int row,int col){
             run = false;
         }
     }
-    
     run=true;
-    
     //check for tiles down
     while(run){
         if(inBoundCheck(runDown +1,col)!=nullptr){
             if(vBoard[runDown+1][col] != nullptr){
-                runUp++;
+                ++runDown;
             }else{
                 run = false;
             }
@@ -165,25 +161,22 @@ int Board::getVerticalRun(int row,int col){
             run = false;
         }
     }
-    
     points = runDown-runUp+CURRENT_TILE;
-    
     return points;
-    
 }
 
-int Board::getHorizontalRun(int row,int col){
+int Board::getHorizontalRun(const int row, const int col){
     
     int runLeft = col;
     int runRight = col;
     int points=0;
     bool run=true;
     
-    //check for tiles up
+    //check for tiles left
     while(run){
         if(inBoundCheck(row,runLeft-1)!=nullptr){
             if(vBoard[row][runLeft-1] != nullptr){
-                runLeft--;
+                --runLeft;
             }else{
                 run = false;
             }
@@ -191,10 +184,8 @@ int Board::getHorizontalRun(int row,int col){
             run = false;
         }
     }
-    
     run=true;
-    
-    //check for tiles down
+    //check for tiles right
     while(run){
         if(inBoundCheck(row,runRight+1)!=nullptr){
             if(vBoard[row][runRight+1] != nullptr){
@@ -206,13 +197,17 @@ int Board::getHorizontalRun(int row,int col){
             run = false;
         }
     }
-    
     points = runRight-runLeft+CURRENT_TILE;
-    
     return points;
-    
 }
 
+int Board::getTurnPoints(){
+    return turnPoints;
+}
+
+void Board::refreshTurn(){
+    turnPoints = 0;
+}
 
 void Board::printBoard(){
     

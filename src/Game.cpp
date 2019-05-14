@@ -117,11 +117,23 @@ void Game::displayPlayersScore() {
 
 
 void Game::loadGame(std::string filename){
+    //Open the given file name for reading
+
+    // if(filename.length() < 6){
+    //     throw std::runtime_error("File entered is not a .save file");
+    // }
+    // std::string extension = filename.substr(filename.length() - 6, 5);
+    // if(extension[0] != '.' || extension[1] != 's' || extension[2] != 'a' || extension[3] != 'v' || extension[4] != 'e'){
+    //     cout << "File entered is not a .save file" << endl; 
+    //     throw std::runtime_error("File entered is not a .save file");
+    //}
+    
     std::ifstream inFile;
     inFile.open(filename);
-    //if(inFile.fail){
-        //throw std::runtime_error("Unable to open file");
-    //}
+    if(inFile.fail()){
+        throw std::runtime_error("Unable to open file");
+    }
+    //Read the players' information and store it in the player array
     std::string line;
     for(int p = 0; p != 2; p++){
         getline(inFile, line);
@@ -165,22 +177,22 @@ void Game::loadGame(std::string filename){
             while(line[1] == '|'){
                 for(unsigned int i = 2; i != line.length(); i++){
                     if(line[i] > 'A' && line[i] < 'Z'){
-                        // char colour = line[i];
-                        // int shape = line[i + 1] - '0';
-                        // Tile* tile = new Tile(colour, shape);
-                        //int row = line[0] - 'A';
-                        //board->placeTile();
+                        char colour = line[i];
+                        int shape = line[i + 1] - '0';
+                        Tile* tile = new Tile(colour, shape);
+                        board->makeMoveV(line[0], i - 2, tile);
                         tilesOnBoard++;
                     }
                 }
-                cout << line << endl;
+                //cout << line << endl;
                 getline(inFile, line);
             }
+            board->printBoard();
         }else{
-            //incorrect file format
+            throw std::runtime_error("Unable to open file");
         }
     }else{
-        //incorrect file format
+        throw std::runtime_error("Unable to open file");
     }
     cout << tilesOnBoard << endl;
     getline(inFile, line);
@@ -201,6 +213,7 @@ void Game::saveGame(){
     cout << "Enter the name of the file to save:" << endl;
     cout << "> ";
     cin >> filename;
+    filename += ".save";
     std::ofstream outFile;
     outFile.open(filename);
 
@@ -210,8 +223,26 @@ void Game::saveGame(){
         outFile << players[p]->getHand()->toString() << endl;
     }
 
-    outFile << "   0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25" <<endl;
-    outFile << "  ------------------------------------------------------------------------------" <<endl;
+    std::string row = board->getRow(0);
+    int cols = (row.length() - 2) / 3;
+    outFile << "  0";
+    for(int c = 1; c != cols; c++){
+        if(c < 10){
+            outFile << "  ";
+        }else{
+            outFile << " ";
+        }
+        outFile << c;
+    }
+    outFile << endl;
+    outFile << "  -";
+    for(int c = 1; c != cols; c++){
+        outFile << "---";
+    }
+    outFile << endl;
+    // outFile << "  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25" <<endl;
+    // outFile << "  ------------------------------------------------------------------------------" <<endl;
+    
     for(int i = 0; i < 26; i++){
         char letter = 'A' + i;
         outFile << letter;

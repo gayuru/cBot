@@ -18,6 +18,7 @@ Board::Board(){
     vBoard.push_back(temp);
     counter = 0;
     direction = 0;
+    counterPoints =0;
 }
 
 //when a player makes a move it checks for validation
@@ -45,6 +46,7 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
         cout<<"board is being resized"<<endl;
         resizeBoard(row, col);
         cout<<"board is resized"<<endl;
+        
         return true;
     }
     else return false;
@@ -79,24 +81,125 @@ void Board::refresh() {
     direction = 0;
 }
 
-/* COMMENTED FOR COMPILATIONR REASONS
+
 //needs to be implemented
-void Board::calcPoints(Player &player) {
-    //implement me!
-    //int maxRowSize = vBoard.size();
-    //int maxColSize = vBoard[0].size();
-    //left check
+void Board::calcPoints(Player &player,int cRow,int col) {
+    int sum=0;
+    int row = cRow - 'A';
     
-    //right check
-
-    //upcheck
-
-    //downcheck
-
+    int pointsVertical=0;
+    int pointsHorizontal=0;
+    
+    //first tile point calculation
+    if(counterPoints == 0){
+        sum += 1;
+    }else{
+        
+        pointsVertical = getVerticalRun(row, col);
+        pointsHorizontal = getHorizontalRun(row, col);
+        
+        if(pointsVertical || pointsHorizontal == 1){
+            sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
+        }else{
+            sum = pointsVertical + pointsHorizontal;
+        }
+        
+        //update points for a qwirkle
+        if(pointsVertical || pointsHorizontal == 6){
+            sum += 6;
+        }
+        
+    }
+    
+    player.addPoints(sum);
+    counterPoints++;
     //resets 
     refresh();
 }
-*/
+
+
+int Board::getVerticalRun(int row,int col){
+    
+    int runUp = row;
+    int runDown = row;
+    int points=0;
+    bool run=true;
+    
+    //check for tiles up
+    while(run){
+        if(inBoundCheck(runUp -1,col)!=nullptr){
+            if(vBoard[runUp-1][col] != nullptr){
+                runUp--;
+            }else{
+                run = false;
+            }
+        }else{
+            run = false;
+        }
+    }
+    
+    run=true;
+    
+    //check for tiles down
+    while(run){
+        if(inBoundCheck(runDown +1,col)!=nullptr){
+            if(vBoard[runDown+1][col] != nullptr){
+                runUp++;
+            }else{
+                run = false;
+            }
+        }else{
+            run = false;
+        }
+    }
+    
+    points = runDown-runUp+CURRENT_TILE;
+    
+    return points;
+    
+}
+
+int Board::getHorizontalRun(int row,int col){
+    
+    int runLeft = col;
+    int runRight = col;
+    int points=0;
+    bool run=true;
+    
+    //check for tiles up
+    while(run){
+        if(inBoundCheck(row,runLeft-1)!=nullptr){
+            if(vBoard[row][runLeft-1] != nullptr){
+                runLeft--;
+            }else{
+                run = false;
+            }
+        }else{
+            run = false;
+        }
+    }
+    
+    run=true;
+    
+    //check for tiles down
+    while(run){
+        if(inBoundCheck(row,runRight+1)!=nullptr){
+            if(vBoard[row][runRight+1] != nullptr){
+                runRight++;
+            }else{
+                run = false;
+            }
+        }else{
+            run = false;
+        }
+    }
+    
+    points = runRight-runLeft+CURRENT_TILE;
+    
+    return points;
+    
+}
+
 
 void Board::printBoard(){
     

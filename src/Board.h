@@ -7,6 +7,7 @@
 //using std::cout;
 
 #define MAX_BOARD_SIZE_ROW_COL    26
+#define CURRENT_TILE 1
     #define FIX_COLOR  0
 #define FIX_SHAPE  1
 #define HORIZONTAL 1
@@ -21,6 +22,7 @@ private:
     int prevRow;
     int counter;
     int direction;
+    int counterPoints;
     std::vector<std::vector<Tile*> > vBoard;
     void resizeBoard(int row, int col);
     bool checkValidityV(int col, int row, Tile*tile);
@@ -30,6 +32,8 @@ private:
     void refresh();
     bool directionCheck(int row, int col);
     Tile* inBoundCheck(int row, int col);
+    int getVerticalRun(int row,int col);
+    int getHorizontalRun(int row,int col);
 public:
     Board();
     ~Board();
@@ -38,6 +42,6 @@ public:
     bool checkValidity(int column,int row,Tile* tile);
     bool makeMoveV(char cRow, int col, Tile* tile);
     //call this once the player is done
-    void calcPoints(Player &player);
+    void calcPoints(Player &player,int row,int col);
     std::string getRow(int row);
 };

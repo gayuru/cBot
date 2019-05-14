@@ -81,7 +81,7 @@ int Game::playerBreakLoop(int playerNum) {
 
 void Game::playerTurn() {
     int count = 0;
-    while(count < 2) { // Change this to keep looping while the tilebag is not empty
+    while(!tilebag->isEmpty()) { // Change this to keep looping while the tilebag is not empty
         for(int playerNum = 0; playerNum < 2; ++playerNum) {
             std::string playerAction;
             std::string tilePlacementLoc;   
@@ -98,8 +98,19 @@ void Game::playerTurn() {
                 Colour* tmpColour =new Colour(tilePlacementLoc[0]);
                 Shape* tmpShape = new Shape(tilePlacementLoc[1]-'0');
                 Tile* tile = new Tile(*tmpColour,*tmpShape);
+              
+                bool val = board->makeMoveV(tilePlacementLoc[4], tilePlacementLoc[5]-48, tile);
                 
-                board->makeMoveV(tilePlacementLoc[4], tilePlacementLoc[5]-48, tile);
+                if(val){
+                    std::cout<<"Player Move Valid"<<std::endl;
+                     board->calcPoints(*players[playerNum],tilePlacementLoc[4], tilePlacementLoc[5]-48);
+                }else{
+                    std::cout<<"That piece can't go there. Try again."<<std::endl;
+                    //loop through until val is true 
+                }
+               
+                
+                
             } else if(playerAction.substr(0,7) == "replace") {
                 //bool isTileValid = false;
                 int linkedListCounter = 0; 

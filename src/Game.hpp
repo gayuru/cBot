@@ -16,10 +16,6 @@
 #include <algorithm>
 #include <string> 
 
-using std::cout;
-using std::endl;
-using std::cin;
-
 class Game{
     private:
     Player* players[2];
@@ -32,8 +28,11 @@ public:
     void loadGame(std::string filename);
     void saveGame();
     void playerNamePlay(std::string playerName);
+    bool doesStringContainLetters(const std::string & toCheck);
+    bool isAllLettersUppercase(const std::string & toCheck);
+    int  playerBreakLoop(int playerNum);
     void playerTurn();
-    int playerAction(int playerNum);
+    void playerTurnPrintDetails(Player* player);
     void displayPlayersScore();
 };
 #endif /* Game_hpp */

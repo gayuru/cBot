@@ -40,7 +40,7 @@ void TileBag::generateRandomTiles(){
     }
 
     for(int i = 0; i < 72; i++) {
-        cout<<tilesAr[i]->toString()<< ",";
+        std::cout<<tilesAr[i]->toString()<< ",";
     }
 
     

@@ -16,9 +16,9 @@ Board::Board(){
     std::vector<Tile*>temp;
     temp.push_back(nullptr);
     vBoard.push_back(temp);
-    counter = 0;
+    // counter = 0;
     direction = 0;
-    turnPoints =0;
+    // turnPoints =0;
 }
 
 //when a player makes a move it checks for validation
@@ -26,8 +26,9 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
     bool makeMove = true;
     cout<<"Making move"<<endl;
     int row = cRow - 'A';
-    cout<<counter<<endl;
-    if(counter > 1) {
+    // cout<<counter<<endl;
+    cout<<coordPlaced.size()<<endl;
+    if(coordPlaced.size() > 1) {
         cout<<"checking direction"<<endl;
         if(directionCheck(row, col)) {
             cout<<"direction is not right"<<endl;
@@ -40,15 +41,13 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
     if(makeMove) {
         cout<<"checking validity"<<endl;
         if(checkValidityV(col, row, tile)) {
-            if(counter == 0) {
-                prevCol = col;
-                prevRow = row;
-            }
-            if(counter == 1) {
+            if(coordPlaced.size() == 1) {
                 calculateDirection(row, col);
             }
-            counter++;
-            turnPoints = calcPoints(row,col);
+            // counter++;
+            coordPlaced.push_back(new Coordinate(row,col));
+            cout<<"MY SIZE"<<coordPlaced.size()<<endl;
+            // turnPoints = calcPoints(row,col); //ill remove this later
             cout<<"tile is being placed"<<endl;
             vBoard[row][col] = tile;
             cout<<"tile is placed"<<endl;
@@ -69,7 +68,7 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
 }
 
 void Board::calculateDirection(int row, int col) {
-    if (row == prevRow) {
+    if (row == coordPlaced[0]->getRow()) {
         direction = HORIZONTAL;
     }
     else {
@@ -80,13 +79,13 @@ void Board::calculateDirection(int row, int col) {
 bool Board::directionCheck(int row, int col) {
     bool pass = false;
     if(direction == HORIZONTAL) {
-        if(prevRow == row) {
+        if(coordPlaced[0]->getRow() == row) {
             pass = true;
             // return true;
         }
     }
     else {
-        if(prevCol == col) {
+        if(coordPlaced[0]->getCol() == col) {
             pass = true;
             // return true;
         }
@@ -96,42 +95,79 @@ bool Board::directionCheck(int row, int col) {
 
 //
 void Board::refresh() {
-    counter = 0;
+    // counter = 0;
     direction = 0;
+    coordPlaced.clear();
 }
-
-
-//needs to be implemented
-int Board::calcPoints(const int row, const int col) {
-    int sum=0;
-    
-    int pointsVertical=0;
-    int pointsHorizontal=0;
-    
-    //first tile point calculation
-    // if(counterPoints == 0){
-    //     sum += 1;
-    // }else{
-    pointsVertical = getVerticalRun(row, col);
-    pointsHorizontal = getHorizontalRun(row, col);
-    
-    if(pointsVertical == 1 || pointsHorizontal == 1){
-        sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
-    } else {
-        sum = pointsVertical + pointsHorizontal;
+//just call this once u are done with ur turn that is all!!
+int Board::endPoints() {
+    int total = 0;
+    cout<<"DIRECTION:"<<direction<<endl;
+     cout<<"MY SIZE"<<coordPlaced.size()<<endl;
+    for(auto &coord : coordPlaced) {
+        cout<<"Coordinates:::::::" <<coord->getRow()<<"---------"<<coord->getCol()<<endl;
     }
-    
-    //update points for a qwirkle
-    if(pointsVertical == 6 || pointsHorizontal == 6){
-        sum += 6;
+    if(direction == HORIZONTAL) {
+        total += getHorizontalRun(coordPlaced[0]->getRow(),coordPlaced[0]->getCol());
+        for(auto &coord: coordPlaced) {
+            total+= getVerticalRun(coord->getRow(),coord->getCol());
+        }
     }
-    // }
+    else if(direction == VERTICAL) {
+        total += getVerticalRun(coordPlaced[0]->getRow(),coordPlaced[0]->getCol());
+        for(auto &coord: coordPlaced) {
+            total+= getHorizontalRun(coord->getRow(),coord->getCol());
+        }
+    }
+    else {
+        cout<<"VBOARD SIZE:" << vBoard.size() <<endl;
+        //special case: when you place a tile at the very first turn and end
+        if(vBoard.size() == 3 && vBoard[0].size() == 3) {
+            total = 1;
+        }
+        else {
+            for(auto &coord: coordPlaced) {
+                total += (getHorizontalRun(coord->getRow(),coord->getCol()) + getVerticalRun(coord->getRow(),coord->getCol()));
+                cout<<getHorizontalRun(coord->getRow(),coord->getCol())<<endl;
+                cout<<getVerticalRun(coord->getRow(),coord->getCol())<<endl;
+            }            
+        }
+    }
     refresh();
-    return sum;
-    //player.addPoints(sum);
-    //counterPoints++;
-    //resets 
+    return total;
 }
+
+// //needs to be implemented
+// int Board::calcPoints(const int row, const int col) {
+//     int sum=0;
+    
+//     int pointsVertical=0;
+//     int pointsHorizontal=0;
+    
+//     //first tile point calculation
+//     // if(counterPoints == 0){
+//     //     sum += 1;
+//     // }else{
+//     pointsVertical = getVerticalRun(row, col);
+//     pointsHorizontal = getHorizontalRun(row, col);
+    
+//     if(pointsVertical == 1 || pointsHorizontal == 1){
+//         sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
+//     } else {
+//         sum = pointsVertical + pointsHorizontal;
+//     }
+    
+//     //update points for a qwirkle
+//     if(pointsVertical == 6 || pointsHorizontal == 6){
+//         sum += 6;
+//     }
+//     // }
+//     refresh();
+//     return sum;
+//     //player.addPoints(sum);
+//     //counterPoints++;
+//     //resets 
+// }
 
 
 int Board::getVerticalRun(const int row, const int col){
@@ -154,6 +190,7 @@ int Board::getVerticalRun(const int row, const int col){
         }
     }
     run=true;
+    cout<<"runUP::" << runUp <<endl;
     //check for tiles down
     while(run){
         if(inBoundCheck(runDown +1,col)!=nullptr){
@@ -166,7 +203,11 @@ int Board::getVerticalRun(const int row, const int col){
             run = false;
         }
     }
+    cout<<"runDown::" << runDown <<endl;
     points = runDown-runUp+CURRENT_TILE;
+    if (points == 1) {
+        points = 0;
+    }
     return points;
 }
 
@@ -189,12 +230,13 @@ int Board::getHorizontalRun(const int row, const int col){
             run = false;
         }
     }
+    cout<<"runLeft::" << runLeft <<endl;
     run=true;
     //check for tiles right
     while(run){
         if(inBoundCheck(row,runRight+1)!=nullptr){
             if(vBoard[row][runRight+1] != nullptr){
-                runRight++;
+                ++runRight;
             }else{
                 run = false;
             }
@@ -202,17 +244,21 @@ int Board::getHorizontalRun(const int row, const int col){
             run = false;
         }
     }
+    cout<<"runRight::" << runRight <<endl;
     points = runRight-runLeft+CURRENT_TILE;
+    if (points == 1) {
+        points = 0;
+    }
     return points;
 }
 
-int Board::getTurnPoints(){
-    return turnPoints;
-}
+// int Board::getTurnPoints(){
+//     return turnPoints;
+// }
 
-void Board::refreshTurn(){
-    turnPoints = 0;
-}
+// void Board::refreshTurn(){
+//     turnPoints = 0;
+// }
 
 void Board::printBoard(){
     
@@ -573,6 +619,11 @@ void Board::resizeBoard(int row, int col) {
             vBoard.push_back(temp);
             vBoard.push_back(temp1);
             std::rotate(vBoard.rbegin(), vBoard.rbegin() + 1, vBoard.rend());
+
+            for(auto &coord: coordPlaced) {
+                coord->shiftC();
+                coord->shiftR();
+            }
         }
     }
     else {
@@ -585,13 +636,17 @@ void Board::resizeBoard(int row, int col) {
         
         //if top needs to be resized
         if(row == rowMinPoint) {
-            cout<<"bot is resizing"<<endl;
+            cout<<"top is resizing"<<endl;
             std::vector<Tile*>temp;
             for(int i = 0; i < colMaxPoint + 1; i++) {
                 temp.push_back(nullptr);
             }
             vBoard.push_back(temp);
             std::rotate(vBoard.rbegin(), vBoard.rbegin() + 1, vBoard.rend());
+            //shifts the saved coord down once
+                for(auto &coord: coordPlaced) {
+                    coord->shiftR();
+                }
         }
         //if bot needs to be resized
         else if (row == rowMaxPoint) {
@@ -612,6 +667,10 @@ void Board::resizeBoard(int row, int col) {
                 row.push_back(nullptr);
                 std::rotate(row.rbegin(), row.rbegin() + 1, row.rend());
             }
+            //shifts col one to right
+            for(auto &coord: coordPlaced) {
+                coord->shiftC();
+            }            
         }
         //if right needs to be resized
         else if (col == colMaxPoint) {

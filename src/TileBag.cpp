@@ -34,8 +34,8 @@ void TileBag::generateRandomTiles(){
             Shape tempShape = i;
             Tile* tile = new Tile(tempColour,tempShape);
             Tile* tileDuplicate = new Tile(tempColour,tempShape);
-            tilesAr[++counter] = tile;
-            tilesAr[++counter] = tileDuplicate;
+            tilesAr[counter++] = tile;
+            tilesAr[counter++] = tileDuplicate;
         }
     }
 

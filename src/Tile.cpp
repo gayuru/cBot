@@ -1,10 +1,6 @@
 
 #include "Tile.h"
 
-// Empty... for now?
-
-using std::string;
-
 Tile::Tile(Colour colour, Shape shape) {
     this->colour = colour;
     this->shape = shape;

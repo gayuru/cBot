@@ -23,7 +23,6 @@ void Game::newGame(){
     
     //loops until the game is finished
     while(status == "NOT_FINISHED"){
-        std::cout<< "Current Player : "<<currPlayer<<std::endl;
         playerTurnPrintDetails(players[currPlayer]);
         playerTurnN();
         switchPlayers();
@@ -40,7 +39,7 @@ void Game::playerNamePlay(std::string playerName) {
     while(!isNameUpper) {
         int playerNo = 1;
         for(int playerNum = 0; playerNum < 2; ++playerNum) {
-            cout<<"👤 Enter a name for Player " << playerNo << " (uppercase characters only)"<<endl;
+            std::cout<<"👤 Enter a name for Player " << playerNo << " (uppercase characters only)"<<std::endl;
             std::cout<<"> ";
             std::cin>>playerName;
             std::cin.ignore();
@@ -57,7 +56,7 @@ void Game::playerNamePlay(std::string playerName) {
             }
         }
     }
-    cout<<"\n👉 Let's Play 👈\n"<<endl;
+    std::cout<<"\n👉 Let's Play 👈\n"<<std::endl;
 }
 
 //validation for playerName
@@ -244,7 +243,7 @@ void Game::endGame(std::string status){
 }
 
 void Game::playerTurnPrintDetails(Player* player) {
-    std::cout<<player->getName()<<", it's your turn"<<endl;
+    std::cout<<player->getName()<<", it's your turn"<<std::endl;
     displayPlayersScore();
     std::cout<<std::endl;
     board->printBoard();
@@ -302,14 +301,14 @@ void Game::loadGame(std::string filename) {
         }
     }
 
-    std::cout << players[0]->getName() << endl;
-    std::cout << players[0]->getScore() << endl;
+    std::cout << players[0]->getName() << std::endl;
+    std::cout << players[0]->getScore() << std::endl;
     players[0]->getHand()->printLinkedList();
-    std::cout << endl;
-    std::cout << players[1]->getName() << endl;
-    std::cout << players[1]->getScore() << endl;
+    std::cout << std::endl;
+    std::cout << players[1]->getName() << std::endl;
+    std::cout << players[1]->getScore() << std::endl;
     players[1]->getHand()->printLinkedList();
-    std::cout << endl;
+    std::cout << std::endl;
 
     board = new Board();
     int tilesOnBoard = 0;
@@ -317,11 +316,11 @@ void Game::loadGame(std::string filename) {
     inFile >> next;
     if(next == '0'){
         getline(inFile, line);
-        std::cout << "  " << next << line << endl;
+        std::cout << "  " << next << line << std::endl;
         inFile >> next;
         if(next == '-'){
             getline(inFile, line);
-            std::cout << next << line << endl;
+            std::cout << next << line << std::endl;
             getline(inFile, line);
             while(line[1] == '|'){
                 for(unsigned int i = 2; i != line.length(); i++){
@@ -333,7 +332,7 @@ void Game::loadGame(std::string filename) {
                         tilesOnBoard++;
                     }
                 }
-                std::cout << line << endl;
+                std::cout << line << std::endl;
                 getline(inFile, line);
             }
             board->printBoard();
@@ -345,7 +344,7 @@ void Game::loadGame(std::string filename) {
         //incorrect file format
         throw std::runtime_error("Unable to open file");
     }
-    std::cout << tilesOnBoard << endl;
+    std::cout << tilesOnBoard << std::endl;
     getline(inFile, line);
     LinkedList* tiles = new LinkedList();
     char colours[60 - tilesOnBoard];
@@ -356,12 +355,12 @@ void Game::loadGame(std::string filename) {
         tiles->addBack(new Tile(colours[i], shapes[i]));
     }
     tilebag = new TileBag(tiles);
-    std::cout << tilebag->toString() << endl;
+    std::cout << tilebag->toString() << std::endl;
 }
 
 void Game::saveGame(){
     std::string filename;
-    std::cout << "Enter the name of the file to save:" << endl;
+    std::cout << "Enter the name of the file to save:" << std::endl;
     std::cout << "> ";
     std::cin >> filename;
     filename += ".save";
@@ -369,9 +368,9 @@ void Game::saveGame(){
     outFile.open(filename);
 
     for(int p = 0; p != 2; p++){
-        outFile << players[p]->getName() << endl;
-        outFile << players[p]->getScore() << endl;
-        outFile << players[p]->getHand()->toString() << endl;
+        outFile << players[p]->getName() << std::endl;
+        outFile << players[p]->getScore() << std::endl;
+        outFile << players[p]->getHand()->toString() << std::endl;
     }
 
     std::string row = board->getRow(0);
@@ -385,20 +384,20 @@ void Game::saveGame(){
         }
         outFile << c;
     }
-    outFile << endl;
+    outFile << std::endl;
     outFile << "  -";
     for(int c = 1; c != cols; c++){
         outFile << "---";
     }
-    outFile << endl;
+    outFile << std::endl;
 
     for(int i = 0; i < 26; i++){
         char letter = 'A' + i;
         outFile << letter;
-        outFile << board->getRow(i) << endl;
+        outFile << board->getRow(i) << std::endl;
     }
 
-    outFile << tilebag->toString() << endl;
+    outFile << tilebag->toString() << std::endl;
 }
 
 //old method

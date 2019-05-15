@@ -39,11 +39,6 @@ void TileBag::generateRandomTiles(){
         }
     }
 
-    for(int i = 0; i < 72; i++) {
-        std::cout<<tilesAr[i]->toString()<< ",";
-    }
-
-    
     
     std::vector<int> arr;
     

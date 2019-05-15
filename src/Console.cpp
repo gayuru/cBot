@@ -46,15 +46,15 @@ void Console::mainMenu(){
         bool loaded = false;
         while(!loaded){
             try {
-                cout << "Enter the filename from which to load a game:" << endl;
-                cout << "> ";
+                std::cout << "Enter the filename from which to load a game:" << std::endl;
+                std::cout << "> ";
                 std::string filename;
                 std::cin >> filename;
                 qwirkle->loadGame(filename);
                 loaded = true;
             } catch(std::runtime_error& error) {
-                std::cerr << "There was a problem opening the file." << endl;
-                std::cout << "Please try again: " << endl;
+                std::cerr << "There was a problem opening the file." << std::endl;
+                std::cout << "Please try again: " << std::endl;
             }
         }
     }else if (i==3){

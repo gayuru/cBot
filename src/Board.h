@@ -8,7 +8,7 @@
 
 #define MAX_BOARD_SIZE_ROW_COL    26
 #define CURRENT_TILE 1
-    #define FIX_COLOR  0
+#define FIX_COLOR  0
 #define FIX_SHAPE  1
 #define HORIZONTAL 1
 #define VERTICAL   2

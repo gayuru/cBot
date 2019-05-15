@@ -38,6 +38,12 @@ void TileBag::generateRandomTiles(){
             tilesAr[++counter] = tileDuplicate;
         }
     }
+
+    for(int i = 0; i < 72; i++) {
+        cout<<tilesAr[i]->toString()<< ",";
+    }
+
+    
     
     std::vector<int> arr;
     

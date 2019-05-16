@@ -95,7 +95,7 @@ Tile* TileBag::getRandomSingleTile() {
 bool TileBag::replaceTile(Tile* tile, LinkedList* hand) {
     if(!isEmpty()) {
         tiles->addBack(tile);
-        hand->addFront(getRandomSingleTile());
+        hand->addBack(getRandomSingleTile());
     }
     return !isEmpty();
 }
@@ -104,7 +104,7 @@ bool TileBag::replaceTile(Tile* tile, LinkedList* hand) {
 bool TileBag::fillPlayerHand(LinkedList* hand) {
     if(!isEmpty()) {
         for(int i = hand->size(); i < MAX_NUM_COLOUR_SHAPE ;++i) {
-            hand->addFront(getRandomSingleTile());
+            hand->addBack(getRandomSingleTile());
         }
     }
     return false;

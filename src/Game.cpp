@@ -58,7 +58,7 @@ void Game::playerNamePlay(std::string playerName) {
         bool invalid = true;
         while(invalid) {
             std::cout<<"👤 Enter a name for Player " << players.size() + 1 << " (uppercase characters only)"<<std::endl;
-            std::cout<<"Type 'done' when you are done"<<std::endl;
+            std::cout<<"▫️ Input 'done' if all the players are entered.\n"<<std::endl;
             std::cout<<"> ";
             std::cin>>playerName;
             std::cin.ignore();
@@ -77,7 +77,7 @@ void Game::playerNamePlay(std::string playerName) {
                 std::cout << "Error : Please enter the Player names in Uppercase !" <<std::endl;
             } else {
                 // players[playerNum] = new Player(playerName);
-                std::cout <<"Added Player: "  + playerName<< std::endl;
+                std::cout<<playerName + " added into the Game. \n"  << std::endl;
                 players.push_back(new Player(playerName));
                 tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
                 // ++playerNo;
@@ -107,7 +107,6 @@ bool Game::isPlayerNameValid(const std::string & playerName) {
 
 
 void Game::playerTurnN(){
-    std::cout<<tilebag->toString()<<std::endl;
     std::cout<<"Please enter your move:"<<std::endl;
     
     //Gets the user input
@@ -129,18 +128,17 @@ void Game::playerTurnN(){
     mainAction = words[0];
     
     //case: null check when nothing is entered after mainAction string
-
     if(words.size() > 1){
+        //null check
+        if(words[1] != ""){
+            tile = (words[1]);
+        }
         if(words.size() > 2){
             if(words[3] != ""){
                 tilePlacement = words[3];
             }
         }
-        //null check 
         
-        if(words[1] != ""){
-            tile = (words[1]);
-        }
     }
    
     //special case
@@ -217,8 +215,7 @@ void Game::playerTurnN(){
             //replace the tile with the front of the bag
             tilebag->replaceTile(currTile, players[currPlayer]->getHand());
             players[currPlayer]->useTile(currTile);
-            players[currPlayer]->getHand()->printLinkedList();
-            
+        
         }else{
             //invalid input
             std::cout << "Error : Please enter replace or place followed by a tile from player's hand!" <<std::endl;
@@ -244,20 +241,34 @@ void Game::multipleTilePlacement(){
 
 //switch turns between players
 void Game::switchPlayers(){
-    
-    if(currPlayer< 4){
-        currPlayer++;
-    }else {
-        currPlayer=0;
+    //switches turns for two players
+    if(players.size() == 2){
+        if(currPlayer == 0){
+            currPlayer = 1;
+        }else{
+            currPlayer=0;
+        }
+    }else if(players.size() == 3){
+        //switches turns for three players
+        if(currPlayer == 0){
+            currPlayer = 1;
+        }else if(currPlayer == 1){
+            currPlayer=2;
+        }else{
+            currPlayer =0;
+        }
+    } else {
+        //switches turns for four players
+        if(currPlayer == 0){
+            currPlayer = 1;
+        }else if(currPlayer == 1){
+            currPlayer=2;
+        }else if(currPlayer == 2){
+            currPlayer = 3;
+        }else{
+            currPlayer = 0;
+        }
     }
-    
-//depends on the amount of players
-//    else if(currPlayer==2){
-//        currPlayer=3;
-//    }else{
-//        currPlayer =0;
-//    }
-    
 }
 
 //checks for the gameProgress and updates the status

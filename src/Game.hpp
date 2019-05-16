@@ -37,6 +37,7 @@ public:
     void saveGame();
     void playerNamePlay(std::string playerName);
     bool isPlayerNameValid(const std::string & playerName);
+    std::string toLowerPlayerName(const std::string & playerName);
     int  playerBreakLoop(int playerNum);
     void playerTurn();
     std::string buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc);

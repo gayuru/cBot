@@ -63,7 +63,7 @@ void Game::playerNamePlay(std::string playerName) {
             std::cin>>playerName;
             std::cin.ignore();
             // playerName = std::cin.get();
-            if(playerName == "done") {
+            if(toLowerPlayerName(playerName) == "done") {
                 if (players.size() >= 2 && players.size() <= 4) {
                     std::cout<<"You are done"<<std::endl;
                     invalid = false;
@@ -96,14 +96,23 @@ void Game::playerNamePlay(std::string playerName) {
 
 //validation for playerName
 bool Game::isPlayerNameValid(const std::string & playerName) {
+    bool isPlayerNameValid = true;
     for(unsigned int charPos = 0; charPos < playerName.length(); ++charPos) {
         if(!isalpha(playerName[charPos]) || !isupper(playerName[charPos])) {
-            return false;
+            isPlayerNameValid = false;
         }
     }
-    return true;
+    return isPlayerNameValid;
 }
 
+//convert characters of playername for command 'done' during inputting player name
+std::string Game::toLowerPlayerName(const std::string & playerName) {
+    std::string doneAction;
+    for(unsigned int charPos = 0; charPos < playerName.length(); ++charPos) {
+        doneAction += tolower(playerName[charPos]);
+    }
+    return doneAction;
+}
 
 
 void Game::playerTurnN(){

@@ -16,7 +16,8 @@ Shape Tile::getShape() {
 
 std::string Tile::toString() {
     std::string thisString = "";
-    thisString+=colour;
+    //bug here
+    thisString += colour;
     thisString += std::to_string(shape);
     return thisString;
 }

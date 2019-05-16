@@ -1,10 +1,10 @@
 //
 //  Game.cpp
 //  cBot Assignment 2
-//
+//  
 //  Created by Gayuru Gunawardana on 3/5/19.
 //  Copyright © 2019 RMIT. All rights reserved.
-//
+//  Acknowledgement to: https://stackoverflow.com/questions/10828937/how-to-make-cin-take-only-numbers
 
 #include "Game.hpp"
 #include <iostream>
@@ -16,6 +16,7 @@ Game::Game(){
     tilebag = new TileBag();
     status = "NOT_FINISHED";
     currPlayer = 0;
+    tilePlaced = false;
 }
 
 void Game::newGame(){
@@ -36,44 +37,85 @@ void Game::newGame(){
 
 //input and validation for players
 void Game::playerNamePlay(std::string playerName) {
-    bool isNameUpper = false;
-    while(!isNameUpper) {
-        int playerNo = 1;
-        for(int playerNum = 0; playerNum < 2; ++playerNum) {
-            std::cout<<"👤 Enter a name for Player " << playerNo << " (uppercase characters only)"<<std::endl;
+//     bool invalid = true;
+//     while(invalid) {
+//         std::cout<<"Enter the number of Players from 2-4"<<std::endl;
+//         int x = 0;
+//         while(!(std::cin >> x && x <= 4 && x >= 2)){
+//             std::cin.clear();
+//             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+//             std::cout << "Invalid input.  Try again: ";
+//         }
+//         std::cout << "You enterd: " << x << std::endl;  
+        
+  
+// }
+
+
+    // bool isNameUpper = false;
+    // while(!isNameUpper) {
+        // int playerNo = 0;
+        bool invalid = true;
+        while(invalid) {
+            std::cout<<"👤 Enter a name for Player " << players.size() + 1 << " (uppercase characters only)"<<std::endl;
+            std::cout<<"▫️ Input 'done' if all the players are entered.\n"<<std::endl;
             std::cout<<"> ";
             std::cin>>playerName;
             std::cin.ignore();
-            if(!isPlayerNameValid(playerName)) {
-                playerNum = playerBreakLoop(playerNum);
+            // playerName = std::cin.get();
+            if(toLowerPlayerName(playerName) == "done") {
+                if (players.size() >= 2 && players.size() <= 4) {
+                    std::cout<<"You are done"<<std::endl;
+                    invalid = false;
+                }
+                else {
+                    std::cout<<"Number of players has to be between 2-4"<<std::endl;
+                }
+            }
+            else if(!isPlayerNameValid(playerName)) {
+                // playerNum = playerBreakLoop(playerNum);
                 std::cout << "Error : Please enter the Player names in Uppercase !" <<std::endl;
             } else {
-                players[playerNum] = new Player(playerName);
-                tilebag->fillPlayerHand(players[playerNum]->getHand());
-                ++playerNo;
-                if(playerNum == 1) {
-                    isNameUpper = true;
+                // players[playerNum] = new Player(playerName);
+                std::cout<<playerName + " added into the Game. \n"  << std::endl;
+                players.push_back(new Player(playerName));
+                tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
+                // ++playerNo;
+                // if(playerNum == 1) {
+                //     isNameUpper = true;
+                // }
+                if (players.size() == 4) {
+                    invalid = false;
                 }
             }
         }
-    }
+    // }
+    playerSize = players.size();
     std::cout<<"\n👉 Let's Play 👈\n"<<std::endl;
 }
 
 //validation for playerName
 bool Game::isPlayerNameValid(const std::string & playerName) {
+    bool isPlayerNameValid = true;
     for(unsigned int charPos = 0; charPos < playerName.length(); ++charPos) {
         if(!isalpha(playerName[charPos]) || !isupper(playerName[charPos])) {
-            return false;
+            isPlayerNameValid = false;
         }
     }
-    return true;
+    return isPlayerNameValid;
+}
+
+//convert characters of playername for command 'done' during inputting player name
+std::string Game::toLowerPlayerName(const std::string & playerName) {
+    std::string doneAction;
+    for(unsigned int charPos = 0; charPos < playerName.length(); ++charPos) {
+        doneAction += tolower(playerName[charPos]);
+    }
+    return doneAction;
 }
 
 
-
 void Game::playerTurnN(){
-    
     std::cout<<"Please enter your move:"<<std::endl;
     
     //Gets the user input
@@ -103,11 +145,8 @@ void Game::playerTurnN(){
                 tilePlacement = words[3];
             }
         }
+        
     }
-
-  
-
-    
    
     //special case
     if(mainAction != "place"){
@@ -131,6 +170,8 @@ void Game::playerTurnN(){
         //fill players hand 
         tilebag->fillPlayerHand(players[currPlayer]->getHand());
         std::cout<< "Switching turns"<<std::endl;
+        //reset tilePlaced
+        tilePlaced = false;
         return;
     }
     
@@ -163,6 +204,7 @@ void Game::playerTurnN(){
             if(board->makeMoveV(toupper(row), col, currTile)){
                 //removeTile from players hand
                 players[currPlayer]->useTile(currTile);
+                tilePlaced = true; //stops a player from replacing a tile after he places
                 //loop until the player decides he want to end his turn
                 multipleTilePlacement();
             }else{
@@ -172,11 +214,16 @@ void Game::playerTurnN(){
          
         }else if(mainAction == "replace"){
             
+            //checks if the player attempts to do both actions at the same time 
+            if(tilePlaced == true){
+                std::cout<<"You can't do the following actions on the same turn : Place Tile and ReplaceTile"<<std::endl;
+                playerTurnN();
+            }
+            
             //replace the tile with the front of the bag
             tilebag->replaceTile(currTile, players[currPlayer]->getHand());
             players[currPlayer]->useTile(currTile);
-            players[currPlayer]->getHand()->printLinkedList();
-            
+        
         }else{
             //invalid input 
             std::cout << "Error : Please enter replace or place followed by a tile from player's hand!" <<std::endl;
@@ -202,20 +249,34 @@ void Game::multipleTilePlacement(){
 
 //switch turns between players
 void Game::switchPlayers(){
-    
-    if(currPlayer ==0){
-        currPlayer =1;
-    }else if(currPlayer==1){
-        currPlayer=0;
+    //switches turns for two players
+    if(players.size() == 2){
+        if(currPlayer == 0){
+            currPlayer = 1;
+        }else{
+            currPlayer=0;
+        }
+    }else if(players.size() == 3){
+        //switches turns for three players
+        if(currPlayer == 0){
+            currPlayer = 1;
+        }else if(currPlayer == 1){
+            currPlayer=2;
+        }else{
+            currPlayer =0;
+        }
+    } else {
+        //switches turns for four players
+        if(currPlayer == 0){
+            currPlayer = 1;
+        }else if(currPlayer == 1){
+            currPlayer=2;
+        }else if(currPlayer == 2){
+            currPlayer = 3;
+        }else{
+            currPlayer = 0;
+        }
     }
-    
-//depends on the amount of players
-//    else if(currPlayer==2){
-//        currPlayer=3;
-//    }else{
-//        currPlayer =0;
-//    }
-    
 }
 
 //checks for the gameProgress and updates the status
@@ -247,7 +308,7 @@ void Game::endGame(std::string status){
     }else if(status == "GAME_OVER"){
         
         std::cout<<"Game Over"<<std::endl;
-        for(int i=0;i<4;i++){
+        for(int i=0;i<playerSize;i++){
             std::cout<<"Score for "<<players[i]->getName()<<":"<<players[i]->getScore()<<std::endl;
             //check who has the highest score
             //implement this!
@@ -275,7 +336,7 @@ void Game::playerTurnPrintDetails(Player* player) {
 }
 
 void Game::displayPlayersScore() {
-    for(int playerNum = 0; playerNum < 2; ++playerNum) {
+    for(int playerNum = 0; playerNum < playerSize; ++playerNum) {
         std::cout<< "Score for " << players[playerNum]->getName() << ": " << players[playerNum] -> getScore() << std::endl;
     }
 }

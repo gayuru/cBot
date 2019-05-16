@@ -18,10 +18,13 @@
 #include <sstream>
 class Game{
     private:
-    Player* players[2];
+    std::vector<Player*> players;
+    // Player* players[2];
     Board* board;
     TileBag* tilebag;
     std::string status;
+    int playerSize;
+    bool tilePlaced;
     int currPlayer;
     void switchPlayers();
     void multipleTilePlacement();
@@ -34,6 +37,7 @@ public:
     void saveGame();
     void playerNamePlay(std::string playerName);
     bool isPlayerNameValid(const std::string & playerName);
+    std::string toLowerPlayerName(const std::string & playerName);
     int  playerBreakLoop(int playerNum);
     void playerTurn();
     std::string buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc);

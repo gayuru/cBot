@@ -32,15 +32,15 @@ void Console::mainMenu(){
     std::cout<< "1. New Game\n2. Load Game\n3. Show Student Information\n4. Quit \n" << std::endl;
     std::cout<<"> ";
     std::cin>>i;
-    
-    if(i == 1){
+
+    if (i == 1) {
         
         std::cout<< "\nStarting a New Game\n" << std::endl;
         //call the new game method on the view
         Game* qwirkle = new Game();
         qwirkle->newGame();
        
-    }else if (i==2){
+    } else if (i==2) {
         //load a Game
         Game* qwirkle = new Game();
         bool loaded = false;
@@ -63,11 +63,15 @@ void Console::mainMenu(){
 
     }else if (i==3){
         showStudentInfo();
-    }else if(i==4){
+    } else if(i==4) {
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
         
-    }else{
-        std::cout<<"Wrong input please try again";
+    } else {
+        if(std::cin.fail()) {
+            std::cin.clear(); 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        }
+        std::cout<<"Wrong input please try again"<<std::endl;
         mainMenu();
     }
     

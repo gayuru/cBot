@@ -51,5 +51,7 @@ public:
     // int getTurnPoints();
     // void refreshTurn();
     std::string getRow(int row);
-    int getSize();
+    int getHSize();
+    int getVSize();
+    void loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles);
 };

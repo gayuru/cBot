@@ -40,5 +40,6 @@ public:
     void playerTurnPrintDetails(Player* player);
     void displayPlayersScore();
     void playerTurnN();
+    void continueLoop();
 };
 #endif /* Game_hpp */

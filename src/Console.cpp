@@ -57,6 +57,10 @@ void Console::mainMenu(){
                 std::cout << "Please try again: " << std::endl;
             }
         }
+        std::cout << "Game successfully loaded" << std::endl;
+
+        qwirkle->continueLoop();
+
     }else if (i==3){
         showStudentInfo();
     }else if(i==4){

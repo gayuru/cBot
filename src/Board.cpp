@@ -630,26 +630,54 @@ void Board::resizeBoard(int row, int col) {
 
 std::string Board::getRow(int row){
     std::string outString = "";
-    for (int column = 0; column < MAX_BOARD_SIZE_ROW_COL; ++column) {
-            outString += '|';
-            if(board[row][column] == nullptr){
+    for (int column = 0; column < getHSize(); ++column) {
+            outString += '|';            
+            if(vBoard[row][column] == nullptr){
                     outString += "  ";
             }else{
-                currTile = *board[row][column];
-                outString += " ";
+                Tile* currTile = vBoard[row][column];
+               // outString += " ";
                 outString += currTile->toString();
             }
-            if(column == MAX_BOARD_SIZE_ROW_COL-1) { //For last column
+            if(column == getHSize() - 1) { //For last column
                 outString += '|';
             }
         }
         return outString;
 }
 
-int Board::getSize(){
+int Board::getVSize(){
     return vBoard.size();
 }
 
+int Board::getHSize(){
+    return vBoard[0].size();
+} 
+
+void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles){
+    //add columns to first row
+    for(int c = 1; c != cols; ++c){
+            vBoard[0].push_back(nullptr);
+        }
+
+    //create new rows and add them to the board
+    for(int r = 1; r != rows; ++r){
+        std::vector<Tile*> temp;
+        for(int c = 0; c != cols; ++c){
+            temp.push_back(nullptr);
+        }
+        vBoard.push_back(temp);
+    }
+
+    //place tiles on board and save coordinates
+    for(unsigned int i = 0; i != tiles.size(); i++){
+            int y = coords[i]->getRow();
+            int x = coords[i]->getCol();
+            Tile* tile = tiles[i];
+            coordPlaced.push_back(new Coordinate(y,x));
+            vBoard[y][x] = tile;                
+        }
+}
 
 //bool Board::checkValidity(int column,int row,Tile* tile){
 //

@@ -82,9 +82,9 @@ void Game::playerTurnN(){
     std::transform(playerInput.begin(), playerInput.end(), playerInput.begin(), ::tolower);
     
     //Allocate the user input into variables for ease
-    std::string mainAction;
-    std::string tilePlacement;
-    std::string tile;
+    std::string mainAction = "";
+    std::string tilePlacement = "";
+    std::string tile = "";
     
     //breaks down the userInput sentence into seperate words
     std::istringstream ss(playerInput);
@@ -92,31 +92,31 @@ void Game::playerTurnN(){
     std::vector<std::string> words(begin, end);
     
     //equating the input onto the variables
-    mainAction = words[0];
-
     //case: null check when nothing is entered after mainAction string
+    if(words.size() != 0){
+        mainAction = words[0];
 
-    if(words.size() > 1){
-        if(words.size() > 2){
-            if(words[3] != ""){
+        if(words.size() > 1){
+            tile = (words[1]);
+
+            if(words.size() > 2){
                 tilePlacement = words[3];
             }
         }
-
-        //null check 
-        if(words[1] != ""){
-            tile = (words[1]);
-        }
     }
+
+  
+
+    
    
     //special case
     if(mainAction != "place"){
         tilePlacement = "";
+        if(mainAction != "replace"){
+            tile = "";
         }
-
-    if(mainAction != "place" && mainAction != "replace"){
-        tile = "";
     }
+
     
     //if a placyer decides to skip his move
     if(mainAction == "skip"){
@@ -138,8 +138,9 @@ void Game::playerTurnN(){
     if(mainAction == "save"){//playerInput.substr(0,4) == "save"
         saveGame();
         status = "GAME_SAVED";
+        return;
     }
-    
+
     
     //creation of the user input tile
     Colour* tmpColour =new Colour(toupper(tile[0]));
@@ -177,7 +178,7 @@ void Game::playerTurnN(){
             players[currPlayer]->getHand()->printLinkedList();
             
         }else{
-            //invalid input
+            //invalid input 
             std::cout << "Error : Please enter replace or place followed by a tile from player's hand!" <<std::endl;
             playerTurnN();
         }
@@ -298,6 +299,7 @@ void Game::loadGame(std::string filename) {
     }
     //Read the players' information and store it in the player array
     std::string line;
+    int handTiles = 0;
     for(int p = 0; p != 2; p++){
         getline(inFile, line);
         players[p] = new Player(line);
@@ -314,6 +316,7 @@ void Game::loadGame(std::string filename) {
             shapes[i] = line[3 * i + 1] - '0';
             players[p]->addTile(new Tile(colours[i], shapes[i]));
         }
+        handTiles += players[p]->getHand()->size();
     }
 
     std::cout << players[0]->getName() << std::endl;
@@ -332,25 +335,37 @@ void Game::loadGame(std::string filename) {
     inFile >> next;
     if(next == '0'){
         getline(inFile, line);
-        std::cout << "  " << next << line << std::endl;
+        //std::cout << "  " << next << line << std::endl;
         inFile >> next;
         if(next == '-'){
             getline(inFile, line);
-            std::cout << next << line << std::endl;
+            //std::cout << next << line << std::endl;
+            //reading the board size and the tiles on the board
+            std::vector<Coordinate*> coords;
+            std::vector<Tile*> tiles;
             getline(inFile, line);
+            int columns = (line.length() - 2) / 3;
+            int rows = 0;
             while(line[1] == '|'){
                 for(unsigned int i = 2; i != line.length(); i++){
                     if(line[i] > 'A' && line[i] < 'Z'){
                         char colour = line[i];
                         int shape = line[i + 1] - '0';
                         Tile* tile = new Tile(colour, shape);
-                        board->makeMoveV(line[0], i - 2, tile);
-                        tilesOnBoard++;
+                        tiles.push_back(tile);
+                        Coordinate* coord = new Coordinate(line[0]-'A', (i - 2)/3);
+                        coords.push_back(coord);
+                        //board->makeMoveV(line[0], i - 2, tile);
+                        ++tilesOnBoard;
                     }
                 }
-                std::cout << line << std::endl;
+                ++rows;
                 getline(inFile, line);
             }
+            std::cout << handTiles << std::endl;
+            std::cout << tilesOnBoard << std::endl;
+            //making the board the right size
+            board->loadBoard(rows, columns, coords, tiles);
             board->printBoard();
         }else{
             //incorrect file format
@@ -360,21 +375,23 @@ void Game::loadGame(std::string filename) {
         //incorrect file format
         throw std::runtime_error("Unable to open file");
     }
-    std::cout << tilesOnBoard << std::endl;
+    //std::cout << tilesOnBoard << std::endl;
     getline(inFile, line);
     LinkedList* tiles = new LinkedList();
-    char colours[60 - tilesOnBoard];
-    int shapes[60 - tilesOnBoard];
-    for(int i = 0; i != 60 - tilesOnBoard; i++){
+    char colours[72 - handTiles - tilesOnBoard];
+    int shapes[72 - handTiles - tilesOnBoard];
+    for(int i = 0; i != 72 - handTiles - tilesOnBoard; i++){
         colours[i] = line[3 * i];
         shapes[i] = line[3 * i + 1] - '0';
         tiles->addBack(new Tile(colours[i], shapes[i]));
     }
     tilebag = new TileBag(tiles);
     std::cout << tilebag->toString() << std::endl;
+    getline(std::cin, line);
 }
 
 void Game::saveGame(){
+    //open file for saving
     std::string filename;
     std::cout << "Enter the name of the file to save:" << std::endl;
     std::cout << "> ";
@@ -383,15 +400,17 @@ void Game::saveGame(){
     std::ofstream outFile;
     outFile.open(filename);
 
+    //save player info
     for(int p = 0; p != 2; p++){
         outFile << players[p]->getName() << std::endl;
         outFile << players[p]->getScore() << std::endl;
         outFile << players[p]->getHand()->toString() << std::endl;
     }
 
+    //save board
     std::string row = board->getRow(0);
-    int cols = (row.length() - 2) / 3;
-    int rows = board->getSize();
+    int cols = board->getHSize();
+    int rows = board->getVSize();
     outFile << "  0";
     for(int c = 1; c != cols; c++){
         if(c < 10){
@@ -402,7 +421,7 @@ void Game::saveGame(){
         outFile << c;
     }
     outFile << std::endl;
-    outFile << "  -";
+    outFile << " ---";
     for(int c = 1; c != cols; c++){
         outFile << "---";
     }
@@ -414,7 +433,21 @@ void Game::saveGame(){
         outFile << board->getRow(i) << std::endl;
     }
 
+    //save tilebag
     outFile << tilebag->toString() << std::endl;
+}
+
+void Game::continueLoop(){
+    //loops until the game is finished
+    while(status == "NOT_FINISHED"){
+        playerTurnPrintDetails(players[currPlayer]);
+        playerTurnN();
+        switchPlayers();
+        updateGameStatus();
+    }
+    
+    //ends the game and shows the results
+    endGame(status);
 }
 
 //old method

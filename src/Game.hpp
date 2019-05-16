@@ -18,10 +18,12 @@
 #include <sstream>
 class Game{
     private:
-    Player* players[2];
+    std::vector<Player*> players;
+    // Player* players[2];
     Board* board;
     TileBag* tilebag;
     std::string status;
+    int playerSize;
     int currPlayer;
     void switchPlayers();
     void multipleTilePlacement();

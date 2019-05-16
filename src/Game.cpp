@@ -1,10 +1,10 @@
 //
 //  Game.cpp
 //  cBot Assignment 2
-//
+//  
 //  Created by Gayuru Gunawardana on 3/5/19.
 //  Copyright © 2019 RMIT. All rights reserved.
-//
+//  Acknowledgement to: https://stackoverflow.com/questions/10828937/how-to-make-cin-take-only-numbers
 
 #include "Game.hpp"
 #include <iostream>
@@ -36,27 +36,60 @@ void Game::newGame(){
 
 //input and validation for players
 void Game::playerNamePlay(std::string playerName) {
-    bool isNameUpper = false;
-    while(!isNameUpper) {
-        int playerNo = 1;
-        for(int playerNum = 0; playerNum < 2; ++playerNum) {
-            std::cout<<"👤 Enter a name for Player " << playerNo << " (uppercase characters only)"<<std::endl;
+//     bool invalid = true;
+//     while(invalid) {
+//         std::cout<<"Enter the number of Players from 2-4"<<std::endl;
+//         int x = 0;
+//         while(!(std::cin >> x && x <= 4 && x >= 2)){
+//             std::cin.clear();
+//             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+//             std::cout << "Invalid input.  Try again: ";
+//         }
+//         std::cout << "You enterd: " << x << std::endl;  
+        
+  
+// }
+
+
+    // bool isNameUpper = false;
+    // while(!isNameUpper) {
+        // int playerNo = 0;
+        bool invalid = true;
+        while(invalid) {
+            std::cout<<"👤 Enter a name for Player " << players.size() + 1 << " (uppercase characters only)"<<std::endl;
+            std::cout<<"Type 'done' when you are done"<<std::endl;
             std::cout<<"> ";
             std::cin>>playerName;
             std::cin.ignore();
-            if(!isPlayerNameValid(playerName)) {
-                playerNum = playerBreakLoop(playerNum);
+            // playerName = std::cin.get();
+            if(playerName == "done") {
+                if (players.size() >= 2 && players.size() <= 4) {
+                    std::cout<<"You are done"<<std::endl;
+                    invalid = false;
+                }
+                else {
+                    std::cout<<"Number of players has to be between 2-4"<<std::endl;
+                }
+            }
+            else if(!isPlayerNameValid(playerName)) {
+                // playerNum = playerBreakLoop(playerNum);
                 std::cout << "Error : Please enter the Player names in Uppercase !" <<std::endl;
             } else {
-                players[playerNum] = new Player(playerName);
-                tilebag->fillPlayerHand(players[playerNum]->getHand());
-                ++playerNo;
-                if(playerNum == 1) {
-                    isNameUpper = true;
+                // players[playerNum] = new Player(playerName);
+                std::cout <<"Added Player: "  + playerName<< std::endl;
+                players.push_back(new Player(playerName));
+                tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
+                // ++playerNo;
+                // if(playerNum == 1) {
+                //     isNameUpper = true;
+                // }
+                if (players.size() == 4) {
+                    invalid = false;
                 }
             }
         }
-    }
+    // }
+    playerSize = players.size();
     std::cout<<"\n👉 Let's Play 👈\n"<<std::endl;
 }
 
@@ -73,7 +106,7 @@ bool Game::isPlayerNameValid(const std::string & playerName) {
 
 
 void Game::playerTurnN(){
-    
+    std::cout<<tilebag->toString()<<std::endl;
     std::cout<<"Please enter your move:"<<std::endl;
     
     //Gets the user input
@@ -202,9 +235,9 @@ void Game::multipleTilePlacement(){
 //switch turns between players
 void Game::switchPlayers(){
     
-    if(currPlayer ==0){
-        currPlayer =1;
-    }else if(currPlayer==1){
+    if(currPlayer< 4){
+        currPlayer++;
+    }else {
         currPlayer=0;
     }
     
@@ -246,7 +279,7 @@ void Game::endGame(std::string status){
     }else if(status == "GAME_OVER"){
         
         std::cout<<"Game Over"<<std::endl;
-        for(int i=0;i<4;i++){
+        for(int i=0;i<playerSize;i++){
             std::cout<<"Score for "<<players[i]->getName()<<":"<<players[i]->getScore()<<std::endl;
             //check who has the highest score
             //implement this!
@@ -274,7 +307,7 @@ void Game::playerTurnPrintDetails(Player* player) {
 }
 
 void Game::displayPlayersScore() {
-    for(int playerNum = 0; playerNum < 2; ++playerNum) {
+    for(int playerNum = 0; playerNum < playerSize; ++playerNum) {
         std::cout<< "Score for " << players[playerNum]->getName() << ": " << players[playerNum] -> getScore() << std::endl;
     }
 }

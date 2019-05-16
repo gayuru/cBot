@@ -71,7 +71,6 @@ void LinkedList::deleteFront(){
       back = nullptr;
    }else{
       Node* storage = head->next;
-      delete head;
       head = storage;
    }
    --this->counter;
@@ -105,10 +104,10 @@ void LinkedList::deleteAt(int i){
       }
       storage->next = node->next;
       delete node;
+      --this->counter;
    }else if(i == this->size() - 1){
       deleteBack();
    }
-   this->counter--;
 }
 
 void LinkedList::printLinkedList(){

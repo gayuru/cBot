@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player(std::string name){
     this->name = name;
@@ -24,6 +25,15 @@ LinkedList* Player::getHand(){
 
 void Player::addPoints(int points){
     score += points;
+}
+
+Tile* Player::hasTile(Tile* tile){
+    for(int i=0;i<hand->size();i++){
+        if(hand->get(i)->getColour() == tile->getColour() && hand->get(i)->getShape() == tile->getShape()){
+            return hand->get(i);
+        }
+    }
+    return nullptr;
 }
 
 void Player::addTile(Tile* tile){

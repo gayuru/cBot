@@ -9,6 +9,7 @@
 #include "Game.hpp"
 #include <iostream>
 #include <fstream>
+#include <iterator>
 
 Game::Game(){
     board = new Board();
@@ -92,11 +93,15 @@ void Game::playerTurnN(){
     
     //equating the input onto the variables
     mainAction = words[0];
-    tile = (words[1]);
-    
+
     //case: null check when nothing is entered after mainAction string
     if(words[3] != ""){
          tilePlacement = words[3];
+    }
+
+    //null check 
+    if(words[1] != ""){
+        tile = (words[1]);
     }
    
     //special case
@@ -112,6 +117,8 @@ void Game::playerTurnN(){
     if(mainAction =="switch"){
         //calculates the player points after done with his turn
         players[currPlayer]->addPoints(board->endPoints());
+        //fill players hand 
+        tilebag->fillPlayerHand(players[currPlayer]->getHand());
         std::cout<< "Switching turns"<<std::endl;
         return;
     }
@@ -121,6 +128,7 @@ void Game::playerTurnN(){
         saveGame();
         status = "GAME_SAVED";
     }
+    
     
     //creation of the user input tile
     Colour* tmpColour =new Colour(toupper(tile[0]));
@@ -143,8 +151,6 @@ void Game::playerTurnN(){
             if(board->makeMoveV(toupper(row), col, currTile)){
                 //removeTile from players hand
                 players[currPlayer]->useTile(currTile);
-                //fill players hand - BUG HERE
-                players[currPlayer]->addTile(tilebag->getRandomSingleTile());
                 //loop until the player decides he want to end his turn
                 multipleTilePlacement();
             }else{
@@ -265,17 +271,15 @@ void Game::displayPlayersScore() {
 
 //saving and loading game
 void Game::loadGame(std::string filename) {
+    //Check if the file is a save file
+    if(filename.length() < 6){
+        throw std::runtime_error("File entered is not a .save file");
+    }
+    if(filename.substr(filename.length() - 5, filename.length()) != ".save"){
+        throw std::runtime_error("File entered is not a .save file");
+    }
+
     //Open the given file name for reading
-
-    // if(filename.length() < 6){
-    //     throw std::runtime_error("File entered is not a .save file");
-    // }
-    // std::string extension = filename.substr(filename.length() - 6, 5);
-    // if(extension[0] != '.' || extension[1] != 's' || extension[2] != 'a' || extension[3] != 'v' || extension[4] != 'e'){
-    //     cout << "File entered is not a .save file" << endl; 
-    //     throw std::runtime_error("File entered is not a .save file");
-    //}
-
     std::ifstream inFile;
     inFile.open(filename);
     if(inFile.fail()){
@@ -310,6 +314,7 @@ void Game::loadGame(std::string filename) {
     players[1]->getHand()->printLinkedList();
     std::cout << std::endl;
 
+    //reads the board
     board = new Board();
     int tilesOnBoard = 0;
     char next;

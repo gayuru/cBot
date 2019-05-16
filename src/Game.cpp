@@ -16,6 +16,7 @@ Game::Game(){
     tilebag = new TileBag();
     status = "NOT_FINISHED";
     currPlayer = 0;
+    tilePlaced = false;
 }
 
 void Game::newGame(){
@@ -93,16 +94,14 @@ void Game::playerTurnN(){
     
     //equating the input onto the variables
     mainAction = words[0];
-
+    
     //case: null check when nothing is entered after mainAction string
-
     if(words.size() > 1){
         if(words.size() > 2){
             if(words[3] != ""){
                 tilePlacement = words[3];
             }
         }
-
         //null check 
         if(words[1] != ""){
             tile = (words[1]);
@@ -131,6 +130,8 @@ void Game::playerTurnN(){
         //fill players hand 
         tilebag->fillPlayerHand(players[currPlayer]->getHand());
         std::cout<< "Switching turns"<<std::endl;
+        //reset tilePlaced
+        tilePlaced = false;
         return;
     }
     
@@ -162,6 +163,7 @@ void Game::playerTurnN(){
             if(board->makeMoveV(toupper(row), col, currTile)){
                 //removeTile from players hand
                 players[currPlayer]->useTile(currTile);
+                tilePlaced = true; //stops a player from replacing a tile after he places
                 //loop until the player decides he want to end his turn
                 multipleTilePlacement();
             }else{
@@ -170,6 +172,12 @@ void Game::playerTurnN(){
             }
          
         }else if(mainAction == "replace"){
+            
+            //checks if the player attempts to do both actions at the same time 
+            if(tilePlaced == true){
+                std::cout<<"You can't do the following actions on the same turn : Place Tile and ReplaceTile"<<std::endl;
+                playerTurnN();
+            }
             
             //replace the tile with the front of the bag
             tilebag->replaceTile(currTile, players[currPlayer]->getHand());

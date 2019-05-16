@@ -22,6 +22,7 @@ class Game{
     Board* board;
     TileBag* tilebag;
     std::string status;
+    bool tilePlaced;
     int currPlayer;
     void switchPlayers();
     void multipleTilePlacement();

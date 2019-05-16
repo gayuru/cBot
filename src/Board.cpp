@@ -646,6 +646,10 @@ std::string Board::getRow(int row){
         return outString;
 }
 
+int Board::getSize(){
+    return vBoard.size();
+}
+
 
 //bool Board::checkValidity(int column,int row,Tile* tile){
 //

@@ -95,17 +95,28 @@ void Game::playerTurnN(){
     mainAction = words[0];
 
     //case: null check when nothing is entered after mainAction string
-    if(words[3] != ""){
-         tilePlacement = words[3];
-    }
 
-    //null check 
-    if(words[1] != ""){
-        tile = (words[1]);
+    if(words.size() > 1){
+        if(words.size() > 2){
+            if(words[3] != ""){
+                tilePlacement = words[3];
+            }
+        }
+
+        //null check 
+        if(words[1] != ""){
+            tile = (words[1]);
+        }
     }
    
     //special case
-    if(mainAction != "place"){tilePlacement = "";}
+    if(mainAction != "place"){
+        tilePlacement = "";
+        }
+
+    if(mainAction != "place" && mainAction != "replace"){
+        tile = "";
+    }
     
     //if a placyer decides to skip his move
     if(mainAction == "skip"){
@@ -124,7 +135,7 @@ void Game::playerTurnN(){
     }
     
     //saveGame
-    if(mainAction == "save"){
+    if(mainAction == "save"){//playerInput.substr(0,4) == "save"
         saveGame();
         status = "GAME_SAVED";
     }
@@ -380,6 +391,7 @@ void Game::saveGame(){
 
     std::string row = board->getRow(0);
     int cols = (row.length() - 2) / 3;
+    int rows = board->getSize();
     outFile << "  0";
     for(int c = 1; c != cols; c++){
         if(c < 10){
@@ -396,7 +408,7 @@ void Game::saveGame(){
     }
     outFile << std::endl;
 
-    for(int i = 0; i < 26; i++){
+    for(int i = 0; i < rows; i++){
         char letter = 'A' + i;
         outFile << letter;
         outFile << board->getRow(i) << std::endl;

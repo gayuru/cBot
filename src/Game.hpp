@@ -15,13 +15,18 @@
 #include <iostream>
 #include <algorithm>
 #include <string> 
-
+#include <sstream>
 class Game{
     private:
     Player* players[2];
     Board* board;
     TileBag* tilebag;
-    
+    std::string status;
+    int currPlayer;
+    void switchPlayers();
+    void multipleTilePlacement();
+    void updateGameStatus();
+    void endGame(std::string status);
 public:
     Game();
     void newGame();
@@ -34,5 +39,6 @@ public:
     std::string buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc);
     void playerTurnPrintDetails(Player* player);
     void displayPlayersScore();
+    void playerTurnN();
 };
 #endif /* Game_hpp */

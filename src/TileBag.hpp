@@ -20,10 +20,10 @@
 
 #include <set>
 
-using std::cout;
-using std::endl;
-using std::find;
-using std::set;
+// using std::cout;
+// using std::endl;
+// using std::find;
+// using std::set;
 
 #define MAX_NUM_COLOUR_SHAPE    6
 #define MAX_NUM_TILES    72

@@ -21,4 +21,5 @@ public:
     std::string toString();
     void addTile(Tile* tile);
     void useTile(Tile* tile);
+    Tile* hasTile(Tile* tile);
 };

@@ -13,6 +13,7 @@
 		5524563322729AC4001B8787 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 5524562C22729AC3001B8787 /* Makefile */; };
 		5524563422729AC4001B8787 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5524562D22729AC3001B8787 /* Node.cpp */; };
 		552456372272CE1E001B8787 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 552456352272CE1E001B8787 /* Console.cpp */; };
+		5526156B228C6500002D4EE8 /* Coordinate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55261569228C64FF002D4EE8 /* Coordinate.cpp */; };
 		55ED6A3C2284FD8B000E963A /* TileBag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ED6A342284FD8A000E963A /* TileBag.cpp */; };
 		55ED6A3D2284FD8B000E963A /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ED6A362284FD8B000E963A /* Board.cpp */; };
 		55ED6A3E2284FD8B000E963A /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55ED6A382284FD8B000E963A /* Game.cpp */; };
@@ -44,6 +45,8 @@
 		5524562F22729AC4001B8787 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinkedList.h; path = src/LinkedList.h; sourceTree = SOURCE_ROOT; };
 		552456352272CE1E001B8787 /* Console.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Console.cpp; path = src/Console.cpp; sourceTree = SOURCE_ROOT; };
 		552456362272CE1E001B8787 /* Console.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Console.hpp; path = src/Console.hpp; sourceTree = SOURCE_ROOT; };
+		55261569228C64FF002D4EE8 /* Coordinate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Coordinate.cpp; path = src/Coordinate.cpp; sourceTree = SOURCE_ROOT; };
+		5526156A228C64FF002D4EE8 /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Coordinate.h; path = src/Coordinate.h; sourceTree = SOURCE_ROOT; };
 		55ED6A2F2284FD8A000E963A /* qwirkle */ = {isa = PBXFileReference; lastKnownFileType = file; name = qwirkle; path = src/qwirkle; sourceTree = SOURCE_ROOT; };
 		55ED6A312284FD8A000E963A /* AddTileTest.save */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTileTest.save; sourceTree = "<group>"; };
 		55ED6A322284FD8A000E963A /* AddTileTest.input */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTileTest.input; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 		5524560322729796001B8787 /* cBot Assignment 2 */ = {
 			isa = PBXGroup;
 			children = (
+				55261569228C64FF002D4EE8 /* Coordinate.cpp */,
+				5526156A228C64FF002D4EE8 /* Coordinate.h */,
 				55ED6A362284FD8B000E963A /* Board.cpp */,
 				55ED6A392284FD8B000E963A /* Board.h */,
 				55ED6A382284FD8B000E963A /* Game.cpp */,
@@ -188,6 +193,7 @@
 				5524563322729AC4001B8787 /* Makefile in Sources */,
 				552456372272CE1E001B8787 /* Console.cpp in Sources */,
 				55ED6A3C2284FD8B000E963A /* TileBag.cpp in Sources */,
+				5526156B228C6500002D4EE8 /* Coordinate.cpp in Sources */,
 				5524563222729AC4001B8787 /* qwirkle.cpp in Sources */,
 				5524563422729AC4001B8787 /* Node.cpp in Sources */,
 			);

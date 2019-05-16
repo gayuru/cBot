@@ -16,19 +16,22 @@ Board::Board(){
     std::vector<Tile*>temp;
     temp.push_back(nullptr);
     vBoard.push_back(temp);
-    counter = 0;
+    // counter = 0;
     direction = 0;
-    turnPoints = 0;
+    // turnPoints =0;
 }
 
 //when a player makes a move it checks for validation
 bool Board::makeMoveV(char cRow, int col, Tile* tile) {
     bool makeMove = true;
-    cout<<"Making move"<<endl;
+    std::cout<<"Making move"<<std::endl;
     int row = cRow - 'A';
-  
-    if(counter > 1) {
+    // std::cout<<counter<<std::endl;
+    std::cout<<coordPlaced.size()<<std::endl;
+    if(coordPlaced.size() > 1) {
+        std::cout<<"checking direction"<<std::endl;
         if(directionCheck(row, col)) {
+            std::cout<<"direction is not right"<<std::endl;
             //makeMove becomes false if direction check is false
             makeMove = true;
             // return false;
@@ -36,28 +39,28 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
         else makeMove = false;
     }
     if(makeMove) {
-
+        std::cout<<"checking validity"<<std::endl;
         if(checkValidityV(col, row, tile)) {
-            if(counter == 0) {
-                prevCol = col;
-                prevRow = row;
-            }
-            if(counter == 1) {
+            if(coordPlaced.size() == 1) {
                 calculateDirection(row, col);
             }
-            turnPoints = calcPoints(row, col);
-            cout<<"tile is being placed"<<endl;
+            // counter++;
+            coordPlaced.push_back(new Coordinate(row,col));
+            std::cout<<"MY SIZE"<<coordPlaced.size()<<std::endl;
+            // turnPoints = calcPoints(row,col); //ill remove this later
+            std::cout<<"tile is being placed"<<std::endl;
             vBoard[row][col] = tile;
-            cout<<"tile is placed"<<endl;
-            counter++;
-            cout<<"board is being resized"<<endl;
+            std::cout<<"tile is placed"<<std::endl;
+            std::cout<<"board is being resized"<<std::endl;
             resizeBoard(row, col);
-            cout<<"board is resized"<<endl;
+            std::cout<<"board is resized"<<std::endl;
             makeMove = true;
             // return true;
         }
-            //else makeMove becomes false
-            else makeMove = false;
+        //else makeMove becomes false
+        else {
+            makeMove = false;
+        }
     }
 
     // else return false;  
@@ -65,7 +68,7 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
 }
 
 void Board::calculateDirection(int row, int col) {
-    if (row == prevRow) {
+    if (row == coordPlaced[0]->getRow()) {
         direction = HORIZONTAL;
     }
     else {
@@ -76,13 +79,13 @@ void Board::calculateDirection(int row, int col) {
 bool Board::directionCheck(int row, int col) {
     bool pass = false;
     if(direction == HORIZONTAL) {
-        if(prevRow == row) {
+        if(coordPlaced[0]->getRow() == row) {
             pass = true;
             // return true;
         }
     }
     else {
-        if(prevCol == col) {
+        if(coordPlaced[0]->getCol() == col) {
             pass = true;
             // return true;
         }
@@ -92,45 +95,79 @@ bool Board::directionCheck(int row, int col) {
 
 //
 void Board::refresh() {
-    counter = 0;
+    // counter = 0;
     direction = 0;
+    coordPlaced.clear();
 }
-
-
-//needs to be implemented
-int Board::calcPoints(const int row, const int col) {
-    int sum=0;
-    //int row = cRow - 'A';
-    
-    int pointsVertical=0;
-    int pointsHorizontal=0;
-    
-    //first tile point calculation
-    // if(counterPoints == 0){
-    //     sum += 1;
-    // }else{
-        
-        pointsVertical = getVerticalRun(row, col);
-        pointsHorizontal = getHorizontalRun(row, col);
-        
-        if(pointsVertical == 1 || pointsHorizontal == 1){
-            sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
-        }else{
-            sum = pointsVertical + pointsHorizontal;
+//just call this once u are done with ur turn that is all!!
+int Board::endPoints() {
+    int total = 0;
+    std::cout<<"DIRECTION:"<<direction<<std::endl;
+     std::cout<<"MY SIZE"<<coordPlaced.size()<<std::endl;
+    for(auto &coord : coordPlaced) {
+        std::cout<<"Coordinates:::::::" <<coord->getRow()<<"---------"<<coord->getCol()<<std::endl;
+    }
+    if(direction == HORIZONTAL) {
+        total += getHorizontalRun(coordPlaced[0]->getRow(),coordPlaced[0]->getCol());
+        for(auto &coord: coordPlaced) {
+            total+= getVerticalRun(coord->getRow(),coord->getCol());
         }
-        
-        //update points for a qwirkle
-        if(pointsVertical ==6 || pointsHorizontal == 6){
-            sum += 6;
+    }
+    else if(direction == VERTICAL) {
+        total += getVerticalRun(coordPlaced[0]->getRow(),coordPlaced[0]->getCol());
+        for(auto &coord: coordPlaced) {
+            total+= getHorizontalRun(coord->getRow(),coord->getCol());
         }
-        
-    // }
-    return sum;
-    //player.addPoints(sum);
-    //counterPoints++;
-    //resets 
+    }
+    else {
+        std::cout<<"VBOARD SIZE:" << vBoard.size() <<std::endl;
+        //special case: when you place a tile at the very first turn and end
+        if(vBoard.size() == 3 && vBoard[0].size() == 3 && coordPlaced.size() == 1) {
+            total = 1;
+        }
+        else {
+            for(auto &coord: coordPlaced) {
+                total += (getHorizontalRun(coord->getRow(),coord->getCol()) + getVerticalRun(coord->getRow(),coord->getCol()));
+                std::cout<<getHorizontalRun(coord->getRow(),coord->getCol())<<std::endl;
+                std::cout<<getVerticalRun(coord->getRow(),coord->getCol())<<std::endl;
+            }            
+        }
+    }
     refresh();
+    return total;
 }
+
+// //needs to be implemented
+// int Board::calcPoints(const int row, const int col) {
+//     int sum=0;
+    
+//     int pointsVertical=0;
+//     int pointsHorizontal=0;
+    
+//     //first tile point calculation
+//     // if(counterPoints == 0){
+//     //     sum += 1;
+//     // }else{
+//     pointsVertical = getVerticalRun(row, col);
+//     pointsHorizontal = getHorizontalRun(row, col);
+    
+//     if(pointsVertical == 1 || pointsHorizontal == 1){
+//         sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
+//     } else {
+//         sum = pointsVertical + pointsHorizontal;
+//     }
+    
+//     //update points for a qwirkle
+//     if(pointsVertical == 6 || pointsHorizontal == 6){
+//         sum += 6;
+//     }
+//     // }
+//     refresh();
+//     return sum;
+//     //player.addPoints(sum);
+//     //counterPoints++;
+//     //resets 
+// }
 
 
 int Board::getVerticalRun(const int row, const int col){
@@ -144,7 +181,7 @@ int Board::getVerticalRun(const int row, const int col){
     while(run){
         if(inBoundCheck(runUp -1,col)!=nullptr){
             if(vBoard[runUp-1][col] != nullptr){
-                 runUp--;
+                --runUp;
             }else{
                 run = false;
             }
@@ -152,14 +189,13 @@ int Board::getVerticalRun(const int row, const int col){
             run = false;
         }
     }
-    
     run=true;
-    
+    std::cout<<"runUP::" << runUp <<std::endl;
     //check for tiles down
     while(run){
         if(inBoundCheck(runDown +1,col)!=nullptr){
             if(vBoard[runDown+1][col] != nullptr){
-                runDown++;
+                ++runDown;
             }else{
                 run = false;
             }
@@ -167,11 +203,12 @@ int Board::getVerticalRun(const int row, const int col){
             run = false;
         }
     }
-    
+    std::cout<<"runDown::" << runDown <<std::endl;
     points = runDown-runUp+CURRENT_TILE;
-    
+    if (points == 1) {
+        points = 0;
+    }
     return points;
-    
 }
 
 int Board::getHorizontalRun(const int row, const int col){
@@ -185,7 +222,7 @@ int Board::getHorizontalRun(const int row, const int col){
     while(run){
         if(inBoundCheck(row,runLeft-1)!=nullptr){
             if(vBoard[row][runLeft-1] != nullptr){
-                runLeft--;
+                --runLeft;
             }else{
                 run = false;
             }
@@ -193,14 +230,13 @@ int Board::getHorizontalRun(const int row, const int col){
            run = false;
         }
     }
-    
+    std::cout<<"runLeft::" << runLeft <<std::endl;
     run=true;
-    
     //check for tiles right
     while(run){
         if(inBoundCheck(row,runRight+1)!=nullptr){
             if(vBoard[row][runRight+1] != nullptr){
-                runRight++;
+                ++runRight;
             }else{
                 run = false;
             }
@@ -208,84 +244,86 @@ int Board::getHorizontalRun(const int row, const int col){
            run = false;
         }
     }
-    
+    std::cout<<"runRight::" << runRight <<std::endl;
     points = runRight-runLeft+CURRENT_TILE;
-    
+    if (points == 1) {
+        points = 0;
+    }
     return points;
-    
 }
 
+// int Board::getTurnPoints(){
+//     return turnPoints;
+// }
 
-int Board::getTurnPoints(){
-    return turnPoints;
-}
-
-void Board::refreshTurn(){
-    turnPoints = 0;
-}
-
+// void Board::refreshTurn(){
+//     turnPoints = 0;
+// }
 
 void Board::printBoard(){
     
     //    char labels[MAX_BOARD_SIZE_ROW_COL] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
     //
-    //    cout<<"   0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25"<<endl;
-    //    cout<<"  ------------------------------------------------------------------------------------------------"<<endl;
+    //    std::cout<<"   0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25"<<std::endl;
+    //    std::cout<<"  ------------------------------------------------------------------------------------------------"<<std::endl;
     //
     //    //char cha = 'A';
     //    for (int row = 0; row<MAX_BOARD_SIZE_ROW_COL; ++row) {
-    //        cout << labels[row]<<" "; // Print y-axis labels
-    //        //cout<< cha++ << " ";
+    //        std::cout << labels[row]<<" "; // Print y-axis labels
+    //        //std::cout<< cha++ << " ";
     //        for (int column = 0; column < MAX_BOARD_SIZE_ROW_COL; ++column) {
-    //            cout << '|';
+    //            std::cout << '|';
     //            if(board[row][column] == nullptr){
     //                if(column >= 10) {
-    //                    cout << "   ";
+    //                    std::cout << "   ";
     //                } else {
-    //                    cout << "  ";
+    //                    std::cout << "  ";
     //                }
     //            }else{
     //                currTile = *board[row][column];
-    //                cout << " "<<currTile->toString();
+    //                std::cout << " "<<currTile->toString();
     //            }
     //            if(column == MAX_BOARD_SIZE_ROW_COL-1) { //For last column
-    //                cout << '|';
+    //                std::cout << '|';
     //            }
     //        }
-    //        cout << endl;
+    //        std::cout << std::endl;
     //    }
     
-        char cha = 'A';
-    int row1 = vBoard.size();
-    cout<<"  ------------------------------------------------------------------------------------------------"<<endl;
-    cout<<"   ";
-    int col1 = vBoard[0].size();
-    for(int i = 0; i < col1; i++) {
+    char cha = 'A';
+    int maxRow = vBoard.size();
+    std::string line = "  -";
+    std::string num = "   ";
+    int maxCol = vBoard[0].size();
+    for(int i = 0; i < maxCol; i++) {
         if(i > 9) {
-            cout<<i;
+            num += std::to_string(i);
         }
         else {
-            cout<<i<<" ";
+            num += std::to_string(i) + "  ";
         }
+        line += "---";
     }
-    cout<<endl;
-    cout<<"  ------------------------------------------------------------------------------------------------"<<endl;
-    for (int row = 0; row < row1; row++) {
-        int col1 = vBoard[row].size();
-        cout<< cha++ << " ";
-        for (int col = 0; col < col1; col++) {
-            cout << '|';
+    std::cout<<line<<std::endl;
+    std::cout<<num<<std::endl;
+    std::cout<<line<<std::endl;
+    for (int row = 0; row < maxRow; row++) {
+        std::string rowString;
+        int maxCol = vBoard[row].size();
+        std::cout<< cha++ << " ";
+        for (int col = 0; col < maxCol; col++) {
+            std::cout << '|';
             if(vBoard[row][col] == nullptr){
-                cout << "  ";
+                std::cout << "  ";
             }else{
                 currTile = vBoard[row][col];
-                cout << currTile->toString();
+                std::cout << currTile->toString();
             }
-            if(col == col1 - 1) {
-                cout << '|';
+            if(col == maxCol - 1) {
+                std::cout << '|';
             }
         }
-        cout << endl;
+        std::cout << std::endl;
     }
     
 }
@@ -331,13 +369,13 @@ bool Board::colorShapeCheckV(Tile* tile, Tile* box, int fixType) {
 bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile* tile, bool rowCheck) {
     //checking the row
     vBoard[row][col] = tile;
-    cout<<"row-------"<<row <<endl;
-    cout<<"col-------"<<col <<endl;
+    std::cout<<"row-------"<<row <<std::endl;
+    std::cout<<"col-------"<<col <<std::endl;
     bool pass = true;
     if(rowCheck) {
         for(int i = min; i < max - 1; i++) {
             for(int j = i + 1; j < max; j++) {
-                cout<<"checking"<<endl;
+                std::cout<<"checking"<<std::endl;
                 if(pass) {
                     if(vBoard[row][i]->getColour() == vBoard[row][j]->getColour() && vBoard[row][i]->getShape() == vBoard[row][j]->getShape()) {
                         // vBoard[row][col] = nullptr;
@@ -352,7 +390,7 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile* tile, boo
     else {
         for(int i = min; i < max - 1; i++) {
             for(int j = i + 1; j < max; j++) {
-                cout<<"checking"<<endl;
+                std::cout<<"checking"<<std::endl;
                 if(pass) {
                     if(vBoard[i][col]->getColour() == vBoard[j][col]->getColour() && vBoard[i][col]->getShape() == vBoard[j][col]->getShape()) {
                         // vBoard[row][col] = nullptr;
@@ -372,13 +410,13 @@ Tile* Board::inBoundCheck(int row, int col) {
     int maxColSize = vBoard[0].size() - 1;
     Tile* tile = nullptr;
     if (row <= maxRowSize && row >= 0 && col <= maxColSize && col >= 0) {
-        cout<<"within board"<<endl;
-        cout<<row <<"-----------" << col <<endl;
+        std::cout<<"within board"<<std::endl;
+        std::cout<<row <<"-----------" << col <<std::endl;
         tile = vBoard[row][col];
         // return vBoard[row][col];
     }
     else {
-        cout<<"not within board"<<endl;
+        std::cout<<"not within board"<<std::endl;
         // return nullptr;
     }
     return tile;
@@ -390,7 +428,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
     //check if tile is within the range of the board
     int maxRowSize = vBoard.size();
     int maxColSize = vBoard[0].size();
-    cout<< row << "------------" << col <<endl;
+    std::cout<< row << "------------" << col <<std::endl;
     //if the row and col is within the range
     if (row <= maxRowSize && row >= 0 && col <= maxColSize && col >= 0) {
         //if the tile place selected is a nullptr
@@ -402,45 +440,45 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
             }
             //otherwise.. check if the surroundings are not nullptr
             else {
-                cout<<"checking bound"<<endl;
+                std::cout<<"checking bound"<<std::endl;
                 Tile* leftBox = inBoundCheck(row, col - 1);
-                cout<<"checked left box"<<endl;
+                std::cout<<"checked left box"<<std::endl;
                 Tile* rightBox = inBoundCheck(row, col + 1);
-                cout<<"checked right box"<<endl;
+                std::cout<<"checked right box"<<std::endl;
                 Tile* upBox = inBoundCheck(row - 1, col);
-                cout<<"checked up box"<<endl;
+                std::cout<<"checked up box"<<std::endl;
                 Tile* downBox = inBoundCheck(row + 1, col);
-                cout<<"checked down box"<<endl;
+                std::cout<<"checked down box"<<std::endl;
 
                 // Tile* leftBox = vBoard[row][col -1];
-                // cout<<"checked left box"<<endl;
+                // std::cout<<"checked left box"<<std::endl;
                 // Tile* rightBox = vBoard[row][col +1];
-                // cout<<"checked right box"<<endl;
+                // std::cout<<"checked right box"<<std::endl;
                 // Tile* upBox = vBoard[row - 1][col];
-                // cout<<"checked up box"<<endl;
+                // std::cout<<"checked up box"<<std::endl;
                 // Tile* downBox = vBoard[row +1][col];
-                // cout<<"checked down box"<<endl;
+                // std::cout<<"checked down box"<<std::endl;
                 //cannot place a tile that has no tile next to it
                 if (leftBox == nullptr && rightBox == nullptr && upBox == nullptr && downBox == nullptr) {
-                    cout<<"everything around is empty"<<endl;
+                    std::cout<<"everything around is empty"<<std::endl;
                     pass = false;
                     return false;
                 }
                 else {
-                    cout<<"surrounding check starts"<<endl;
+                    std::cout<<"surrounding check starts"<<std::endl;
                     int fixType = 2;
                     int minRange = col;
                     int maxRange = col;
                     int boxPass = true;
                     //checks all the connections on lhs
                     if(leftBox != nullptr) {
-                        cout<<"left box contains something"<<endl;
+                        std::cout<<"left box contains something"<<std::endl;
                         bool fin = false;
                         for(int i = col - 1; i > 0; i--) {
                             if(boxPass) {
-                                cout<<"thisBox being made"<<endl;
+                                std::cout<<"thisBox being made"<<std::endl;
                                 Tile* thisBox = vBoard[row][i];
-                                cout<<"thisBox made"<<endl;
+                                std::cout<<"thisBox made"<<std::endl;
                                 if(thisBox == nullptr) {
                                     minRange = i + 1;
                                     fin = true;
@@ -452,22 +490,22 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                         // return false;
                                     }
                                 }
-                                delete thisBox;
+                                // delete thisBox;
                             }
                         }
                     }
                     if(boxPass) {
                     //checks all the connections on rhs
                         if(rightBox != nullptr) {
-                            cout<<"right box contains something"<<endl;
+                            std::cout<<"right box contains something"<<std::endl;
                             bool fin = false;
-                            cout<<row<< "----------"  << col + 1<<endl;
+                            std::cout<<row<< "----------"  << col + 1<<std::endl;
                             for(int i = col + 1; i < maxColSize; i++) {
                                 if(boxPass) {
-                                    cout<<row<< "----------"  << i <<endl;
+                                    std::cout<<row<< "----------"  << i <<std::endl;
                                     Tile* thisBox = vBoard[row][i];
                                     if(thisBox == nullptr) {
-                                        cout<<"this box is emptyyyy"<<endl;
+                                        std::cout<<"this box is emptyyyy"<<std::endl;
                                         maxRange = i - 1;
                                         fin = true;
                                         // break;
@@ -478,7 +516,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                             // return false;
                                         }
                                     }
-                                    delete thisBox;
+                                    // delete thisBox;
                                 }
                             }
                         }
@@ -493,13 +531,13 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     if(boxPass) {
                         //checks all the connections on up
                         if(upBox != nullptr) {
-                            cout<<"up box contains something"<<endl;
+                            std::cout<<"up box contains something"<<std::endl;
                             bool fin = false;
                             for(int i = row - 1; i > 0; i--) {
                                 if(boxPass) {
-                                    cout<<"thisBox being made"<<endl;
-                                    Tile* thisBox = vBoard[col][i];
-                                    cout<<"thisBox made"<<endl;
+                                    std::cout<<"thisBox being made"<<std::endl;
+                                    Tile* thisBox = vBoard[i][col];
+                                    std::cout<<"thisBox made"<<std::endl;
                                     if(thisBox == nullptr) {
                                         minRange = i + 1;
                                         fin = true;
@@ -511,7 +549,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                             // return false;
                                         }
                                     }
-                                    delete thisBox;
+                                    // delete thisBox;
                                 }
 
                             }
@@ -523,11 +561,11 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                         maxRange = row;
                         //checks all the connections on down
                         if(downBox != nullptr) {
-                            cout<<"down box contains something"<<endl;
+                            std::cout<<"down box contains something"<<std::endl;
                             bool fin = false;
                             for(int i = row + 1; i < maxRowSize; i++) {
                                 if(boxPass) {
-                                Tile* thisBox = vBoard[col][i];
+                                Tile* thisBox = vBoard[i][col];
                                     if(thisBox == nullptr) {
                                         // break;
                                         maxRange = i -1;
@@ -539,7 +577,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                             // return false;
                                         }
                                     }
-                                    delete thisBox;
+                                    // delete thisBox;
                                 }
                             }
                         }
@@ -584,31 +622,40 @@ void Board::resizeBoard(int row, int col) {
             vBoard.push_back(temp);
             vBoard.push_back(temp1);
             std::rotate(vBoard.rbegin(), vBoard.rbegin() + 1, vBoard.rend());
+
+            for(auto &coord: coordPlaced) {
+                coord->shiftC();
+                coord->shiftR();
+            }
         }
     }
     else {
         int colMinPoint = 0;
         int rowMinPoint = 0;
         int rowMaxPoint = thisSize - 1;
-        cout<< row << "------------" << rowMaxPoint<<endl;
-        int colMaxPoint = vBoard[0].size();
-        cout<< col << "------------" << colMaxPoint<<endl;
+        std::cout<< row << "------------" << rowMaxPoint<<std::endl;
+        int colMaxPoint = vBoard[0].size() - 1;
+        std::cout<< col << "------------" << colMaxPoint<<std::endl;
         
         //if top needs to be resized
         if(row == rowMinPoint) {
-            cout<<"bot is resizing"<<endl;
+            std::cout<<"top is resizing"<<std::endl;
             std::vector<Tile*>temp;
-            for(int i = 0; i < colMaxPoint; i++) {
+            for(int i = 0; i < colMaxPoint + 1; i++) {
                 temp.push_back(nullptr);
             }
             vBoard.push_back(temp);
             std::rotate(vBoard.rbegin(), vBoard.rbegin() + 1, vBoard.rend());
+            //shifts the saved coord down once
+                for(auto &coord: coordPlaced) {
+                    coord->shiftR();
+                }
         }
         //if bot needs to be resized
         else if (row == rowMaxPoint) {
-            cout<<"bot is resizing"<<endl;
+            std::cout<<"bot is resizing"<<std::endl;
             std::vector<Tile*>temp;
-            for(int i = 0; i < colMaxPoint; i++) {
+            for(int i = 0; i < colMaxPoint + 1; i++) {
                 temp.push_back(nullptr);
             }
             vBoard.push_back(temp);
@@ -617,17 +664,23 @@ void Board::resizeBoard(int row, int col) {
         //if left needs to be resized
         else if (col == colMinPoint) {
             //adds col to the front
-            cout<<"lef is resizing"<<endl;
+            std::cout<<"lef is resizing"<<std::endl;
             for(auto &row: vBoard) {
-                cout<<"adding nullptr to back"<<endl;
+                std::cout<<"adding nullptr to back"<<std::endl;
                 row.push_back(nullptr);
                 std::rotate(row.rbegin(), row.rbegin() + 1, row.rend());
             }
+            //shifts col one to right
+            for(auto &coord: coordPlaced) {
+                coord->shiftC();
+            }            
         }
         //if right needs to be resized
         else if (col == colMaxPoint) {
+            std::cout<<"right is resizing"<<std::endl;
             //adds col to the back
-            for(std::vector<Tile*> &row: vBoard) {
+            for(auto &row: vBoard) {
+                std::cout<<"adding nullptr to back"<<std::endl;
                 row.push_back(nullptr);
             }
         }
@@ -721,7 +774,7 @@ std::string Board::getRow(int row){
 //         */
 //
 //        if(checkValidity(column, row,tile)){
-//            cout<<"It's Valid"<<endl;
+//            std::cout<<"It's Valid"<<std::endl;
 //            return true;
 //
 //        }else{

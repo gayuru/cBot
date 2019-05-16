@@ -50,4 +50,5 @@ public:
     // int getTurnPoints();
     // void refreshTurn();
     std::string getRow(int row);
+    int getSize();
 };

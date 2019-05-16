@@ -8,6 +8,7 @@
 //using std::cout;
 
 #define MAX_BOARD_SIZE_ROW_COL    26
+#define QUIRKLE 6
 #define CURRENT_TILE 1
 #define FIX_COLOR  0
 #define FIX_SHAPE  1

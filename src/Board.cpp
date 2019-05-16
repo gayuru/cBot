@@ -34,7 +34,6 @@ bool Board::makeMoveV(char cRow, int col, Tile* tile) {
         else makeMove = false;
     }
     if(makeMove) {
-        std::cout<<"checking validity"<<std::endl;
         if(checkValidityV(col, row, tile)) {
             if(coordPlaced.size() == 1) {
                 calculateDirection(row, col);
@@ -186,7 +185,6 @@ int Board::getVerticalRun(const int row, const int col){
         points = 0;
     }
     if (points == 6) {
-        std::cout<<"QUIRKLE!!!!!!!"<<std::endl;
         points += QUIRKLE;
     }
     return points;
@@ -211,7 +209,6 @@ int Board::getHorizontalRun(const int row, const int col){
            run = false;
         }
     }
-    std::cout<<"runLeft::" << runLeft <<std::endl;
     run=true;
     //check for tiles right
     while(run){
@@ -225,14 +222,12 @@ int Board::getHorizontalRun(const int row, const int col){
            run = false;
         }
     }
-    std::cout<<"runRight::" << runRight <<std::endl;
     points = runRight-runLeft+CURRENT_TILE;
     if (points == 1) {
         points = 0;
     }
 
     if (points == 6) {
-        std::cout<<"QUIRKLE!!!!!!!"<<std::endl;
         points += QUIRKLE;
     }
     return points;
@@ -400,6 +395,7 @@ Tile* Board::inBoundCheck(int row, int col) {
 //Validity for vertex
 bool Board::checkValidityV(int col, int row, Tile* tile) {
     bool pass = false;
+    bool quirkle = false;
     //check if tile is within the range of the board
     int maxRowSize = vBoard.size();
     int maxColSize = vBoard[0].size();
@@ -479,6 +475,9 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                             if(!noDuplicateCheck(minRange, maxRange, row, col, tile, true)) {
                                 boxPass = false;
                             }
+                            else {
+                                if(maxRange - minRange + 1 == 6) quirkle = true;
+                            }
                         }
 
                     }
@@ -533,13 +532,18 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                         }
                         if(boxPass) {
                             if(!noDuplicateCheck(minRange, maxRange, row, col, tile, false)) {
-                                boxPass = false;
-                                
+                                boxPass = false;      
+                            }
+                            else {
+                                if(maxRange - minRange == 6) quirkle = true;
                             }
                         }
                     }
                     if(boxPass) {
                         pass = true;
+                        if(quirkle) {
+                            std::cout<<"QUIRKLE!!!!"<<std::endl;
+                        }
                     }
 
                     //

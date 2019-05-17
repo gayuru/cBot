@@ -481,7 +481,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 boxPass = false;
                             }
                             else {
-                                if(maxRange - minRange + 1 + 1 == 6) quirkle = true;
+                                if(maxRange - minRange + 1 == 6) quirkle = true;
                             }
                         }
 
@@ -540,7 +540,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 boxPass = false;      
                             }
                             else {
-                                if(maxRange - minRange + 1 + 1 == 6) quirkle = true;
+                                if(maxRange - minRange + 1 == 6) quirkle = true;
                             }
                         }
                     }
@@ -548,6 +548,9 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                         pass = true;
                         if(quirkle) {
                             std::cout<<"QUIRKLE!!!!"<<std::endl;
+                        }
+                        else {
+                            std::cout<<"QUIRKLE---NOPE"<<std::endl;
                         }
                     }
 

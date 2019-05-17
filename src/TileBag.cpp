@@ -54,11 +54,25 @@ void TileBag::generateRandomTiles(){
     for (int i = 0; i != MAX_NUM_TILES; ++i) {
         bool is_in = false;
         value = uniform_dist(engine);    
-        is_in = std::find(arr.begin(), arr.end(), value) != arr.end();
+        std::find(arr.begin(), arr.end(), value);
+        for(int has: arr) {
+            if (has == value) {
+                is_in = true;
+            }
+            else is_in = false;
+        }
         while(is_in == true){
             value = uniform_dist(engine);
-            is_in = std::find(arr.begin(), arr.end(), value) != arr.end();
+            std::find(arr.begin(), arr.end(), value);
+            for(int has: arr) {
+                if (has == value) {
+                    is_in = true;
+                }
+                else is_in = false;
+            }
         }
+        std::cout<<value<<std::endl;
+        arr.push_back(value);
         tiles->addFront(tilesAr[value]);
     }
     
@@ -82,6 +96,8 @@ void TileBag::generateRandomTiles(){
      }
      */
     
+    std::cout<<toString()<<std::endl;
+
 }
 
 //gets the tile at the front of the bag and deletes the tile from the bag once "drawn";

@@ -321,12 +321,16 @@ Player* Game::getWinningPlayer() {
 
 //checks to see if the playersHand is empty to end the game (helper method to endGame())
 bool Game::playersHandEmpty(){
+    bool isNotEmpty = false;
     for(int i=0; i < playerSize; i++){
-        if(players[i]->getHand()->size() >0){
-            return true;
+        if(players[i]->getHand()->size() > 0){
+            isNotEmpty = true;
+        }else{
+            isNotEmpty = false;
         }
     }
-    return false;
+    return isNotEmpty;
+
 }
 
 void Game::playerTurnPrintDetails(Player* player) {

@@ -30,6 +30,7 @@ class Game{
     void multipleTilePlacement();
     void updateGameStatus();
     void endGame(std::string status);
+    bool playersHandEmpty();
 public:
     Game();
     void newGame();
@@ -46,5 +47,6 @@ public:
     void displayPlayersScore();
     void playerTurnN();
     void continueLoop();
+    Player* getWinningPlayer();
 };
 #endif /* Game_hpp */

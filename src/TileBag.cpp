@@ -70,7 +70,6 @@ void TileBag::generateRandomTiles(){
                 }
             }
         }
-        std::cout<<value<<std::endl;
         arr.push_back(value);
         tiles->addFront(tilesAr[value]);
     }
@@ -94,8 +93,6 @@ void TileBag::generateRandomTiles(){
      cout << i << "---------" << tiles->get(i)->toString()<<endl;
      }
      */
-    
-    std::cout<<toString()<<std::endl;
 
 }
 

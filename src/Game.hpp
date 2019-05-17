@@ -39,6 +39,7 @@ public:
     bool isPlayerNameValid(const std::string & playerName);
     std::string toLowerPlayerName(const std::string & playerName);
     int  playerBreakLoop(int playerNum);
+    int getPlayerHighestScore();
     void playerTurn();
     std::string buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc);
     void playerTurnPrintDetails(Player* player);

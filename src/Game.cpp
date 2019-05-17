@@ -156,9 +156,8 @@ void Game::playerTurnN(){
         }
     }
 
-    
     //if a placyer decides to skip his move
-    if(mainAction == "skip"){
+    if(mainAction == "done"){
         std::cout<< "Player is skipping the turn"<<std::endl;
         return;
     }
@@ -295,30 +294,29 @@ void Game::updateGameStatus(){
 
 //Stats for ending the game
 void Game::endGame(std::string status){
-    
     if(status== "GAME_SAVED"){
-        
         std::cout<<"Game Succesfully Saved!"<<std::endl;
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
-        
     }else if(status=="NOT_FINISHED"){
-        
         std::cout<<"Game is not finished yet!"<<std::endl;
-        
     }else if(status == "GAME_OVER"){
-        
         std::cout<<"Game Over"<<std::endl;
-        for(int i=0;i<playerSize;i++){
-            std::cout<<"Score for "<<players[i]->getName()<<":"<<players[i]->getScore()<<std::endl;
-            //check who has the highest score
-            //implement this!
-        }
-    
-        //print out this
-        //implement this !
-        std::cout<<"PLAYER_NAME has won"<<std::endl;
+        std::cout<< getWinningPlayer()->getName() + " has won"<<std::endl;
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
     }
+}
+
+Player* Game::getWinningPlayer() {
+    int highestScore = 0;
+    Player* winningPlayer;
+    for(int i=0;i<playerSize;i++){
+        std::cout<<"Score for "<<players[i]->getName()<<":"<<players[i]->getScore()<<std::endl;
+        if(players[i]->getScore() > highestScore) {
+            highestScore = players[i] -> getScore();
+            winningPlayer = players[i];
+        }
+    }
+    return winningPlayer;
 }
 
 void Game::playerTurnPrintDetails(Player* player) {

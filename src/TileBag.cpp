@@ -54,7 +54,6 @@ void TileBag::generateRandomTiles(){
     for (int i = 0; i != MAX_NUM_TILES; ++i) {
         bool is_in = false;
         value = uniform_dist(engine);    
-        std::find(arr.begin(), arr.end(), value);
         for(int has: arr) {
             if (has == value) {
                 is_in = true;
@@ -62,7 +61,6 @@ void TileBag::generateRandomTiles(){
         }
         while(is_in == true){
             value = uniform_dist(engine);
-            std::find(arr.begin(), arr.end(), value);
             is_in = false;
             for(int has: arr) {
                 if (has == value) {
@@ -73,7 +71,9 @@ void TileBag::generateRandomTiles(){
         arr.push_back(value);
         tiles->addFront(tilesAr[value]);
     }
-    
+    for(int a: arr) {
+        std::cout<<a<<std::endl;
+    }
     /*
      // testing if getting random single tiles work
      cout<<getRandomSingleTile()->toString()<<endl;

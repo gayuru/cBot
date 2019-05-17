@@ -426,18 +426,16 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 //cannot place a tile that has no tile next to it
                 if (leftBox == nullptr && rightBox == nullptr && upBox == nullptr && downBox == nullptr) {
                     pass = false;
-                    return false;
                 }
                 else {
                     int fixType = 2;
                     int minRange = col;
                     int maxRange = col;
-                    int boxPass = true;
+                    bool boxPass = true;
                     //checks all the connections on lhs
                     if(leftBox != nullptr) {
                         bool fin = false;
-                        for(int i = col - 1; i > 0; i--) {
-                            std::cout<<i<<std::endl;
+                        for(int i = col - 1; i >= 0; i--) {
                             if(boxPass) {
                                 Tile* thisBox = vBoard[row][i];
                                 if(!fin) {
@@ -490,7 +488,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                         //checks all the connections on up
                         if(upBox != nullptr) {
                             bool fin = false;
-                            for(int i = row - 1; i > 0; i--) {
+                            for(int i = row - 1; i >= 0; i--) {
                                 if(boxPass) {
                                     Tile* thisBox = vBoard[i][col];
                                     if(!fin) {
@@ -547,10 +545,7 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     if(boxPass) {
                         pass = true;
                         if(quirkle) {
-                            std::cout<<"QUIRKLE!!!!"<<std::endl;
-                        }
-                        else {
-                            std::cout<<"QUIRKLE---NOPE"<<std::endl;
+                            std::cout<<"--------------QUIRKLE!!!!!!---------------"<<std::endl;
                         }
                     }
 
@@ -666,6 +661,12 @@ int Board::getHSize(){
     return vBoard[0].size();
 } 
 
+//For you drew to save it
+std::vector<Coordinate*> Board::getCoordPlaced() {
+    return coordPlaced;
+}
+
+//
 void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles){
     //add columns to first row
     for(int c = 1; c != cols; ++c){
@@ -686,7 +687,7 @@ void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::
             int y = coords[i]->getRow();
             int x = coords[i]->getCol();
             Tile* tile = tiles[i];
-            coordPlaced.push_back(new Coordinate(y,x));
+            // coordPlaced.push_back(new Coordinate(y,x));
             vBoard[y][x] = tile;                
         }
 }

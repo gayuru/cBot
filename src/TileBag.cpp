@@ -59,16 +59,15 @@ void TileBag::generateRandomTiles(){
             if (has == value) {
                 is_in = true;
             }
-            else is_in = false;
         }
         while(is_in == true){
             value = uniform_dist(engine);
             std::find(arr.begin(), arr.end(), value);
+            is_in = false;
             for(int has: arr) {
                 if (has == value) {
                     is_in = true;
                 }
-                else is_in = false;
             }
         }
         std::cout<<value<<std::endl;

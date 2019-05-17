@@ -394,6 +394,7 @@ Tile* Board::inBoundCheck(int row, int col) {
 
 //Validity for vertex
 bool Board::checkValidityV(int col, int row, Tile* tile) {
+    std::cout<<"checking validity"<<std::endl;
     bool pass = false;
     bool quirkle = false;
     //check if tile is within the range of the board
@@ -476,7 +477,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 boxPass = false;
                             }
                             else {
-                                if(maxRange - minRange + 1 == 6) quirkle = true;
+                                std::cout<<minRange<<std::endl;
+                                std::cout<<maxRange<<std::endl;
+                                if(maxRange - minRange + 1 == 6) {
+                                    quirkle = true;
+                                } 
+                                else {
+                                    std::cout<<"not quirkle check"<<std::endl;
+                                }
                             }
                         }
 
@@ -530,12 +538,19 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 }
                             }
                         }
+                        std::cout<<"c1"<<std::endl;
                         if(boxPass) {
+                            std::cout<<"checking"<<std::endl;
                             if(!noDuplicateCheck(minRange, maxRange, row, col, tile, false)) {
                                 boxPass = false;      
                             }
                             else {
-                                if(maxRange - minRange == 6) quirkle = true;
+                                if(maxRange - minRange + 1 == 6) {
+                                    quirkle = true;
+                                } 
+                                else {
+                                    std::cout<<"not quirkle check"<<std::endl;
+                                }
                             }
                         }
                     }

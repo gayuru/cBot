@@ -248,34 +248,39 @@ void Game::multipleTilePlacement(){
 
 //switch turns between players
 void Game::switchPlayers(){
-    //switches turns for two players
-    if(players.size() == 2){
-        if(currPlayer == 0){
-            currPlayer = 1;
-        }else{
-            currPlayer=0;
-        }
-    }else if(players.size() == 3){
-        //switches turns for three players
-        if(currPlayer == 0){
-            currPlayer = 1;
-        }else if(currPlayer == 1){
-            currPlayer=2;
-        }else{
-            currPlayer =0;
-        }
-    } else {
-        //switches turns for four players
-        if(currPlayer == 0){
-            currPlayer = 1;
-        }else if(currPlayer == 1){
-            currPlayer=2;
-        }else if(currPlayer == 2){
-            currPlayer = 3;
-        }else{
-            currPlayer = 0;
-        }
+    currPlayer++;
+    int playerSize = players.size();
+    if(currPlayer == playerSize) {
+        currPlayer = 0;
     }
+    //switches turns for two players
+    // if(players.size() == 2){
+    //     if(currPlayer == 0){
+    //         currPlayer = 1;
+    //     }else{
+    //         currPlayer=0;
+    //     }
+    // }else if(players.size() == 3){
+    //     //switches turns for three players
+    //     if(currPlayer == 0){
+    //         currPlayer = 1;
+    //     }else if(currPlayer == 1){
+    //         currPlayer=2;
+    //     }else{
+    //         currPlayer =0;
+    //     }
+    // } else {
+    //     //switches turns for four players
+    //     if(currPlayer == 0){
+    //         currPlayer = 1;
+    //     }else if(currPlayer == 1){
+    //         currPlayer=2;
+    //     }else if(currPlayer == 2){
+    //         currPlayer = 3;
+    //     }else{
+    //         currPlayer = 0;
+    //     }
+    // }
 }
 
 //checks for the gameProgress and updates the status

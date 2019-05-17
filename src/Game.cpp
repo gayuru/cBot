@@ -156,10 +156,9 @@ void Game::playerTurnN(){
         }
     }
 
-    
     //if a placyer decides to skip his move
-    if(mainAction == "skip"){
-        std::cout<< "Player is skipping the turn"<<std::endl;
+    if(mainAction == "done"){
+        std::cout<< "Player is skipping the turn\n"<<std::endl;
         return;
     }
     
@@ -169,7 +168,7 @@ void Game::playerTurnN(){
         players[currPlayer]->addPoints(board->endPoints());
         //fill players hand 
         tilebag->fillPlayerHand(players[currPlayer]->getHand());
-        std::cout<< "Switching turns"<<std::endl;
+        std::cout<< "Switching turns\n"<<std::endl;
         //reset tilePlaced
         tilePlaced = false;
         return;
@@ -284,8 +283,7 @@ void Game::updateGameStatus(){
     
     if(status == "GAME_SAVED"){
         return;
-    }//change this to numOfPlayers
-    else if(players[0]->getHand()->size() > 0 || players[1]->getHand()->size() > 0 || !tilebag->isEmpty() ){
+    }else if(playersHandEmpty() || !tilebag->isEmpty() ){
         status = "NOT_FINISHED";
     }else{
         status = "GAME_OVER";
@@ -295,34 +293,48 @@ void Game::updateGameStatus(){
 
 //Stats for ending the game
 void Game::endGame(std::string status){
-    
     if(status== "GAME_SAVED"){
-        
         std::cout<<"Game Succesfully Saved!"<<std::endl;
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
-        
     }else if(status=="NOT_FINISHED"){
-        
         std::cout<<"Game is not finished yet!"<<std::endl;
-        
     }else if(status == "GAME_OVER"){
-        
-        std::cout<<"Game Over"<<std::endl;
-        for(int i=0;i<playerSize;i++){
-            std::cout<<"Score for "<<players[i]->getName()<<":"<<players[i]->getScore()<<std::endl;
-            //check who has the highest score
-            //implement this!
-        }
-    
-        //print out this
-        //implement this !
-        std::cout<<"PLAYER_NAME has won"<<std::endl;
-        std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
+        std::cout<<"\n\n‼️ Game Over ‼️\n"<<std::endl;
+        displayPlayersScore();
+        std::cout<< getWinningPlayer()->getName() + " has won 🏆"<<std::endl;
+        std::cout<<"\nGoodbye 👋🏼👋🏼"<<std::endl;
     }
 }
 
+//returns the winning player after the game is over
+Player* Game::getWinningPlayer() {
+    int highestScore = 0;
+    Player* winningPlayer =nullptr;
+    for(int i=0;i<playerSize;i++){
+        if(players[i]->getScore() > highestScore) {
+            highestScore = players[i] -> getScore();
+            winningPlayer = players[i];
+        }
+    }
+    return winningPlayer;
+}
+
+//checks to see if the playersHand is empty to end the game (helper method to endGame())
+bool Game::playersHandEmpty(){
+    bool isNotEmpty = false;
+    for(int i=0; i < playerSize; i++){
+        if(players[i]->getHand()->size() > 0){
+            isNotEmpty = true;
+        }else{
+            isNotEmpty = false;
+        }
+    }
+    return isNotEmpty;
+
+}
+
 void Game::playerTurnPrintDetails(Player* player) {
-    std::cout<<player->getName()<<", it's your turn"<<std::endl;
+    std::cout<<player->getName()<<", it's your turn\n"<<std::endl;
     displayPlayersScore();
     std::cout<<std::endl;
     board->printBoard();

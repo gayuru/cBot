@@ -156,14 +156,14 @@ void Game::playerTurnN(){
         }
     }
 
-    //if a placyer decides to skip his move
-    if(mainAction == "done"){
-        std::cout<< "Player is skipping the turn\n"<<std::endl;
-        return;
-    }
+    // //if a placyer decides to skip his move
+    // if(mainAction == "done"){
+    //     std::cout<< "Player is skipping the turn\n"<<std::endl;
+    //     return;
+    // }
     
     //when a player decides he wants to finish his turn
-    if(mainAction =="switch"){
+    if(mainAction =="done"){
         //calculates the player points after done with his turn
         players[currPlayer]->addPoints(board->endPoints());
         //fill players hand 

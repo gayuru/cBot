@@ -437,11 +437,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                     if(leftBox != nullptr) {
                         bool fin = false;
                         for(int i = col - 1; i > 0; i--) {
+                            std::cout<<i<<std::endl;
                             if(boxPass) {
                                 Tile* thisBox = vBoard[row][i];
-                                if(thisBox == nullptr) {
-                                    minRange = i + 1;
-                                    fin = true;
+                                if(!fin) {
+                                    if(thisBox == nullptr) {
+                                        minRange = i + 1;
+                                        fin = true;
+                                    }
                                 }
                                 if(!fin) {
                                     if(!colorShapeCheckV(tile, thisBox, fixType)) {
@@ -458,9 +461,11 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                             for(int i = col + 1; i < maxColSize; i++) {
                                 if(boxPass) {
                                     Tile* thisBox = vBoard[row][i];
-                                    if(thisBox == nullptr) {
-                                        maxRange = i - 1;
-                                        fin = true;
+                                    if(!fin) {
+                                        if(thisBox == nullptr) {
+                                            maxRange = i - 1;
+                                            fin = true;
+                                        }
                                     }
                                     if(!fin) {
                                         if(!colorShapeCheckV(tile, thisBox, fixType)) {
@@ -488,10 +493,11 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                             for(int i = row - 1; i > 0; i--) {
                                 if(boxPass) {
                                     Tile* thisBox = vBoard[i][col];
-                                    if(thisBox == nullptr) {
-                                        minRange = i + 1;
-                                        fin = true;
-                                        
+                                    if(!fin) {
+                                        if(thisBox == nullptr) {
+                                            minRange = i + 1;
+                                            fin = true;                                        
+                                        }
                                     }
                                     if(!fin) {
                                         if(!colorShapeCheckV(tile, thisBox, fixType)) {
@@ -515,18 +521,17 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                             for(int i = row + 1; i < maxRowSize; i++) {
                                 if(boxPass) {
                                 Tile* thisBox = vBoard[i][col];
-                                    if(thisBox == nullptr) {
-                                        
-                                        maxRange = i -1;
-                                        fin = true;
+                                    if(!fin) {
+                                        if(thisBox == nullptr) {                                      
+                                            maxRange = i -1;
+                                            fin = true;
+                                        }
                                     }
                                     if(!fin) {
                                         if(!colorShapeCheckV(tile, thisBox, fixType)) {
-                                            boxPass = false;
-                                            
+                                            boxPass = false;                                         
                                         }
-                                    }
-                                    
+                                    }                                 
                                 }
                             }
                         }

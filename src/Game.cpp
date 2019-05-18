@@ -389,12 +389,14 @@ void Game::loadGame(std::string filename) {
         }
         getline(inFile, line);
         getline(inFile, line);
-        char colours[6];
-        int shapes[6];
-        for(int i = 0; i != 6; i++){
-            colours[i] = line[3 * i];
-            shapes[i] = line[3 * i + 1] - '0';
-            players[p]->addTile(new Tile(colours[i], shapes[i]));
+        char colour;
+        int shape;
+        for(unsigned int i = 0; i != 6; i++){
+            if(i < line.length()/3 + 1){
+                colour = line[3 * i];
+                shape = line[3 * i + 1] - '0';
+                players[p]->addTile(new Tile(colour, shape));
+            }
         }
         handTiles += players[p]->getHand()->size();
     }
@@ -473,7 +475,7 @@ void Game::loadGame(std::string filename) {
     tilebag = new TileBag(tiles);
     getline(std::cin, line);
 }
-//------needs to also save coords currently placed by a user (that is still their turn), which turn is the player
+
 void Game::saveGame(){
     //open file for saving
     std::string filename;
@@ -488,13 +490,17 @@ void Game::saveGame(){
     outFile << playerSize << std::endl;
     for(int p = 0; p != playerSize; p++){
         outFile << players[p]->getName() << std::endl;
+        std::cout << players[p]->getName() << std::endl;
         outFile << players[p]->getScore() << std::endl;
+        std::cout << players[p]->getScore() << std::endl;
         outFile << players[p]->getHand()->toString() << std::endl;
+        std::cout << players[p]->getHand()->toString() << std::endl;
     }
+    //save whos turn it is
     outFile << currPlayer << std::endl;
 
     //save the coordinates of placed tiles, in order
-    std::vector<Coordinate*> coordPlaced = board->getCoordinates();
+    std::vector<Coordinate*> coordPlaced = board->getCoordPlaced();
     for(unsigned int i = 0; i != coordPlaced.size(); ++i){
         outFile << '(' << coordPlaced[i]->getRow() << ',' << coordPlaced[i]->getCol() << ')'; 
     }

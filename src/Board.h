@@ -54,5 +54,5 @@ public:
     int getHSize();
     int getVSize();
     std::vector<Coordinate*> getCoordPlaced();
-    void loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles);
+    void loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles, std::vector<Coordinate*> coordOrder);
 };

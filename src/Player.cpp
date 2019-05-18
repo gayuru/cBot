@@ -28,12 +28,13 @@ void Player::addPoints(int points){
 }
 
 Tile* Player::hasTile(Tile* tile){
+    Tile* toReturn = nullptr;
     for(int i=0;i<hand->size();i++){
         if(hand->get(i)->getColour() == tile->getColour() && hand->get(i)->getShape() == tile->getShape()){
-            return hand->get(i);
+            toReturn = hand->get(i);
         }
     }
-    return nullptr;
+    return toReturn;
 }
 
 void Player::addTile(Tile* tile){

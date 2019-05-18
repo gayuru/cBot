@@ -18,7 +18,7 @@ int LinkedList::size(){
 
 Tile* LinkedList::get(int i){
    Tile* value = nullptr;
-   if(i >= 0){
+   if(i >= 0 && i < this->size()){
       Node* node = this->head;
       for(int j = 0; j != i; ++j){
          node = node->next;

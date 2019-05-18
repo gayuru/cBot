@@ -658,7 +658,7 @@ int Board::getHSize(){
     return vBoard[0].size();
 } 
 
-void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles){
+void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles, std::vector<Coordinate*> coordOrder){
     //add columns to first row
     for(int c = 1; c != cols; ++c){
             vBoard[0].push_back(nullptr);
@@ -678,9 +678,14 @@ void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::
             int y = coords[i]->getRow();
             int x = coords[i]->getCol();
             Tile* tile = tiles[i];
-            coordPlaced.push_back(new Coordinate(y,x));
+            //coordPlaced.push_back(new Coordinate(x,y));
             vBoard[y][x] = tile;                
         }
+        coordPlaced = coordOrder;
+}
+
+std::vector<Coordinate*> Board::getCoordinates(){
+    return coordPlaced;
 }
 
 //bool Board::checkValidity(int column,int row,Tile* tile){

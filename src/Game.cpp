@@ -344,13 +344,7 @@ void Game::displayPlayersScore() {
 
 //saving and loading game
 void Game::loadGame(std::string filename) {
-    //Check if the file is a save file
-    if(filename.length() < 6){
-        throw std::runtime_error("File entered is not a .save file");
-    }
-    if(filename.substr(filename.length() - 5, filename.length()) != ".save"){
-        throw std::runtime_error("File entered is not a .save file");
-    }
+    filename += ".save";
 
     //Open the given file name for reading
     std::ifstream inFile;
@@ -358,12 +352,20 @@ void Game::loadGame(std::string filename) {
     if(inFile.fail()){
         throw std::runtime_error("Unable to open file");
     }
-    //Read the players' information and store it in the player array
+
+    //Read the number of players
     std::string line;
+    getline(inFile, line);
+    if(line[0] < '2' || line[0] > '4'){
+        throw std::runtime_error("Save file formatted incorrectly");
+    }
+    playerSize = line[0] - '0';
+
+    //Read the players' information and store it in the player array
     int handTiles = 0;
-    for(int p = 0; p != 2; p++){
+    for(int p = 0; p != playerSize; p++){
         getline(inFile, line);
-        players[p] = new Player(line);
+        players.push_back(new Player(line));
         int score;
         if(inFile >> score){
             players[p]->addPoints(score);
@@ -380,14 +382,21 @@ void Game::loadGame(std::string filename) {
         handTiles += players[p]->getHand()->size();
     }
 
-    std::cout << players[0]->getName() << std::endl;
-    std::cout << players[0]->getScore() << std::endl;
-    players[0]->getHand()->printLinkedList();
-    std::cout << std::endl;
-    std::cout << players[1]->getName() << std::endl;
-    std::cout << players[1]->getScore() << std::endl;
-    players[1]->getHand()->printLinkedList();
-    std::cout << std::endl;
+    //reads who's turn it is
+    getline(inFile, line);
+    if(line[0] < '0' || line[0] > playerSize + '0'){
+        throw std::runtime_error("Incorrect file format");
+    }
+    currPlayer = line[0] - '0';
+
+    //reading the coordinates of placed tiles, in order
+    getline(inFile, line);
+    std::vector<Coordinate*> coordOrder;
+    for(unsigned int i = 0; i < line.size(); i += 5){
+        int x = line[i + 1] - '0';
+        int y = line[i + 3] - '0';
+        coordOrder.push_back(new Coordinate(x,y));
+    }
 
     //reads the board
     board = new Board();
@@ -396,11 +405,9 @@ void Game::loadGame(std::string filename) {
     inFile >> next;
     if(next == '0'){
         getline(inFile, line);
-        //std::cout << "  " << next << line << std::endl;
         inFile >> next;
         if(next == '-'){
             getline(inFile, line);
-            //std::cout << next << line << std::endl;
             //reading the board size and the tiles on the board
             std::vector<Coordinate*> coords;
             std::vector<Tile*> tiles;
@@ -423,10 +430,9 @@ void Game::loadGame(std::string filename) {
                 ++rows;
                 getline(inFile, line);
             }
-            std::cout << handTiles << std::endl;
-            std::cout << tilesOnBoard << std::endl;
-            //making the board the right size
-            board->loadBoard(rows, columns, coords, tiles);
+
+            //resizing the board and placing the tiles in their correct positions
+            board->loadBoard(rows, columns, coords, tiles, coordOrder);
             board->printBoard();
         }else{
             //incorrect file format
@@ -436,7 +442,8 @@ void Game::loadGame(std::string filename) {
         //incorrect file format
         throw std::runtime_error("Unable to open file");
     }
-    //std::cout << tilesOnBoard << std::endl;
+
+    //Reading the tilebag
     getline(inFile, line);
     LinkedList* tiles = new LinkedList();
     char colours[72 - handTiles - tilesOnBoard];
@@ -447,7 +454,6 @@ void Game::loadGame(std::string filename) {
         tiles->addBack(new Tile(colours[i], shapes[i]));
     }
     tilebag = new TileBag(tiles);
-    std::cout << tilebag->toString() << std::endl;
     getline(std::cin, line);
 }
 
@@ -462,11 +468,20 @@ void Game::saveGame(){
     outFile.open(filename);
 
     //save player info
-    for(int p = 0; p != 2; p++){
+    outFile << playerSize << std::endl;
+    for(int p = 0; p != playerSize; p++){
         outFile << players[p]->getName() << std::endl;
         outFile << players[p]->getScore() << std::endl;
         outFile << players[p]->getHand()->toString() << std::endl;
     }
+    outFile << currPlayer << std::endl;
+
+    //save the coordinates of placed tiles, in order
+    std::vector<Coordinate*> coordPlaced = board->getCoordinates();
+    for(unsigned int i = 0; i != coordPlaced.size(); ++i){
+        outFile << '(' << coordPlaced[i]->getRow() << ',' << coordPlaced[i]->getCol() << ')'; 
+    }
+    outFile << std::endl;
 
     //save board
     std::string row = board->getRow(0);

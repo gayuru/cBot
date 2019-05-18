@@ -30,6 +30,7 @@ class Game{
     void multipleTilePlacement();
     void updateGameStatus();
     void endGame(std::string status);
+    bool playersHandEmpty();
 public:
     Game();
     void newGame();
@@ -39,11 +40,13 @@ public:
     bool isPlayerNameValid(const std::string & playerName);
     std::string toLowerPlayerName(const std::string & playerName);
     int  playerBreakLoop(int playerNum);
+    int getPlayerHighestScore();
     void playerTurn();
     std::string buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc);
     void playerTurnPrintDetails(Player* player);
     void displayPlayersScore();
     void playerTurnN();
     void continueLoop();
+    Player* getWinningPlayer();
 };
 #endif /* Game_hpp */

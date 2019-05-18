@@ -53,6 +53,6 @@ public:
     std::string getRow(int row);
     int getHSize();
     int getVSize();
-    void loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles, std::vector<Coordinate*> coordOrder);
-    std::vector<Coordinate*> getCoordinates();
+    std::vector<Coordinate*> getCoordPlaced();
+    void loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles);
 };

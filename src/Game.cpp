@@ -156,20 +156,19 @@ void Game::playerTurnN(){
         }
     }
 
-    
-    //if a placyer decides to skip his move
-    if(mainAction == "skip"){
-        std::cout<< "Player is skipping the turn"<<std::endl;
-        return;
-    }
+    // //if a placyer decides to skip his move
+    // if(mainAction == "done"){
+    //     std::cout<< "Player is skipping the turn\n"<<std::endl;
+    //     return;
+    // }
     
     //when a player decides he wants to finish his turn
-    if(mainAction =="switch"){
+    if(mainAction =="done"){
         //calculates the player points after done with his turn
         players[currPlayer]->addPoints(board->endPoints());
         //fill players hand 
         tilebag->fillPlayerHand(players[currPlayer]->getHand());
-        std::cout<< "Switching turns"<<std::endl;
+        std::cout<< "Switching turns\n"<<std::endl;
         //reset tilePlaced
         tilePlaced = false;
         return;
@@ -249,34 +248,39 @@ void Game::multipleTilePlacement(){
 
 //switch turns between players
 void Game::switchPlayers(){
-    //switches turns for two players
-    if(players.size() == 2){
-        if(currPlayer == 0){
-            currPlayer = 1;
-        }else{
-            currPlayer=0;
-        }
-    }else if(players.size() == 3){
-        //switches turns for three players
-        if(currPlayer == 0){
-            currPlayer = 1;
-        }else if(currPlayer == 1){
-            currPlayer=2;
-        }else{
-            currPlayer =0;
-        }
-    } else {
-        //switches turns for four players
-        if(currPlayer == 0){
-            currPlayer = 1;
-        }else if(currPlayer == 1){
-            currPlayer=2;
-        }else if(currPlayer == 2){
-            currPlayer = 3;
-        }else{
-            currPlayer = 0;
-        }
+    currPlayer++;
+    int playerSize = players.size();
+    if(currPlayer == playerSize) {
+        currPlayer = 0;
     }
+    //switches turns for two players
+    // if(players.size() == 2){
+    //     if(currPlayer == 0){
+    //         currPlayer = 1;
+    //     }else{
+    //         currPlayer=0;
+    //     }
+    // }else if(players.size() == 3){
+    //     //switches turns for three players
+    //     if(currPlayer == 0){
+    //         currPlayer = 1;
+    //     }else if(currPlayer == 1){
+    //         currPlayer=2;
+    //     }else{
+    //         currPlayer =0;
+    //     }
+    // } else {
+    //     //switches turns for four players
+    //     if(currPlayer == 0){
+    //         currPlayer = 1;
+    //     }else if(currPlayer == 1){
+    //         currPlayer=2;
+    //     }else if(currPlayer == 2){
+    //         currPlayer = 3;
+    //     }else{
+    //         currPlayer = 0;
+    //     }
+    // }
 }
 
 //checks for the gameProgress and updates the status
@@ -284,8 +288,7 @@ void Game::updateGameStatus(){
     
     if(status == "GAME_SAVED"){
         return;
-    }//change this to numOfPlayers
-    else if(players[0]->getHand()->size() > 0 || players[1]->getHand()->size() > 0 || !tilebag->isEmpty() ){
+    }else if(playersHandEmpty() || !tilebag->isEmpty() ){
         status = "NOT_FINISHED";
     }else{
         status = "GAME_OVER";
@@ -295,34 +298,48 @@ void Game::updateGameStatus(){
 
 //Stats for ending the game
 void Game::endGame(std::string status){
-    
     if(status== "GAME_SAVED"){
-        
         std::cout<<"Game Succesfully Saved!"<<std::endl;
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
-        
     }else if(status=="NOT_FINISHED"){
-        
         std::cout<<"Game is not finished yet!"<<std::endl;
-        
     }else if(status == "GAME_OVER"){
-        
-        std::cout<<"Game Over"<<std::endl;
-        for(int i=0;i<playerSize;i++){
-            std::cout<<"Score for "<<players[i]->getName()<<":"<<players[i]->getScore()<<std::endl;
-            //check who has the highest score
-            //implement this!
-        }
-    
-        //print out this
-        //implement this !
-        std::cout<<"PLAYER_NAME has won"<<std::endl;
-        std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
+        std::cout<<"\n\n‼️ Game Over ‼️\n"<<std::endl;
+        displayPlayersScore();
+        std::cout<< getWinningPlayer()->getName() + " has won 🏆"<<std::endl;
+        std::cout<<"\nGoodbye 👋🏼👋🏼"<<std::endl;
     }
 }
 
+//returns the winning player after the game is over
+Player* Game::getWinningPlayer() {
+    int highestScore = 0;
+    Player* winningPlayer =nullptr;
+    for(int i=0;i<playerSize;i++){
+        if(players[i]->getScore() > highestScore) {
+            highestScore = players[i] -> getScore();
+            winningPlayer = players[i];
+        }
+    }
+    return winningPlayer;
+}
+
+//checks to see if the playersHand is empty to end the game (helper method to endGame())
+bool Game::playersHandEmpty(){
+    bool isNotEmpty = false;
+    for(int i=0; i < playerSize; i++){
+        if(players[i]->getHand()->size() > 0){
+            isNotEmpty = true;
+        }else{
+            isNotEmpty = false;
+        }
+    }
+    return isNotEmpty;
+
+}
+
 void Game::playerTurnPrintDetails(Player* player) {
-    std::cout<<player->getName()<<", it's your turn"<<std::endl;
+    std::cout<<player->getName()<<", it's your turn\n"<<std::endl;
     displayPlayersScore();
     std::cout<<std::endl;
     board->printBoard();
@@ -342,7 +359,7 @@ void Game::displayPlayersScore() {
 }
 
 
-//saving and loading game
+//saving and loading game -- needs edit for 2-4 players -- needs input of coords Currently placed by a user atm -- Needs to load at the player's turn
 void Game::loadGame(std::string filename) {
     filename += ".save";
 
@@ -456,7 +473,7 @@ void Game::loadGame(std::string filename) {
     tilebag = new TileBag(tiles);
     getline(std::cin, line);
 }
-
+//------needs to also save coords currently placed by a user (that is still their turn), which turn is the player
 void Game::saveGame(){
     //open file for saving
     std::string filename;
@@ -528,87 +545,87 @@ void Game::continueLoop(){
 
 //old method
 
- void Game::playerTurn() {
- int count = 0;
- while(!tilebag->isEmpty()) { // Change this to keep looping while the tilebag is not empty !tilebag->isEmpty()
- for(int playerNum = 0; playerNum < 2; ++playerNum) {
- std::string playerAction;
- std::string tilePlacementLoc;
- playerTurnPrintDetails(players[playerNum]);
- getline(std::cin, playerAction);
- std::transform(playerAction.begin(), playerAction.end(), playerAction.begin(), ::tolower);
- if(playerAction.substr(0,5) == "place") {
- for(unsigned int charPos = 5; charPos < playerAction.length(); ++charPos) {
- if(isalpha(playerAction[charPos]) || isdigit(playerAction[charPos])) {
- tilePlacementLoc += toupper(playerAction[charPos]);
- }
- }
+//  void Game::playerTurn() {
+//  int count = 0;
+//  while(!tilebag->isEmpty()) { // Change this to keep looping while the tilebag is not empty !tilebag->isEmpty()
+//  for(int playerNum = 0; playerNum < 2; ++playerNum) {
+//  std::string playerAction;
+//  std::string tilePlacementLoc;
+//  playerTurnPrintDetails(players[playerNum]);
+//  getline(std::cin, playerAction);
+//  std::transform(playerAction.begin(), playerAction.end(), playerAction.begin(), ::tolower);
+//  if(playerAction.substr(0,5) == "place") {
+//  for(unsigned int charPos = 5; charPos < playerAction.length(); ++charPos) {
+//  if(isalpha(playerAction[charPos]) || isdigit(playerAction[charPos])) {
+//  tilePlacementLoc += toupper(playerAction[charPos]);
+//  }
+//  }
  
- Colour* tmpColour =new Colour(tilePlacementLoc[0]);
- Shape* tmpShape = new Shape(tilePlacementLoc[1]-'0');
- Tile* tile = new Tile(*tmpColour,*tmpShape);
+//  Colour* tmpColour =new Colour(tilePlacementLoc[0]);
+//  Shape* tmpShape = new Shape(tilePlacementLoc[1]-'0');
+//  Tile* tile = new Tile(*tmpColour,*tmpShape);
  
- bool val = board->makeMoveV(tilePlacementLoc[4], tilePlacementLoc[5]-'0', tile);
+//  bool val = board->makeMoveV(tilePlacementLoc[4], tilePlacementLoc[5]-'0', tile);
  
- if(val){
- std::cout<<"Player Move Valid"<<std::endl;
- //board->calcPoints(*players[playerNum],tilePlacementLoc[4], tilePlacementLoc[5]-'0');
- players[playerNum]->addPoints(board->endPoints());
- //players[playerNum]->addPoints(board->getTurnPoints());
- // board->refreshTurn();
- }else{
- std::cout<<"That piece can't go there. Try again."<<std::endl;
- //loop through until val is true
- }
- } else if(playerAction.substr(0,7) == "replace") {
- bool isTileValid = false;
- int linkedListCounter = 0;
- tilePlacementLoc = buildReplaceTileString(playerAction, tilePlacementLoc);
- std::cout<< tilePlacementLoc << std::endl;
- std::cout<< std::endl;
- while(linkedListCounter < players[playerNum]->getHand()->size()) {
- Tile* checkTile = players[playerNum]->getHand()->get(linkedListCounter);
- if(checkTile->toString() == tilePlacementLoc.substr(0,2)) {
- isTileValid = true;
- players[playerNum]->getHand()->deleteAt(linkedListCounter);
- tilebag->replaceTile(checkTile, players[playerNum]->getHand());
- // BUG TO BE FIXED: removing 2 tiles(selected and back tiles) if (selected tile is at the start or end)
- linkedListCounter = players[playerNum]->getHand()->size();
- }
- ++linkedListCounter;
- }
- players[playerNum]->getHand()->printLinkedList();
- std::cout<< std::endl;
- if(!isTileValid) {
- playerNum = playerBreakLoop(playerNum);
- }
- } else if(playerAction.substr(0,4) == "save") {
- saveGame();
- } else {
- std::cout << "Error : Please enter replace or place followed by a tile from player's hand!" <<std::endl;
- playerNum = playerBreakLoop(playerNum);
- }
- }
- ++count;
- }
- }
+//  if(val){
+//  std::cout<<"Player Move Valid"<<std::endl;
+//  //board->calcPoints(*players[playerNum],tilePlacementLoc[4], tilePlacementLoc[5]-'0');
+//  players[playerNum]->addPoints(board->endPoints());
+//  //players[playerNum]->addPoints(board->getTurnPoints());
+//  // board->refreshTurn();
+//  }else{
+//  std::cout<<"That piece can't go there. Try again."<<std::endl;
+//  //loop through until val is true
+//  }
+//  } else if(playerAction.substr(0,7) == "replace") {
+//  bool isTileValid = false;
+//  int linkedListCounter = 0;
+//  tilePlacementLoc = buildReplaceTileString(playerAction, tilePlacementLoc);
+//  std::cout<< tilePlacementLoc << std::endl;
+//  std::cout<< std::endl;
+//  while(linkedListCounter < players[playerNum]->getHand()->size()) {
+//  Tile* checkTile = players[playerNum]->getHand()->get(linkedListCounter);
+//  if(checkTile->toString() == tilePlacementLoc.substr(0,2)) {
+//  isTileValid = true;
+//  players[playerNum]->getHand()->deleteAt(linkedListCounter);
+//  tilebag->replaceTile(checkTile, players[playerNum]->getHand());
+//  // BUG TO BE FIXED: removing 2 tiles(selected and back tiles) if (selected tile is at the start or end)
+//  linkedListCounter = players[playerNum]->getHand()->size();
+//  }
+//  ++linkedListCounter;
+//  }
+//  players[playerNum]->getHand()->printLinkedList();
+//  std::cout<< std::endl;
+//  if(!isTileValid) {
+//  playerNum = playerBreakLoop(playerNum);
+//  }
+//  } else if(playerAction.substr(0,4) == "save") {
+//  saveGame();
+//  } else {
+//  std::cout << "Error : Please enter replace or place followed by a tile from player's hand!" <<std::endl;
+//  playerNum = playerBreakLoop(playerNum);
+//  }
+//  }
+//  ++count;
+//  }
+//  }
  
- std::string Game::buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc) {
- for(unsigned int charPos = 7; charPos < playerAction.length(); ++charPos) {
- if(isalpha(playerAction[charPos]) || isdigit(playerAction[charPos])) {
- tilePlacementLoc += toupper(playerAction[charPos]);
- }
- }
- return tilePlacementLoc;
- }
+//  std::string Game::buildReplaceTileString(const std::string & playerAction, std::string & tilePlacementLoc) {
+//  for(unsigned int charPos = 7; charPos < playerAction.length(); ++charPos) {
+//  if(isalpha(playerAction[charPos]) || isdigit(playerAction[charPos])) {
+//  tilePlacementLoc += toupper(playerAction[charPos]);
+//  }
+//  }
+//  return tilePlacementLoc;
+//  }
  
- int Game::playerBreakLoop(int playerNum) {
- if(playerNum == 1) {
- playerNum = 0;
- } else {
- playerNum = -1;
- }
- return playerNum;
- }
+//  int Game::playerBreakLoop(int playerNum) {
+//  if(playerNum == 1) {
+//  playerNum = 0;
+//  } else {
+//  playerNum = -1;
+//  }
+//  return playerNum;
+//  }
  
 

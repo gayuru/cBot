@@ -54,14 +54,26 @@ void TileBag::generateRandomTiles(){
     for (int i = 0; i != MAX_NUM_TILES; ++i) {
         bool is_in = false;
         value = uniform_dist(engine);    
-        is_in = std::find(arr.begin(), arr.end(), value) != arr.end();
+        for(int has: arr) {
+            if (has == value) {
+                is_in = true;
+            }
+        }
         while(is_in == true){
             value = uniform_dist(engine);
-            is_in = std::find(arr.begin(), arr.end(), value) != arr.end();
+            is_in = false;
+            for(int has: arr) {
+                if (has == value) {
+                    is_in = true;
+                }
+            }
         }
+        arr.push_back(value);
         tiles->addFront(tilesAr[value]);
     }
-    
+    for(int a: arr) {
+        std::cout<<a<<std::endl;
+    }
     /*
      // testing if getting random single tiles work
      cout<<getRandomSingleTile()->toString()<<endl;
@@ -81,7 +93,7 @@ void TileBag::generateRandomTiles(){
      cout << i << "---------" << tiles->get(i)->toString()<<endl;
      }
      */
-    
+
 }
 
 //gets the tile at the front of the bag and deletes the tile from the bag once "drawn";
@@ -93,21 +105,28 @@ Tile* TileBag::getRandomSingleTile() {
 
 //adds the tile from the player's hand to the back of the list and bag returns a tile that is added to the player's hand at the front, returns false if bag is empty.
 bool TileBag::replaceTile(Tile* tile, LinkedList* hand) {
+    bool pass = true;
     if(!isEmpty()) {
         tiles->addBack(tile);
         hand->addBack(getRandomSingleTile());
     }
-    return !isEmpty();
+    else pass = false;
+    return pass;
 }
 
 //gets the hand from the player and fills it, returns false if bag is empty
 bool TileBag::fillPlayerHand(LinkedList* hand) {
+    bool pass = true;
     if(!isEmpty()) {
         for(int i = hand->size(); i < MAX_NUM_COLOUR_SHAPE ;++i) {
+            if(!isEmpty()) {
             hand->addBack(getRandomSingleTile());
+            }
+            else pass = false;
         }
     }
-    return false;
+    else pass = false;
+    return pass;
 }
 
 //checks if the tile bag is empty.

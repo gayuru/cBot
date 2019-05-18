@@ -426,22 +426,23 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                 //cannot place a tile that has no tile next to it
                 if (leftBox == nullptr && rightBox == nullptr && upBox == nullptr && downBox == nullptr) {
                     pass = false;
-                    return false;
                 }
                 else {
                     int fixType = 2;
                     int minRange = col;
                     int maxRange = col;
-                    int boxPass = true;
+                    bool boxPass = true;
                     //checks all the connections on lhs
                     if(leftBox != nullptr) {
                         bool fin = false;
-                        for(int i = col - 1; i > 0; i--) {
+                        for(int i = col - 1; i >= 0; i--) {
                             if(boxPass) {
                                 Tile* thisBox = vBoard[row][i];
-                                if(thisBox == nullptr) {
-                                    minRange = i + 1;
-                                    fin = true;
+                                if(!fin) {
+                                    if(thisBox == nullptr) {
+                                        minRange = i + 1;
+                                        fin = true;
+                                    }
                                 }
                                 if(!fin) {
                                     if(!colorShapeCheckV(tile, thisBox, fixType)) {
@@ -458,9 +459,11 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                             for(int i = col + 1; i < maxColSize; i++) {
                                 if(boxPass) {
                                     Tile* thisBox = vBoard[row][i];
-                                    if(thisBox == nullptr) {
-                                        maxRange = i - 1;
-                                        fin = true;
+                                    if(!fin) {
+                                        if(thisBox == nullptr) {
+                                            maxRange = i - 1;
+                                            fin = true;
+                                        }
                                     }
                                     if(!fin) {
                                         if(!colorShapeCheckV(tile, thisBox, fixType)) {
@@ -485,13 +488,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                         //checks all the connections on up
                         if(upBox != nullptr) {
                             bool fin = false;
-                            for(int i = row - 1; i > 0; i--) {
+                            for(int i = row - 1; i >= 0; i--) {
                                 if(boxPass) {
                                     Tile* thisBox = vBoard[i][col];
-                                    if(thisBox == nullptr) {
-                                        minRange = i + 1;
-                                        fin = true;
-                                        
+                                    if(!fin) {
+                                        if(thisBox == nullptr) {
+                                            minRange = i + 1;
+                                            fin = true;                                        
+                                        }
                                     }
                                     if(!fin) {
                                         if(!colorShapeCheckV(tile, thisBox, fixType)) {
@@ -515,18 +519,17 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                             for(int i = row + 1; i < maxRowSize; i++) {
                                 if(boxPass) {
                                 Tile* thisBox = vBoard[i][col];
-                                    if(thisBox == nullptr) {
-                                        
-                                        maxRange = i -1;
-                                        fin = true;
+                                    if(!fin) {
+                                        if(thisBox == nullptr) {                                      
+                                            maxRange = i -1;
+                                            fin = true;
+                                        }
                                     }
                                     if(!fin) {
                                         if(!colorShapeCheckV(tile, thisBox, fixType)) {
-                                            boxPass = false;
-                                            
+                                            boxPass = false;                                         
                                         }
-                                    }
-                                    
+                                    }                                 
                                 }
                             }
                         }
@@ -535,14 +538,14 @@ bool Board::checkValidityV(int col, int row, Tile* tile) {
                                 boxPass = false;      
                             }
                             else {
-                                if(maxRange - minRange == 6) quirkle = true;
+                                if(maxRange - minRange + 1 == 6) quirkle = true;
                             }
                         }
                     }
                     if(boxPass) {
                         pass = true;
                         if(quirkle) {
-                            std::cout<<"QUIRKLE!!!!"<<std::endl;
+                            std::cout<<"--------------QUIRKLE!!!!!!---------------"<<std::endl;
                         }
                     }
 
@@ -658,7 +661,13 @@ int Board::getHSize(){
     return vBoard[0].size();
 } 
 
-void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles, std::vector<Coordinate*> coordOrder){
+//For you drew to save it
+std::vector<Coordinate*> Board::getCoordPlaced() {
+    return coordPlaced;
+}
+
+//
+void Board::loadBoard(int rows, int cols, std::vector<Coordinate*> coords, std::vector<Tile*> tiles){
     //add columns to first row
     for(int c = 1; c != cols; ++c){
             vBoard[0].push_back(nullptr);

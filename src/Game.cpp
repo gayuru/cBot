@@ -76,17 +76,22 @@ void Game::playerNamePlay(std::string playerName) {
                 // playerNum = playerBreakLoop(playerNum);
                 std::cout << "Error : Please enter the Player names in Uppercase !" <<std::endl;
             } else {
-                // players[playerNum] = new Player(playerName);
-                std::cout<<playerName + " added into the Game. \n"  << std::endl;
-                players.push_back(new Player(playerName));
-                tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
-                // ++playerNo;
-                // if(playerNum == 1) {
-                //     isNameUpper = true;
-                // }
-                if (players.size() == 4) {
-                    invalid = false;
+                if(playerName.length() <= MAX_PLAYER_NAME_LENGTH) {
+                    // players[playerNum] = new Player(playerName);
+                    std::cout<<playerName + " added into the Game. \n"  << std::endl;
+                    players.push_back(new Player(playerName));
+                    tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
+                    // ++playerNo;
+                    // if(playerNum == 1) {
+                    //     isNameUpper = true;
+                    // }
+                    if (players.size() == 4) {
+                        invalid = false;
+                    }
+                } else {
+                    std::cout << "Error : Maximum Player Name Length is 150 characters !" <<std::endl;
                 }
+                
             }
         }
     // }

@@ -9,6 +9,7 @@
 #ifndef Game_hpp
 #define Game_hpp
 
+#define MAX_PLAYER_NAME_LENGTH    150
 #include "Board.h"
 #include "TileBag.hpp"
 #include <stdio.h>

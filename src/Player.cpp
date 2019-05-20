@@ -48,7 +48,5 @@ void Player::useTile(Tile* tile){
         pos++;
     }
     hand->deleteAt(pos);
-    }else{
-        std::cout << "pos:" << pos << "Tile not in hand?" << std::endl;
     }
 }

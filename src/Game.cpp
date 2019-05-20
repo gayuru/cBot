@@ -214,7 +214,6 @@ void Game::playerTurnN()
         Tile *currTile = new Tile(*tmpColour, *tmpShape);
         if (mainAction == "replace")
         {
-
             //checks if the player attempts to do both actions at the same time
             if (tilePlaced == true)
             {
@@ -223,8 +222,17 @@ void Game::playerTurnN()
             }
 
             //replace the tile with the front of the bag
-            tilebag->replaceTile(currTile, players[currPlayer]->getHand());
-            players[currPlayer]->useTile(currTile);
+            if (players[currPlayer]->hasTile(currTile) != nullptr) {
+                tilebag->replaceTile(currTile, players[currPlayer]->getHand());
+                players[currPlayer]->useTile(currTile);
+            }
+            else {
+                if(tile.size() > 2) {
+                    std::cout << "ERROR-WHAT THE HELL ARE YOU INPUTTING??" << std::endl;    
+                }
+                std::cout << "ERROR-THERE IS NO SUCH TILE IN YOUR HAND" << std::endl;
+                playerTurnN();
+            }
         }
         else
         {

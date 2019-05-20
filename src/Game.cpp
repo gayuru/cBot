@@ -298,10 +298,10 @@ void Game::updateGameStatus(){
     
     if(status == "GAME_SAVED"){
         return;
-    }else if(playersHandEmpty() || !tilebag->isEmpty() ){
-        status = "NOT_FINISHED";
-    }else{
+    }else if(playersHandEmpty() && tilebag->isEmpty() ){
         status = "GAME_OVER";
+    }else{
+        status = "NOT_FINISHED";
     }
     
 }
@@ -336,15 +336,13 @@ Player* Game::getWinningPlayer() {
 
 //checks to see if the playersHand is empty to end the game (helper method to endGame())
 bool Game::playersHandEmpty(){
-    bool isNotEmpty = false;
+    bool isEmpty = false;
     for(int i=0; i < playerSize; i++){
-        if(players[i]->getHand()->size() > 0){
-            isNotEmpty = true;
-        }else{
-            isNotEmpty = false;
+        if(players[i]->getHand()->size() == 0){
+            isEmpty = true;
         }
     }
-    return isNotEmpty;
+    return isEmpty;
 
 }
 

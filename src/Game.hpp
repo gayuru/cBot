@@ -18,12 +18,19 @@
 #include <string> 
 #include <sstream>
 
+
 class Game{
     
 private:
     std::vector<Player*> players;
-    enum Status{NOT_FINISHED,GAME_SAVED,EOF_FINISH,GAME_OVER};
-    // Player* players[2];
+    
+    enum Status {
+        NOT_FINISHED,
+        GAME_SAVED,
+        EOF_FINISH,
+        GAME_OVER
+    };
+    
     Board* board;
     TileBag* tilebag;
     Status status;

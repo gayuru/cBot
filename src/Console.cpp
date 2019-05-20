@@ -33,39 +33,43 @@ void Console::mainMenu(){
     std::cout<<"> ";
     std::cin>>i;
 
-    if (i == 1) {
-        
+    if (i == 1) {    
         std::cout<< "\nStarting a New Game\n" << std::endl;
         //call the new game method on the view
         Game* qwirkle = new Game();
         qwirkle->newGame();
-       
     } else if (i==2) {
         //load a Game
         Game* qwirkle = new Game();
         bool loaded = false;
-        while(!loaded){
+        while(!loaded && !std::cin.eof()){
             try {
                 std::cout << "Enter the filename from which to load a game:" << std::endl;
                 std::cout << "> ";
                 std::string filename;
                 std::cin >> filename;
-                qwirkle->loadGame(filename);
+                if(std::cin.eof()) {
+                    std::cout<<"Goodbye"<<std::endl;
+                } else {
+                    qwirkle->loadGame(filename);
+                }
                 loaded = true;
             } catch(std::runtime_error& error) {
                 std::cerr << "There was a problem opening the file." << std::endl;
                 std::cout << "Please try again: " << std::endl;
             }
         }
-        std::cout << "Game successfully loaded" << std::endl;
 
-        qwirkle->continueLoop();
-
+        if(!std::cin.eof()) {
+            std::cout << "Game successfully loaded" << std::endl;
+            qwirkle->continueLoop();
+        }
     }else if (i==3){
         showStudentInfo();
     } else if(i==4) {
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
-        
+    } else if(std::cin.eof()) {
+        std::cout<<"Goodbye"<<std::endl;
     } else {
         if(std::cin.fail()) {
             std::cin.clear(); 

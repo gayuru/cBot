@@ -41,22 +41,6 @@ void Game::newGame()
 //input and validation for players
 void Game::playerNamePlay(std::string playerName)
 {
-    //     bool invalid = true;
-    //     while(invalid) {
-    //         std::cout<<"Enter the number of Players from 2-4"<<std::endl;
-    //         int x = 0;
-    //         while(!(std::cin >> x && x <= 4 && x >= 2)){
-    //             std::cin.clear();
-    //             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    //             std::cout << "Invalid input.  Try again: ";
-    //         }
-    //         std::cout << "You enterd: " << x << std::endl;
-
-    // }
-
-    // bool isNameUpper = false;
-    // while(!isNameUpper) {
-    // int playerNo = 0;
     bool invalid = true;
     while (invalid && !std::cin.eof())
     {
@@ -66,7 +50,6 @@ void Game::playerNamePlay(std::string playerName)
         std::cout << "> ";
         std::cin >> playerName;
         std::cin.ignore();
-        // playerName = std::cin.get();
         if (toLowerPlayerName(playerName) == "done")
         {
             if (players.size() >= 2 && players.size() <= 4)
@@ -81,24 +64,18 @@ void Game::playerNamePlay(std::string playerName)
         }
         else if (!isPlayerNameValid(playerName))
         {
-            // playerNum = playerBreakLoop(playerNum);
             std::cout << "Error : Please enter the Player names in Uppercase !" << std::endl;
         }
         else
         {
             if (playerName.length() <= MAX_PLAYER_NAME_LENGTH)
             {
-                // players[playerNum] = new Player(playerName);
                 if(!std::cin.eof()) {
                     std::cout << playerName + " added into the Game. \n"
                           << std::endl;
                     players.push_back(new Player(playerName));
                     tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
                 }
-                // ++playerNo;
-                // if(playerNum == 1) {
-                //     isNameUpper = true;
-                // }
                 if (players.size() == 4)
                 {
                     invalid = false;
@@ -110,7 +87,6 @@ void Game::playerNamePlay(std::string playerName)
             }
         }
     }
-    // }
     if(!std::cin.eof()) {
         playerSize = players.size();
         std::cout << "\n👉 Let's Play 👈\n"
@@ -152,155 +128,159 @@ void Game::playerTurnN()
     //Gets the user input
     std::string playerInput;
     getline(std::cin, playerInput);
-    std::transform(playerInput.begin(), playerInput.end(), playerInput.begin(), ::tolower);
+    if(!std::cin.eof()) {
+        std::transform(playerInput.begin(), playerInput.end(), playerInput.begin(), ::tolower);
 
-    //Allocate the user input into variables for ease
-    std::string mainAction = "";
-    std::string tilePlacement = "";
-    std::string tile = "";
+        //Allocate the user input into variables for ease
+        std::string mainAction = "";
+        std::string tilePlacement = "";
+        std::string tile = "";
 
-    //breaks down the userInput sentence into seperate words
-    std::istringstream ss(playerInput);
-    std::istream_iterator<std::string> begin(ss), end;
-    std::vector<std::string> words(begin, end);
+        //breaks down the userInput sentence into seperate words
+        std::istringstream ss(playerInput);
+        std::istream_iterator<std::string> begin(ss), end;
+        std::vector<std::string> words(begin, end);
 
-    //equating the input onto the variables
-    //case: null check when nothing is entered after mainAction string
-    if (words.size() != 0)
-    {
-        mainAction = words[0];
-
-        if (words.size() > 1)
+        //equating the input onto the variables
+        //case: null check when nothing is entered after mainAction string
+        if (words.size() != 0)
         {
-            tile = (words[1]);
+            mainAction = words[0];
 
-            if (words.size() > 3)
+            if (words.size() > 1)
             {
-                tilePlacement = words[3];
+                tile = (words[1]);
+
+                if (words.size() > 3)
+                {
+                    tilePlacement = words[3];
+                }
             }
         }
-    }
 
-    //special case
-    if (mainAction != "place")
-    {
-        tilePlacement = "";
-        if (mainAction != "replace")
+        //special case
+        if (mainAction != "place")
         {
-            tile = "";
-        }
-    }
-
-    //when a player decides he wants to finish his turn
-    if (mainAction == "done")
-    {
-        //calculates the player points after done with his turn
-        players[currPlayer]->addPoints(board->endPoints());
-        //fill players hand
-        tilebag->fillPlayerHand(players[currPlayer]->getHand());
-        std::cout << "Switching turns\n"
-                  << std::endl;
-        //reset tilePlaced
-        tilePlaced = false;
-        return;
-    }
-
-    //saveGame
-    else if (mainAction == "save")
-    { //playerInput.substr(0,4) == "save"
-        saveGame();
-        status = "GAME_SAVED";
-        return;
-    }
-    else if (mainAction == "replace" || mainAction == "place")
-    {
-        //creation of the user input tile
-        Colour *tmpColour = new Colour(toupper(tile[0]));
-        Shape *tmpShape = new Shape(tile[1] - '0');
-        Tile *currTile = new Tile(*tmpColour, *tmpShape);
-        if (mainAction == "replace")
-        {
-            //checks if the player attempts to do both actions at the same time
-            if (tilePlaced == true)
+            tilePlacement = "";
+            if (mainAction != "replace")
             {
-                std::cout << "You can't do the following actions on the same turn : Place Tile and ReplaceTile" << std::endl;
-                playerTurnN();
-            }
-
-            //replace the tile with the front of the bag
-            if (players[currPlayer]->hasTile(currTile) != nullptr) {
-                tilebag->replaceTile(currTile, players[currPlayer]->getHand());
-                players[currPlayer]->useTile(currTile);
-            }
-            else {
-                if(tile.size() > 2) {
-                    std::cout << "ERROR-WHAT THE HELL ARE YOU INPUTTING??" << std::endl;    
-                }
-                std::cout << "ERROR-THERE IS NO SUCH TILE IN YOUR HAND" << std::endl;
-                playerTurnN();
+                tile = "";
             }
         }
-        else
+
+        //when a player decides he wants to finish his turn
+        if (mainAction == "done")
         {
-            if(tile[0] == '\0' || tile[1] == '\0' || tilePlacement == "") {
-                std::cout << "You did not input anything at: 'Place ---> [tile??] at {or/and} --> [location??]' Please try again" << std::endl;
-                playerTurnN();
-            }
-            //check if the player has that tile in his hand to proceed
-            else if (players[currPlayer]->hasTile(currTile) != nullptr)
+            //calculates the player points after done with his turn
+            players[currPlayer]->addPoints(board->endPoints());
+            //fill players hand
+            tilebag->fillPlayerHand(players[currPlayer]->getHand());
+            std::cout << "Switching turns\n"
+                    << std::endl;
+            //reset tilePlaced
+            tilePlaced = false;
+            return;
+        }
+
+        //saveGame
+        else if (mainAction == "save")
+        { //playerInput.substr(0,4) == "save"
+            saveGame();
+            status = "GAME_SAVED";
+            return;
+        }
+        else if (mainAction == "replace" || mainAction == "place")
+        {
+            //creation of the user input tile
+            Colour *tmpColour = new Colour(toupper(tile[0]));
+            Shape *tmpShape = new Shape(tile[1] - '0');
+            Tile *currTile = new Tile(*tmpColour, *tmpShape);
+            if (mainAction == "replace")
             {
-
-                //gets the real location of the currentTile
-                currTile = players[currPlayer]->hasTile(currTile);
-                char row = tilePlacement[0];
-                //conversion from ASCII to int
-                std::string colString = tilePlacement.substr(1, tilePlacement.length());
-                int col = -1;
-                bool isNumber = true;
-                for (unsigned int i = 0; i != colString.length() && isNumber; ++i)
+                //checks if the player attempts to do both actions at the same time
+                if (tilePlaced == true)
                 {
-                    if (colString[i] - '0' < 10 && colString[i] >= 0)
-                    {
-                        isNumber = true;
-                    }
-                    else
-                    {
-                        isNumber = false;
-                    }
-                }
-                if (isNumber)
-                {
-                    col = std::stoi(colString);
+                    std::cout << "You can't do the following actions on the same turn : Place Tile and ReplaceTile" << std::endl;
+                    playerTurnN();
                 }
 
-                //checks if the move is valid
-                if (board->makeMoveV(toupper(row), col, currTile))
-                {
-                    //removeTile from players hand
+                //replace the tile with the front of the bag
+                if (players[currPlayer]->hasTile(currTile) != nullptr) {
+                    tilebag->replaceTile(currTile, players[currPlayer]->getHand());
                     players[currPlayer]->useTile(currTile);
-                    tilePlaced = true; //stops a player from replacing a tile after he places
-                    //loop until the player decides he want to end his turn
-                    multipleTilePlacement();
                 }
-                else
-                {
-                    std::cout << "Try again." << std::endl;
+                else {
+                    if(tile.size() > 2) {
+                        std::cout << "ERROR-WHAT THE HELL ARE YOU INPUTTING??" << std::endl;    
+                    }
+                    std::cout << "ERROR-THERE IS NO SUCH TILE IN YOUR HAND" << std::endl;
                     playerTurnN();
                 }
             }
             else
             {
-                //reverts the player back to placing a tile again (since the player didn't have the tile in his hand)
-                std::cout << "Player doesn't have the entered piece in the hand. Please try again!" << std::endl;
-                playerTurnN();
+                if(tile[0] == '\0' || tile[1] == '\0' || tilePlacement == "") {
+                    std::cout << "You did not input anything at: 'Place ---> [tile??] at {or/and} --> [location??]' Please try again" << std::endl;
+                    playerTurnN();
+                }
+                //check if the player has that tile in his hand to proceed
+                else if (players[currPlayer]->hasTile(currTile) != nullptr)
+                {
+
+                    //gets the real location of the currentTile
+                    currTile = players[currPlayer]->hasTile(currTile);
+                    char row = tilePlacement[0];
+                    //conversion from ASCII to int
+                    std::string colString = tilePlacement.substr(1, tilePlacement.length());
+                    int col = -1;
+                    bool isNumber = true;
+                    for (unsigned int i = 0; i != colString.length() && isNumber; ++i)
+                    {
+                        if (colString[i] - '0' < 10 && colString[i] >= 0)
+                        {
+                            isNumber = true;
+                        }
+                        else
+                        {
+                            isNumber = false;
+                        }
+                    }
+                    if (isNumber)
+                    {
+                        col = std::stoi(colString);
+                    }
+
+                    //checks if the move is valid
+                    if (board->makeMoveV(toupper(row), col, currTile))
+                    {
+                        //removeTile from players hand
+                        players[currPlayer]->useTile(currTile);
+                        tilePlaced = true; //stops a player from replacing a tile after he places
+                        //loop until the player decides he want to end his turn
+                        multipleTilePlacement();
+                    }
+                    else
+                    {
+                        std::cout << "Try again." << std::endl;
+                        playerTurnN();
+                    }
+                }
+                else
+                {
+                    //reverts the player back to placing a tile again (since the player didn't have the tile in his hand)
+                    std::cout << "Player doesn't have the entered piece in the hand. Please try again!" << std::endl;
+                    playerTurnN();
+                }
             }
         }
-    }
 
-    else
-    {
-        std::cout << "----------------ERRRRRORRRR: UNKNOWN COMMAND--------------" << std::endl;
-        playerTurnN();
+        else
+        {
+            std::cout << "----------------ERRRRRORRRR: UNKNOWN COMMAND--------------" << std::endl;
+            playerTurnN();
+        }
+    } else {
+        updateGameStatus();
     }
 }
 

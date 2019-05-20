@@ -58,7 +58,7 @@ void Game::playerNamePlay(std::string playerName)
     // while(!isNameUpper) {
     // int playerNo = 0;
     bool invalid = true;
-    while (invalid)
+    while (invalid && !std::cin.eof())
     {
         std::cout << "👤 Enter a name for Player " << players.size() + 1 << " (uppercase characters only)" << std::endl;
         std::cout << "▫️ Input 'done' if all the players are entered.\n"
@@ -89,10 +89,12 @@ void Game::playerNamePlay(std::string playerName)
             if (playerName.length() <= MAX_PLAYER_NAME_LENGTH)
             {
                 // players[playerNum] = new Player(playerName);
-                std::cout << playerName + " added into the Game. \n"
+                if(!std::cin.eof()) {
+                    std::cout << playerName + " added into the Game. \n"
                           << std::endl;
-                players.push_back(new Player(playerName));
-                tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
+                    players.push_back(new Player(playerName));
+                    tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
+                }
                 // ++playerNo;
                 // if(playerNum == 1) {
                 //     isNameUpper = true;
@@ -109,9 +111,13 @@ void Game::playerNamePlay(std::string playerName)
         }
     }
     // }
-    playerSize = players.size();
-    std::cout << "\n👉 Let's Play 👈\n"
+    if(!std::cin.eof()) {
+        playerSize = players.size();
+        std::cout << "\n👉 Let's Play 👈\n"
               << std::endl;
+    } else {
+        updateGameStatus();
+    }
 }
 
 //validation for playerName
@@ -357,6 +363,9 @@ void Game::updateGameStatus()
     {
         status = "GAME_OVER";
     }
+    else if(std::cin.eof()) {
+        status = "EOF_FINISH";
+    }
     else
     {
         status = "NOT_FINISHED";
@@ -374,6 +383,9 @@ void Game::endGame(std::string status)
     else if (status == "NOT_FINISHED")
     {
         std::cout << "Game is not finished yet!" << std::endl;
+    }
+    else if (status == "EOF_FINISH") {
+        std::cout << "Goodbye" << std::endl;
     }
     else if (status == "GAME_OVER")
     {

@@ -48,12 +48,10 @@ void Console::mainMenu(){
                 std::cout << "> ";
                 std::string filename;
                 std::cin >> filename;
-                if(std::cin.eof()) {
-                    std::cout<<"Goodbye"<<std::endl;
-                } else {
+                if(!std::cin.eof()) {
                     qwirkle->loadGame(filename);
+                    loaded = true;
                 }
-                loaded = true;
             } catch(std::runtime_error& error) {
                 std::cerr << "There was a problem opening the file." << std::endl;
                 std::cout << "Please try again: " << std::endl;
@@ -63,7 +61,9 @@ void Console::mainMenu(){
         if(!std::cin.eof()) {
             std::cout << "Game successfully loaded" << std::endl;
             qwirkle->continueLoop();
-        }
+        } else {
+            std::cout<<"Goodbye"<<std::endl;
+        }    
     }else if (i==3){
         showStudentInfo();
     } else if(i==4) {

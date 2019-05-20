@@ -173,14 +173,14 @@ void Game::playerTurnN(){
     }
     
     //saveGame
-    if(mainAction == "save"){//playerInput.substr(0,4) == "save"
+    else if(mainAction == "save"){//playerInput.substr(0,4) == "save"
         saveGame();
         status = "GAME_SAVED";
         return;
     }
 
-    
-    //creation of the user input tile
+    else if(mainAction == "place") {
+            //creation of the user input tile
     Colour* tmpColour =new Colour(toupper(tile[0]));
     Shape* tmpShape = new Shape(tile[1]-'0');
     Tile* currTile = new Tile(*tmpColour,*tmpShape);
@@ -192,7 +192,7 @@ void Game::playerTurnN(){
         currTile = players[currPlayer]->hasTile(currTile);
         
         if(mainAction == "place"){
-            
+            std::cout<<"YOU HAVE TYPED PLACE"<<std::endl;
             char row =tilePlacement[0];
             //conversion from ASCII to int
             std::string colString = tilePlacement.substr(1, tilePlacement.length());
@@ -244,7 +244,15 @@ void Game::playerTurnN(){
         std::cout<<"Player doesn't have the entered piece in the hand. Please try again!"<<std::endl;
         playerTurnN();
         
+        }
     }
+
+    else {
+        std::cout<<"----------------ERRRRRORRRR: UNKNOWN COMMAND--------------"<<std::endl;
+        playerTurnN();
+    }
+    
+
 
 }
 

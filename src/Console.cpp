@@ -65,7 +65,8 @@ void Console::mainMenu(){
         showStudentInfo();
     } else if(i==4) {
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
-        
+    } else if(std::cin.eof()) {
+        std::cout<<"Goodbye"<<std::endl;
     } else {
         if(std::cin.fail()) {
             std::cin.clear(); 

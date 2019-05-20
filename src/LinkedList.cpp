@@ -83,7 +83,7 @@ void LinkedList::deleteBack(){
       back = nullptr;
    }else{
       Node* node = head;
-      for(int i = 0; i != this->size() - 1; ++i){
+      for(int i = 1; i != this->size() - 1; ++i){
          node = node->next;
       }
       delete back;
@@ -112,7 +112,7 @@ void LinkedList::deleteAt(int i){
 
 void LinkedList::printLinkedList(){
     for(int i=0;i<this->size();++i) {
-      std::cout<< this->get(i)->toString();  
+        std::cout<< this->get(i)->toString();
       if(i < this->size()-1) {
          std::cout<< ",";
       }  

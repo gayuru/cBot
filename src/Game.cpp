@@ -159,12 +159,6 @@ void Game::playerTurnN(){
             tile = "";
         }
     }
-
-    // //if a placyer decides to skip his move
-    // if(mainAction == "done"){
-    //     std::cout<< "Player is skipping the turn\n"<<std::endl;
-    //     return;
-    // }
     
     //when a player decides he wants to finish his turn
     if(mainAction =="done"){
@@ -193,10 +187,9 @@ void Game::playerTurnN(){
     
     //check if the player has that tile in his hand to proceed
     if(players[currPlayer]->hasTile(currTile) != nullptr){
-        
+      
         //gets the real location of the currentTile
         currTile = players[currPlayer]->hasTile(currTile);
-        std::cout << currTile->toString() << std::endl;
         
         if(mainAction == "place"){
             
@@ -270,7 +263,6 @@ void Game::switchPlayers(){
     if(currPlayer == playerSize) {
         currPlayer = 0;
     }
-    std::cout << tilebag->toString() << std::endl;
     //switches turns for two players
     // if(players.size() == 2){
     //     if(currPlayer == 0){
@@ -306,10 +298,10 @@ void Game::updateGameStatus(){
     
     if(status == "GAME_SAVED"){
         return;
-    }else if(playersHandEmpty() || !tilebag->isEmpty() ){
-        status = "NOT_FINISHED";
-    }else{
+    }else if(playersHandEmpty() && tilebag->isEmpty() ){
         status = "GAME_OVER";
+    }else{
+        status = "NOT_FINISHED";
     }
     
 }
@@ -344,15 +336,13 @@ Player* Game::getWinningPlayer() {
 
 //checks to see if the playersHand is empty to end the game (helper method to endGame())
 bool Game::playersHandEmpty(){
-    bool isNotEmpty = false;
+    bool isEmpty = false;
     for(int i=0; i < playerSize; i++){
-        if(players[i]->getHand()->size() > 0){
-            isNotEmpty = true;
-        }else{
-            isNotEmpty = false;
+        if(players[i]->getHand()->size() == 0){
+            isEmpty = true;
         }
     }
-    return isNotEmpty;
+    return isEmpty;
 
 }
 

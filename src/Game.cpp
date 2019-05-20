@@ -334,17 +334,16 @@ void Game::switchPlayers()
 //checks for the gameProgress and updates the status
 void Game::updateGameStatus()
 {
-
-    if (status == "GAME_SAVED")
+    if(std::cin.eof()) {
+        status = "EOF_FINISH";
+    } 
+    else if (status == "GAME_SAVED")
     {
         return;
     }
     else if (playersHandEmpty() && tilebag->isEmpty())
     {
         status = "GAME_OVER";
-    }
-    else if(std::cin.eof()) {
-        status = "EOF_FINISH";
     }
     else
     {
@@ -578,66 +577,70 @@ void Game::saveGame()
     std::cout << "Enter the name of the file to save:" << std::endl;
     std::cout << "> ";
     std::cin >> filename;
-    filename += ".save";
-    std::ofstream outFile;
-    outFile.open(filename);
+    if(!std::cin.eof()) {
+        filename += ".save";
+        std::ofstream outFile;
+        outFile.open(filename);
 
-    //save player info
-    outFile << playerSize << std::endl;
-    for (int p = 0; p != playerSize; p++)
-    {
-        outFile << players[p]->getName() << std::endl;
-        std::cout << players[p]->getName() << std::endl;
-        outFile << players[p]->getScore() << std::endl;
-        std::cout << players[p]->getScore() << std::endl;
-        outFile << players[p]->getHand()->toString() << std::endl;
-        std::cout << players[p]->getHand()->toString() << std::endl;
-    }
-    //save whos turn it is
-    outFile << currPlayer << std::endl;
-
-    //save the coordinates of placed tiles, in order
-    std::vector<Coordinate *> coordPlaced = board->getCoordPlaced();
-    for (unsigned int i = 0; i != coordPlaced.size(); ++i)
-    {
-        outFile << '(' << coordPlaced[i]->getRow() << ',' << coordPlaced[i]->getCol() << ')';
-    }
-    outFile << std::endl;
-
-    //save board
-    std::string row = board->getRow(0);
-    int cols = board->getHSize();
-    int rows = board->getVSize();
-    outFile << "  0";
-    for (int c = 1; c != cols; c++)
-    {
-        if (c <= 10)
+        //save player info
+        outFile << playerSize << std::endl;
+        for (int p = 0; p != playerSize; p++)
         {
-            outFile << "  ";
+            outFile << players[p]->getName() << std::endl;
+            std::cout << players[p]->getName() << std::endl;
+            outFile << players[p]->getScore() << std::endl;
+            std::cout << players[p]->getScore() << std::endl;
+            outFile << players[p]->getHand()->toString() << std::endl;
+            std::cout << players[p]->getHand()->toString() << std::endl;
         }
-        else
+        //save whos turn it is
+        outFile << currPlayer << std::endl;
+
+        //save the coordinates of placed tiles, in order
+        std::vector<Coordinate *> coordPlaced = board->getCoordPlaced();
+        for (unsigned int i = 0; i != coordPlaced.size(); ++i)
         {
-            outFile << " ";
+            outFile << '(' << coordPlaced[i]->getRow() << ',' << coordPlaced[i]->getCol() << ')';
         }
-        outFile << c;
-    }
-    outFile << std::endl;
-    outFile << " ----";
-    for (int c = 1; c != cols; c++)
-    {
-        outFile << "---";
-    }
-    outFile << std::endl;
+        outFile << std::endl;
 
-    for (int i = 0; i < rows; i++)
-    {
-        char letter = 'A' + i;
-        outFile << letter;
-        outFile << board->getRow(i) << std::endl;
-    }
+        //save board
+        std::string row = board->getRow(0);
+        int cols = board->getHSize();
+        int rows = board->getVSize();
+        outFile << "  0";
+        for (int c = 1; c != cols; c++)
+        {
+            if (c <= 10)
+            {
+                outFile << "  ";
+            }
+            else
+            {
+                outFile << " ";
+            }
+            outFile << c;
+        }
+        outFile << std::endl;
+        outFile << " ----";
+        for (int c = 1; c != cols; c++)
+        {
+            outFile << "---";
+        }
+        outFile << std::endl;
 
-    //save tilebag
-    outFile << tilebag->toString() << std::endl;
+        for (int i = 0; i < rows; i++)
+        {
+            char letter = 'A' + i;
+            outFile << letter;
+            outFile << board->getRow(i) << std::endl;
+        }
+
+        //save tilebag
+        outFile << tilebag->toString() << std::endl;
+    } else {
+        updateGameStatus();
+    }
 }
 
 void Game::continueLoop()

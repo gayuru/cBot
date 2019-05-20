@@ -71,14 +71,18 @@ void Game::playerNamePlay(std::string playerName)
             if (playerName.length() <= MAX_PLAYER_NAME_LENGTH)
             {
                 if(!std::cin.eof()) {
-                    std::cout << playerName + " added into the Game. \n"
+                    if(isPlayerNameDuplicated(playerName)) {
+                        std::cout << "Error : Player Name Has Been Used. Enter A New One !" << std::endl;
+                    } else {
+                        std::cout << playerName + " added into the Game. \n"
                           << std::endl;
-                    players.push_back(new Player(playerName));
-                    tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
-                }
-                if (players.size() == 4)
-                {
-                    invalid = false;
+                        players.push_back(new Player(playerName));
+                        tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
+                        if (players.size() == 4)
+                        {
+                            invalid = false;
+                        }   
+                    }
                 }
             }
             else
@@ -86,7 +90,7 @@ void Game::playerNamePlay(std::string playerName)
                 std::cout << "Error : Maximum Player Name Length is 150 characters !" << std::endl;
             }
         }
-    }
+    } // end of while
     if(!std::cin.eof()) {
         playerSize = players.size();
         std::cout << "\n👉 Let's Play 👈\n"
@@ -108,6 +112,20 @@ bool Game::isPlayerNameValid(const std::string &playerName)
         }
     }
     return isPlayerNameValid;
+}
+
+ //Check previous player names to prevent duplication   
+bool Game::isPlayerNameDuplicated(const std::string &playerName) 
+{
+    bool isPlayerNameDuplicated = false;
+    if(!players.empty()) {
+        for(unsigned int playerNo = 0; playerNo < players.size(); ++playerNo) {
+            if(players[playerNo] -> getName() == playerName) {
+                isPlayerNameDuplicated = true;
+            }
+        }
+    }
+    return isPlayerNameDuplicated;
 }
 
 //convert characters of playername for command 'done' during inputting player name
@@ -301,34 +319,6 @@ void Game::switchPlayers()
     {
         currPlayer = 0;
     }
-    //switches turns for two players
-    // if(players.size() == 2){
-    //     if(currPlayer == 0){
-    //         currPlayer = 1;
-    //     }else{
-    //         currPlayer=0;
-    //     }
-    // }else if(players.size() == 3){
-    //     //switches turns for three players
-    //     if(currPlayer == 0){
-    //         currPlayer = 1;
-    //     }else if(currPlayer == 1){
-    //         currPlayer=2;
-    //     }else{
-    //         currPlayer =0;
-    //     }
-    // } else {
-    //     //switches turns for four players
-    //     if(currPlayer == 0){
-    //         currPlayer = 1;
-    //     }else if(currPlayer == 1){
-    //         currPlayer=2;
-    //     }else if(currPlayer == 2){
-    //         currPlayer = 3;
-    //     }else{
-    //         currPlayer = 0;
-    //     }
-    // }
 }
 
 //checks for the gameProgress and updates the status

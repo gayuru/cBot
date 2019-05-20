@@ -39,6 +39,7 @@ public:
     void saveGame();
     void playerNamePlay(std::string playerName);
     bool isPlayerNameValid(const std::string & playerName);
+    bool isPlayerNameDuplicated(const std::string & playerName);
     std::string toLowerPlayerName(const std::string & playerName);
     int  playerBreakLoop(int playerNum);
     int getPlayerHighestScore();

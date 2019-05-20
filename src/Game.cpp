@@ -228,7 +228,6 @@ void Game::playerTurnN()
         }
         else
         {
-            std::cout<<tile[1]<<std::endl;
             if(tile[0] == '\0' || tile[1] == '\0' || tilePlacement == "") {
                 std::cout << "You did not input anything at: 'Place ---> [tile??] at {or/and} --> [location??]' Please try again" << std::endl;
                 playerTurnN();
@@ -239,7 +238,6 @@ void Game::playerTurnN()
 
                 //gets the real location of the currentTile
                 currTile = players[currPlayer]->hasTile(currTile);
-                std::cout << "YOU HAVE TYPED PLACE" << std::endl;
                 char row = tilePlacement[0];
                 //conversion from ASCII to int
                 std::string colString = tilePlacement.substr(1, tilePlacement.length());

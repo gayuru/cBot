@@ -71,9 +71,9 @@ void TileBag::generateRandomTiles(){
         arr.push_back(value);
         tiles->addFront(tilesAr[value]);
     }
-    for(int a: arr) {
-        std::cout<<a<<std::endl;
-    }
+    // for(int a: arr) {
+    //     std::cout<<a<<std::endl;
+    // }
     /*
      // testing if getting random single tiles work
      cout<<getRandomSingleTile()->toString()<<endl;

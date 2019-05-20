@@ -43,8 +43,12 @@ void Player::addTile(Tile* tile){
 
 void Player::useTile(Tile* tile){
     int pos = 0;
-    while(tile != hand->get(pos) && pos != hand->size()){
+    if(hasTile(tile) != nullptr){
+    while(tile->getColour() != hand->get(pos)->getColour() || tile->getShape() != hand->get(pos)->getShape()){
         pos++;
     }
     hand->deleteAt(pos);
+    }else{
+        std::cout << "pos:" << pos << "Tile not in hand?" << std::endl;
+    }
 }

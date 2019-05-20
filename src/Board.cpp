@@ -278,7 +278,7 @@ void Board::printBoard(){
     int maxCol = vBoard[0].size();
     for(int i = 0; i < maxCol; i++) {
         if(i > 9) {
-            num += std::to_string(i);
+            num += std::to_string(i) + " ";
         }
         else {
             num += std::to_string(i) + "  ";

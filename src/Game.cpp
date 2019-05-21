@@ -205,7 +205,6 @@ void Game::playerTurnN()
             << std::endl;
             //reset tilePlaced
             tilePlaced = false;
-            return;
         }
         
         //saveGame
@@ -213,7 +212,6 @@ void Game::playerTurnN()
         {
             saveGame();
             status = GAME_SAVED;
-            return;
         }
         
         //Lists the commands

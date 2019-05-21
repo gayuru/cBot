@@ -348,12 +348,10 @@ bool Board::colorShapeCheckV(Tile *tile, Tile *box, int fixType)
             {
                 fixType = FIX_COLOR;
                 pass = true;
-                // return true;
             }
             else if (fixType == FIX_COLOR)
             {
                 pass = true;
-                // return true;
             }
         }
     }
@@ -365,12 +363,10 @@ bool Board::colorShapeCheckV(Tile *tile, Tile *box, int fixType)
             {
                 fixType = FIX_SHAPE;
                 pass = true;
-                // return true;
             }
             else if (fixType == FIX_SHAPE)
             {
                 pass = true;
-                // return true;
             }
         }
     }

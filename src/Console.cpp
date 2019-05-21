@@ -45,7 +45,7 @@ void Console::mainMenu(){
                     loaded = true;
                 }
             } catch(std::runtime_error& error) {
-                std::cerr << "There was a problem opening the file." << std::endl;
+                std::cout << "There was a problem opening the file." << std::endl;
                 std::cout << "Please try again: " << std::endl;
             }
         }        

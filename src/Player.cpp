@@ -1,37 +1,46 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(std::string name){
+Player::Player(std::string name)
+{
     this->name = name;
     score = 0;
     hand = new LinkedList();
 }
 
-Player::~Player(){
+Player::~Player()
+{
     delete hand;
 }
 
-std::string Player::getName(){
+std::string Player::getName()
+{
     return name;
 }
 
-int Player::getScore(){
+int Player::getScore()
+{
     return score;
 }
 
-LinkedList* Player::getHand(){
+LinkedList *Player::getHand()
+{
     return hand;
 }
 
-void Player::addPoints(int points){
+void Player::addPoints(int points)
+{
     score += points;
 }
 
 //checks if the player has a specific tile and returns that tile to the caller method
-Tile* Player::hasTile(Tile* tile){
-    Tile* toReturn = nullptr;
-    for(int i=0;i<hand->size();i++){
-        if(hand->get(i)->getColour() == tile->getColour() && hand->get(i)->getShape() == tile->getShape()){
+Tile *Player::hasTile(Tile *tile)
+{
+    Tile *toReturn = nullptr;
+    for (int i = 0; i < hand->size(); i++)
+    {
+        if (hand->get(i)->getColour() == tile->getColour() && hand->get(i)->getShape() == tile->getShape())
+        {
             toReturn = hand->get(i);
         }
     }
@@ -39,15 +48,19 @@ Tile* Player::hasTile(Tile* tile){
 }
 
 //used to add tiles to the players hand
-void Player::addTile(Tile* tile){
+void Player::addTile(Tile *tile)
+{
     hand->addBack(tile);
 }
 
 //when a player places a tile this will help to remove that tile from the hand
-void Player::useTile(Tile* tile){
+void Player::useTile(Tile *tile)
+{
     int pos = 0;
-    if(hasTile(tile) != nullptr){
-        while(tile->getColour() != hand->get(pos)->getColour() || tile->getShape() != hand->get(pos)->getShape()){
+    if (hasTile(tile) != nullptr)
+    {
+        while (tile->getColour() != hand->get(pos)->getColour() || tile->getShape() != hand->get(pos)->getShape())
+        {
             pos++;
         }
         hand->deleteAt(pos);

@@ -34,7 +34,7 @@ void Game::newGame()
 {
     std::string playerName;
     playerNamePlay(playerName);
-    
+
     //loops until the game is finished
     while (status == NOT_FINISHED)
     {
@@ -43,7 +43,7 @@ void Game::newGame()
         switchPlayers();
         updateGameStatus();
     }
-    
+
     //ends the game and shows the results
     endGame(status);
 }
@@ -56,7 +56,7 @@ void Game::playerNamePlay(std::string playerName)
     {
         std::cout << "• Enter a name for Player " << players.size() + 1 << " (uppercase characters only)" << std::endl;
         std::cout << "•• Input 'done' if all the players are entered.\n"
-        << std::endl;
+                  << std::endl;
         std::cout << "> ";
         std::cin >> playerName;
         std::cin.ignore();
@@ -65,30 +65,37 @@ void Game::playerNamePlay(std::string playerName)
             //3-4 player support
             if (players.size() >= 2 && players.size() <= 4)
             {
-                std::cout << "You are done" << std::endl;
+                std::cout << "\n☀ Good Luck ☀" << std::endl;
                 invalid = false;
             }
             else
             {
-                std::cout << "\n Number of players has to be between 2-4 \n" << std::endl;
+                std::cout << "\n Number of players has to be between 2-4 \n"
+                          << std::endl;
             }
         }
         //calls the helper validation method for playerName
         else if (!isPlayerNameValid(playerName))
         {
-            std::cout << "\nError : Please enter the Player names in Uppercase !\n" << std::endl;
+            std::cout << "\nError : Please enter the Player names in Uppercase !\n"
+                      << std::endl;
         }
         else
         {
             if (playerName.length() <= MAX_PLAYER_NAME_LENGTH)
             {
-                if(!std::cin.eof()) {
+                if (!std::cin.eof())
+                {
                     //checks if the playerName has already been used
-                    if(isPlayerNameDuplicated(playerName)) {
-                        std::cout << "\nError : Player Name Has Been Used. Enter A New One !\n" << std::endl;
-                    } else {
+                    if (isPlayerNameDuplicated(playerName))
+                    {
+                        std::cout << "\nError : Player Name Has Been Used. Enter A New One !\n"
+                                  << std::endl;
+                    }
+                    else
+                    {
                         std::cout << playerName + " added into the Game. \n"
-                        << std::endl;
+                                  << std::endl;
                         players.push_back(new Player(playerName));
                         tilebag->fillPlayerHand(players[players.size() - 1]->getHand());
                         if (players.size() == 4)
@@ -105,11 +112,14 @@ void Game::playerNamePlay(std::string playerName)
             }
         }
     } // end of while
-    if(!std::cin.eof()) {
+    if (!std::cin.eof())
+    {
         playerSize = players.size();
-        std::cout << "\n👉 Let's Play 👈\n"
-        << std::endl;
-    } else {
+        std::cout << "\nΔ Let's Play Δ"
+                  << std::endl;
+    }
+    else
+    {
         updateGameStatus();
     }
 }
@@ -129,12 +139,15 @@ bool Game::isPlayerNameValid(const std::string &playerName)
 }
 
 //Check previous player names to prevent duplication
-bool Game::isPlayerNameDuplicated(const std::string &playerName) 
+bool Game::isPlayerNameDuplicated(const std::string &playerName)
 {
     bool isPlayerNameDuplicated = false;
-    if(!players.empty()) {
-        for(unsigned int playerNo = 0; playerNo < players.size(); ++playerNo) {
-            if(players[playerNo] -> getName() == playerName) {
+    if (!players.empty())
+    {
+        for (unsigned int playerNo = 0; playerNo < players.size(); ++playerNo)
+        {
+            if (players[playerNo]->getName() == playerName)
+            {
                 isPlayerNameDuplicated = true;
             }
         }
@@ -159,40 +172,41 @@ void Game::playerTurnN()
     std::cout << "If you're not sure what to do at any time, enter 'help'" << std::endl;
     std::cout << "Please enter your move:" << std::endl;
     std::cout << "> ";
-    
+
     //Gets the user input
     std::string playerInput;
     getline(std::cin, playerInput);
-    if(!std::cin.eof()) {
+    if (!std::cin.eof())
+    {
         std::transform(playerInput.begin(), playerInput.end(), playerInput.begin(), ::tolower);
-        
+
         //Allocate the user input into variables for ease
         std::string mainAction = "";
         std::string tilePlacement = "";
         std::string tile = "";
-        
+
         //breaks down the userInput sentence into seperate words
         std::istringstream ss(playerInput);
         std::istream_iterator<std::string> begin(ss), end;
         std::vector<std::string> words(begin, end);
-        
+
         //equating the input onto the variables
         //case: null check when nothing is entered after mainAction string
         if (words.size() != 0)
         {
             mainAction = words[0];
-            
+
             if (words.size() > 1)
             {
                 tile = (words[1]);
-                
+
                 if (words.size() > 3)
                 {
                     tilePlacement = words[3];
                 }
             }
         }
-        
+
         //special case
         if (mainAction != "place")
         {
@@ -202,7 +216,7 @@ void Game::playerTurnN()
                 tile = "";
             }
         }
-        
+
         //when a player decides he wants to finish his turn
         if (mainAction == "done")
         {
@@ -211,31 +225,31 @@ void Game::playerTurnN()
             //fill players hand
             tilebag->fillPlayerHand(players[currPlayer]->getHand());
             std::cout << "\n•• Switching turns ••"
-            << std::endl;
+                      << std::endl;
             //reset tilePlaced
             tilePlaced = false;
-            return;
         }
-        
+
         //saveGame
         else if (mainAction == "save")
         {
             saveGame();
             status = GAME_SAVED;
-            return;
         }
-        
+
         //Lists the commands
-        else if(mainAction == "help"){
+        else if (mainAction == "help")
+        {
             std::cout << "\n- Here's a list of commands that you can use:" << std::endl;
             std::cout << "• To place a tile: Type 'place <Tile> at <Position on Board>' e.g. place G5 at A3" << std::endl;
             std::cout << "• To replace a tile you don't want: Type 'replace <Tile>' e.g. replace C3" << std::endl;
             std::cout << "• To end your turn (whether you have placed tiles or not): Type 'done'" << std::endl;
             std::cout << "• To save the game: Type 'save'" << std::endl;
-            std::cout << "• To end the game without saving: Enter an EOF character (eg. ctrl+D, ctrl+Z)\n" << std::endl;
+            std::cout << "• To end the game without saving: Enter an EOF character (eg. ctrl+D, ctrl+Z)\n"
+                      << std::endl;
             playerTurnN();
         }
-        
+
         else if (mainAction == "replace" || mainAction == "place")
         {
             //creation of the user input tile
@@ -247,34 +261,42 @@ void Game::playerTurnN()
                 //checks if the player attempts to do both actions at the same time
                 if (tilePlaced == true)
                 {
-                    std::cout << "\nYou can't do the following actions on the same turn : Place Tile and ReplaceTile\n" << std::endl;
+                    std::cout << "\nYou can't do the following actions on the same turn : Place Tile and ReplaceTile\n"
+                              << std::endl;
                     playerTurnN();
                 }
-                
+
                 //replace the tile with the front of the bag
-                if (players[currPlayer]->hasTile(currTile) != nullptr) {
+                if (players[currPlayer]->hasTile(currTile) != nullptr)
+                {
                     tilebag->replaceTile(currTile, players[currPlayer]->getHand());
                     players[currPlayer]->useTile(currTile);
                 }
-                else {
-                    if(tile.size() > 2) {
-                        std::cout << "\nError : We can't do that !!\n" << std::endl;
+                else
+                {
+                    if (tile.size() > 2)
+                    {
+                        std::cout << "\nError : We can't do that !!\n"
+                                  << std::endl;
                     }
-                    std::cout << "Error : THERE IS NO SUCH TILE IN YOUR HAND\n" << std::endl;
+                    std::cout << "Error : THERE IS NO SUCH TILE IN YOUR HAND\n"
+                              << std::endl;
                     playerTurnN();
                 }
             }
             else
             {
                 //user command error output
-                if(tile[0] == '\0' || tile[1] == '\0' || tilePlacement == "") {
-                    std::cout << "\nYou did not input anything at: 'Place ---> [tile??] at {or/and} --> [location??]' Please try again !\n" << std::endl;
+                if (tile[0] == '\0' || tile[1] == '\0' || tilePlacement == "")
+                {
+                    std::cout << "\nYou did not input anything at: 'Place ---> [tile??] at {or/and} --> [location??]' Please try again !\n"
+                              << std::endl;
                     playerTurnN();
                 }
                 //check if the player has that tile in his hand to proceed
                 else if (players[currPlayer]->hasTile(currTile) != nullptr)
                 {
-                    
+
                     //gets the real location of the currentTile
                     currTile = players[currPlayer]->hasTile(currTile);
                     char row = tilePlacement[0];
@@ -297,7 +319,7 @@ void Game::playerTurnN()
                     {
                         col = std::stoi(colString);
                     }
-                    
+
                     //checks if the move is valid
                     if (board->makeMoveV(toupper(row), col, currTile))
                     {
@@ -316,18 +338,22 @@ void Game::playerTurnN()
                 else
                 {
                     //reverts the player back to placing a tile again (since the player didn't have the tile in his hand)
-                    std::cout << "\nPlayer doesn't have the entered piece in the hand. Please try again!\n" << std::endl;
+                    std::cout << "\nPlayer doesn't have the entered piece in the hand. Please try again!\n"
+                              << std::endl;
                     playerTurnN();
                 }
             }
         }
-        
+
         else
         {
-            std::cout << "\n----------------Error: UNKNOWN COMMAND--------------\n" << std::endl;
+            std::cout << "\n----------------Error: UNKNOWN COMMAND--------------\n"
+                      << std::endl;
             playerTurnN();
         }
-    } else {
+    }
+    else
+    {
         updateGameStatus();
     }
 }
@@ -353,7 +379,8 @@ void Game::switchPlayers()
 //checks for the gameProgress and updates the status
 void Game::updateGameStatus()
 {
-    if(std::cin.eof()) {
+    if (std::cin.eof())
+    {
         status = EOF_FINISH;
     }
     else if (status == GAME_SAVED)
@@ -376,22 +403,23 @@ void Game::endGame(Status status)
     if (status == GAME_SAVED)
     {
         std::cout << "Game Succesfully Saved!" << std::endl;
-        std::cout << "Goodbye 👋🏼👋🏼" << std::endl;
+        std::cout << "Goodbye ❤" << std::endl;
     }
     else if (status == NOT_FINISHED)
     {
         std::cout << "Game is not finished yet!" << std::endl;
     }
-    else if (status == EOF_FINISH) {
-        std::cout << "\nGoodbye 👋🏼👋🏼" << std::endl;
+    else if (status == EOF_FINISH)
+    {
+        std::cout << "\nGoodbye ❤❤" << std::endl;
     }
     else if (status == GAME_OVER)
     {
-        std::cout << "‼️ Game Over ‼️\n"
-        << std::endl;
+        std::cout << "☯ Game Over ☯\n"
+                  << std::endl;
         displayPlayersScore();
-        std::cout << getWinningPlayer()->getName() + " has won 🏆" << std::endl;
-        std::cout << "\nGoodbye 👋🏼👋🏼" << std::endl;
+        std::cout << getWinningPlayer()->getName() + " has won ❤❤❤" << std::endl;
+        std::cout << "\nGoodbye ❤❤" << std::endl;
     }
 }
 
@@ -429,16 +457,20 @@ bool Game::playersHandEmpty()
 void Game::playerTurnPrintDetails(Player *player)
 {
     std::cout << std::endl;
-    std::cout << player->getName() << ", it's your turn\n"<< std::endl;
+    std::cout << player->getName() << ", it's your turn\n"
+              << std::endl;
     displayPlayersScore();
     std::cout << std::endl;
     board->printBoard();
     std::cout << std::endl;
-   
+
     //GameOver move
-    if(player->getHand()->size() == 0){
-        std::cout<< "Player hand is Empty | Finish the game by typing 'done'"<<std::endl;
-    }else{
+    if (player->getHand()->size() == 0)
+    {
+        std::cout << "Player hand is Empty | Finish the game by typing 'done'" << std::endl;
+    }
+    else
+    {
         std::cout << "Your hand is " << std::endl;
         player->getHand()->printLinkedList();
     }
@@ -460,7 +492,7 @@ void Game::displayPlayersScore()
 void Game::loadGame(std::string filename)
 {
     filename += ".save";
-    
+
     //Open the given file name for reading
     std::ifstream inFile;
     inFile.open(filename);
@@ -468,7 +500,7 @@ void Game::loadGame(std::string filename)
     {
         throw std::runtime_error("Unable to open file");
     }
-    
+
     //Read the number of players
     std::string line;
     getline(inFile, line);
@@ -477,7 +509,7 @@ void Game::loadGame(std::string filename)
         throw std::runtime_error("Save file formatted incorrectly");
     }
     playerSize = line[0] - '0';
-    
+
     //Read the players' information and store it in the player array
     int handTiles = 0;
     for (int p = 0; p != playerSize; p++)
@@ -504,7 +536,7 @@ void Game::loadGame(std::string filename)
         }
         handTiles += players[p]->getHand()->size();
     }
-    
+
     //reads who's turn it is
     getline(inFile, line);
     if (line[0] < '0' || line[0] > playerSize + '0')
@@ -512,11 +544,12 @@ void Game::loadGame(std::string filename)
         throw std::runtime_error("Incorrect file format");
     }
     currPlayer = line[0] - '0';
-    
+
     //reading the coordinates of the tiles placed this turn
     getline(inFile, line);
     std::vector<Coordinate *> coordOrder;
-    if(line != "null"){
+    if (line != "null")
+    {
         for (unsigned int i = 0; i < line.size(); i += 5)
         {
             int x = line[i + 1] - '0';
@@ -524,7 +557,7 @@ void Game::loadGame(std::string filename)
             coordOrder.push_back(new Coordinate(x, y));
         }
     }
-    
+
     //reads the board
     board = new Board();
     int tilesOnBoard = 0;
@@ -561,7 +594,7 @@ void Game::loadGame(std::string filename)
                 ++rows;
                 getline(inFile, line);
             }
-            
+
             //resizing the board and placing the tiles in their correct positions
             board->loadBoard(rows, columns, coords, tiles, coordOrder);
         }
@@ -576,11 +609,12 @@ void Game::loadGame(std::string filename)
         //incorrect file format
         throw std::runtime_error("Unable to open file");
     }
-    
+
     //Reading the tilebag
     getline(inFile, line);
     LinkedList *tiles = new LinkedList();
-    if(line != "null"){
+    if (line != "null")
+    {
         char colour;
         int shape;
         inFile >> next;  
@@ -603,11 +637,12 @@ void Game::saveGame()
     std::cout << "Enter the name of the file to save:" << std::endl;
     std::cout << "> ";
     std::cin >> filename;
-    if(!std::cin.eof()) {
+    if (!std::cin.eof())
+    {
         filename += ".save";
         std::ofstream outFile;
         outFile.open(filename);
-        
+
         //save player info
         outFile << playerSize << std::endl;
         for (int p = 0; p != playerSize; p++)
@@ -618,18 +653,22 @@ void Game::saveGame()
         }
         //save whos turn it is
         outFile << currPlayer << std::endl;
-        
+
         //save the coordinates of placed tiles, in order
         std::vector<Coordinate *> coordPlaced = board->getCoordPlaced();
-        if(coordPlaced.size() == 0){
+        if (coordPlaced.size() == 0)
+        {
             outFile << "null" << std::endl;
-        } else{
-            for (unsigned int i = 0; i != coordPlaced.size(); ++i){
+        }
+        else
+        {
+            for (unsigned int i = 0; i != coordPlaced.size(); ++i)
+            {
                 outFile << '(' << coordPlaced[i]->getRow() << ',' << coordPlaced[i]->getCol() << ')';
             }
             outFile << std::endl;
         }
-        
+
         //save board
         std::string row = board->getRow(0);
         int cols = board->getHSize();
@@ -654,21 +693,26 @@ void Game::saveGame()
             outFile << "---";
         }
         outFile << std::endl;
-        
+
         for (int i = 0; i < rows; i++)
         {
             char letter = 'A' + i;
             outFile << letter;
             outFile << board->getRow(i) << std::endl;
         }
-        
+
         //save tilebag
-        if(!(tilebag->isEmpty())){
+        if (!(tilebag->isEmpty()))
+        {
             outFile << " " << tilebag->toString() << std::endl;
-        }else{
+        }
+        else
+        {
             outFile << "null" << std::endl;
         }
-    } else {
+    }
+    else
+    {
         updateGameStatus();
     }
 }
@@ -683,7 +727,7 @@ void Game::continueLoop()
         switchPlayers();
         updateGameStatus();
     }
-    
+
     //ends the game and shows the results
     endGame(status);
 }

@@ -11,7 +11,7 @@ Board::Board()
 }
 
 Board::~Board()
-{   
+{
     refresh();
     clearBoard();
 }
@@ -21,8 +21,10 @@ void Board::clearBoard()
     int maxRow = getVSize();
     int maxCol = getHSize();
 
-    for(int row = 0; row < maxRow; row++) {
-        for(int col = 0; col < maxCol; col++) {
+    for (int row = 0; row < maxRow; row++)
+    {
+        for (int col = 0; col < maxCol; col++)
+        {
             delete vBoard[row][col];
         }
     }
@@ -58,7 +60,7 @@ bool Board::makeMoveV(char cRow, int col, Tile *tile)
                 dir = "VERTICALLY";
                 loc = " AT COL : " + std::to_string(coordPlaced[0]->getCol());
             }
-            std::cout << "YOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES "<< std::endl;
+            std::cout << "\nYOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES \n" << std::endl;
             std::cout << dir << loc << std::endl;
             std::cout << "BASED ON YOUR PREVIOUS TILE PLACEMENT" << std::endl;
         }
@@ -120,7 +122,8 @@ bool Board::directionCheck(int row, int col)
 void Board::refresh()
 {
     direction = 0;
-    for(Coordinate* coord: coordPlaced) {
+    for (Coordinate *coord : coordPlaced)
+    {
         delete coord;
     }
     coordPlaced.clear();
@@ -319,7 +322,7 @@ void Board::printBoard()
             }
             else
             {
-                Tile* currTile = vBoard[row][col];
+                Tile *currTile = vBoard[row][col];
                 std::cout << currTile->toString();
             }
             if (col == maxCol - 1)
@@ -348,12 +351,10 @@ bool Board::colorShapeCheckV(Tile *tile, Tile *box, int fixType)
             {
                 fixType = FIX_COLOR;
                 pass = true;
-                // return true;
             }
             else if (fixType == FIX_COLOR)
             {
                 pass = true;
-                // return true;
             }
         }
     }
@@ -365,12 +366,10 @@ bool Board::colorShapeCheckV(Tile *tile, Tile *box, int fixType)
             {
                 fixType = FIX_SHAPE;
                 pass = true;
-                // return true;
             }
             else if (fixType == FIX_SHAPE)
             {
                 pass = true;
-                // return true;
             }
         }
     }
@@ -394,7 +393,7 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile *tile, boo
                     if (vBoard[row][i]->getColour() == vBoard[row][j]->getColour() && vBoard[row][i]->getShape() == vBoard[row][j]->getShape())
                     {
                         pass = false;
-                        std::cout<<"----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED ROW----"<<std::endl;
+                        std::cout << "\n----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED ROW----\n" << std::endl;
                     }
                 }
             }
@@ -411,7 +410,7 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile *tile, boo
                     if (vBoard[i][col]->getColour() == vBoard[j][col]->getColour() && vBoard[i][col]->getShape() == vBoard[j][col]->getShape())
                     {
                         pass = false;
-                        std::cout<<"----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED COLUMN----"<<std::endl;
+                        std::cout << "\n----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED COLUMN----\n" << std::endl;
                     }
                 }
             }
@@ -495,7 +494,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                 {
                                     if (!colorShapeCheckV(tile, thisBox, fixType))
                                     {
-                                        std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES"<<std::endl;
+                                        std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES\n" << std::endl;
                                         boxPass = false;
                                     }
                                 }
@@ -525,7 +524,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES"<<std::endl;
+                                            std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES\n" << std::endl;
                                             boxPass = false;
                                         }
                                     }
@@ -569,7 +568,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES"<<std::endl;
+                                            std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES\n" << std::endl;
                                             boxPass = false;
                                         }
                                     }
@@ -603,7 +602,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES"<<std::endl;
+                                            std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES\n" << std::endl;
                                             boxPass = false;
                                         }
                                     }
@@ -626,24 +625,26 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                     }
                     if (boxPass)
                     {
-                        //once every validation passes, this method will return true 
+                        //once every validation passes, this method will return true
                         pass = true;
                         //checks for quirkle
                         if (quirkle)
                         {
-                            std::cout << "--------------QUIRKLE!!!!!!---------------" << std::endl;
+                            std::cout << "\nツ ---- QWIRKLE QWIRKLE  ---- ツ\n" << std::endl;
                         }
                     }
                 }
             }
         }
         //Displays Errors
-        else {
-            std::cout<<"ERROR: THIS TILE SPOT HAS BEEN TAKEN"<<std::endl;
+        else
+        {
+            std::cout << "\nERROR: THIS TILE SPOT HAS BEEN TAKEN\n" << std::endl;
         }
     }
-    else {
-        std::cout<<"ERROR: YOU CANNOT PLACE A TILE OUT OF THE BOUNDS OF THE BOARD"<<std::endl;
+    else
+    {
+        std::cout << "\nERROR: YOU CANNOT PLACE A TILE OUT OF THE BOUNDS OF THE BOARD\n" << std::endl;
     }
     return pass;
 }
@@ -740,7 +741,7 @@ void Board::resizeBoard(int row, int col)
     }
 }
 
-//For saving game, gets the row of the board 
+//For saving game, gets the row of the board
 std::string Board::getRow(int row)
 {
     std::string outString = "";
@@ -754,11 +755,10 @@ std::string Board::getRow(int row)
         else
         {
             Tile *currTile = vBoard[row][column];
-            // outString += " ";
             outString += currTile->toString();
         }
         if (column == getHSize() - 1)
-        { //For last column
+        {
             outString += '|';
         }
     }

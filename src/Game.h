@@ -42,7 +42,7 @@ private:
     void switchPlayers();
     void multipleTilePlacement();
     void updateGameStatus();
-    void endGame(Status status);
+    void endGame(Status &status);
     bool playersHandEmpty();
     
 public:

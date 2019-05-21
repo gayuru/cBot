@@ -385,12 +385,13 @@ void Game::updateGameStatus()
 }
 
 //Stats for ending the game
-void Game::endGame(Status status)
+void Game::endGame(Status &status)
 {
     if (status == GAME_SAVED)
     {
         std::cout << "Game Succesfully Saved!" << std::endl;
-        std::cout << "Goodbye ❤" << std::endl;
+        std::cin.ignore();
+        status = NOT_FINISHED;
     }
     else if (status == NOT_FINISHED)
     {
@@ -402,8 +403,7 @@ void Game::endGame(Status status)
     }
     else if (status == GAME_OVER)
     {
-        std::cout << "☯ Game Over ☯\n"
-                  << std::endl;
+        std::cout << "☯ Game Over ☯\n"<< std::endl;
         displayPlayersScore();
         std::cout << getWinningPlayer()->getName() + " has won ❤❤❤" << std::endl;
         std::cout << "\nGoodbye ❤❤" << std::endl;
@@ -713,8 +713,9 @@ void Game::continueLoop()
         playerTurnN();
         switchPlayers();
         updateGameStatus();
+        //ends the game and shows the results
+        endGame(status);
     }
 
-    //ends the game and shows the results
-    endGame(status);
+ 
 }

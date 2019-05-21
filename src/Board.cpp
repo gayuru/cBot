@@ -4,22 +4,28 @@
 
 Board::Board()
 {
-
-    //      TileBag* bag = new TileBag();
-    //       Tile* tile = bag->getRandomSingleTile();
-
-    //initialisation of the board
-    //    for(int row = 0; row != MAX_BOARD_SIZE_ROW_COL; ++row){
-    //        for(int column = 0; column != MAX_BOARD_SIZE_ROW_COL; ++column){
-    //        board[row][column] = nullptr;
-    //        }
-    //    }
     std::vector<Tile *> temp;
     temp.push_back(nullptr);
     vBoard.push_back(temp);
-    // counter = 0;
     direction = 0;
-    // turnPoints =0;
+}
+
+Board::~Board()
+{   
+    refresh();
+    clearBoard();
+}
+
+void Board::clearBoard()
+{
+    int maxRow = getVSize();
+    int maxCol = getHSize();
+
+    for(int row = 0; row < maxRow; row++) {
+        for(int col = 0; col < maxCol; col++) {
+            delete vBoard[row][col];
+        }
+    }
 }
 
 //when a player makes a move it checks for validation
@@ -42,16 +48,19 @@ bool Board::makeMoveV(char cRow, int col, Tile *tile)
             if (direction == HORIZONTAL)
             {
                 dir = "HORIZONTALLY";
-                loc = "AT ROW [" + cRow;
-                loc += "]";
+                loc = " AT ROW : ";
+                std::string row = "";
+                row += 'A' + coordPlaced[0]->getRow();
+                loc += row;
             }
             else
             {
                 dir = "VERTICALLY";
-                loc = "AT COL [" + col;
-                loc += "]";
+                loc = " AT COL : " + std::to_string(coordPlaced[0]->getCol());
             }
-            std::cout << "YOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES " << dir <<" AT COL" << loc << " BASED ON YOUR PREVIOUS TILE PLACEMENT" << std::endl;
+            std::cout << "YOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES "<< std::endl;
+            std::cout << dir << loc << std::endl;
+            std::cout << "BASED ON YOUR PREVIOUS TILE PLACEMENT" << std::endl;
         }
     }
     if (makeMove)
@@ -67,14 +76,11 @@ bool Board::makeMoveV(char cRow, int col, Tile *tile)
             resizeBoard(row, col);
             makeMove = true;
         }
-        //else makeMove becomes false
         else
         {
             makeMove = false;
         }
     }
-
-    // else return false;
     return makeMove;
 }
 
@@ -98,7 +104,6 @@ bool Board::directionCheck(int row, int col)
         if (coordPlaced[0]->getRow() == row)
         {
             pass = true;
-            // return true;
         }
     }
     else
@@ -106,20 +111,22 @@ bool Board::directionCheck(int row, int col)
         if (coordPlaced[0]->getCol() == col)
         {
             pass = true;
-            // return true;
         }
     }
     return pass;
 }
 
-//
+//refreshes the board
 void Board::refresh()
 {
-    // counter = 0;
     direction = 0;
+    for(Coordinate* coord: coordPlaced) {
+        delete coord;
+    }
     coordPlaced.clear();
 }
-//just call this once u are done with ur turn that is all!!
+
+//Calculates the points earned after the player finishes their turn
 int Board::endPoints()
 {
     int total = 0;
@@ -142,7 +149,7 @@ int Board::endPoints()
     else
     {
         //special case: when you place a tile at the very first turn and end
-        if (vBoard.size() == 3 && vBoard[0].size() == 3 && coordPlaced.size() == 1)
+        if (getVSize() == 3 && getHSize() == 3 && coordPlaced.size() == 1)
         {
             total = 1;
         }
@@ -157,38 +164,6 @@ int Board::endPoints()
     refresh();
     return total;
 }
-
-// //needs to be implemented
-// int Board::calcPoints(const int row, const int col) {
-//     int sum=0;
-
-//     int pointsVertical=0;
-//     int pointsHorizontal=0;
-
-//     //first tile point calculation
-//     // if(counterPoints == 0){
-//     //     sum += 1;
-//     // }else{
-//     pointsVertical = getVerticalRun(row, col);
-//     pointsHorizontal = getHorizontalRun(row, col);
-
-//     if(pointsVertical == 1 || pointsHorizontal == 1){
-//         sum = pointsVertical + pointsHorizontal - CURRENT_TILE;
-//     } else {
-//         sum = pointsVertical + pointsHorizontal;
-//     }
-
-//     //update points for a qwirkle
-//     if(pointsVertical == 6 || pointsHorizontal == 6){
-//         sum += 6;
-//     }
-//     // }
-//     refresh();
-//     return sum;
-//     //player.addPoints(sum);
-//     //counterPoints++;
-//     //resets
-// }
 
 int Board::getVerticalRun(const int row, const int col)
 {
@@ -309,50 +284,13 @@ int Board::getHorizontalRun(const int row, const int col)
     return points;
 }
 
-// int Board::getTurnPoints(){
-//     return turnPoints;
-// }
-
-// void Board::refreshTurn(){
-//     turnPoints = 0;
-// }
-
 void Board::printBoard()
 {
-
-    //    char labels[MAX_BOARD_SIZE_ROW_COL] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-    //
-    //    std::cout<<"   0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25"<<std::endl;
-    //    std::cout<<"  ------------------------------------------------------------------------------------------------"<<std::endl;
-    //
-    //    //char cha = 'A';
-    //    for (int row = 0; row<MAX_BOARD_SIZE_ROW_COL; ++row) {
-    //        std::cout << labels[row]<<" "; // Print y-axis labels
-    //        //std::cout<< cha++ << " ";
-    //        for (int column = 0; column < MAX_BOARD_SIZE_ROW_COL; ++column) {
-    //            std::cout << '|';
-    //            if(board[row][column] == nullptr){
-    //                if(column >= 10) {
-    //                    std::cout << "   ";
-    //                } else {
-    //                    std::cout << "  ";
-    //                }
-    //            }else{
-    //                currTile = *board[row][column];
-    //                std::cout << " "<<currTile->toString();
-    //            }
-    //            if(column == MAX_BOARD_SIZE_ROW_COL-1) { //For last column
-    //                std::cout << '|';
-    //            }
-    //        }
-    //        std::cout << std::endl;
-    //    }
-
     char cha = 'A';
-    int maxRow = vBoard.size();
+    int maxRow = getVSize();
+    int maxCol = getHSize();
     std::string line = "  -";
     std::string num = "   ";
-    int maxCol = vBoard[0].size();
     for (int i = 0; i < maxCol; i++)
     {
         if (i > 9)
@@ -371,7 +309,6 @@ void Board::printBoard()
     for (int row = 0; row < maxRow; row++)
     {
         std::string rowString;
-        int maxCol = vBoard[row].size();
         std::cout << cha++ << " ";
         for (int col = 0; col < maxCol; col++)
         {
@@ -382,7 +319,7 @@ void Board::printBoard()
             }
             else
             {
-                currTile = vBoard[row][col];
+                Tile* currTile = vBoard[row][col];
                 std::cout << currTile->toString();
             }
             if (col == maxCol - 1)
@@ -456,7 +393,6 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile *tile, boo
                 {
                     if (vBoard[row][i]->getColour() == vBoard[row][j]->getColour() && vBoard[row][i]->getShape() == vBoard[row][j]->getShape())
                     {
-                        // vBoard[row][col] = nullptr;
                         pass = false;
                         std::cout<<"----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED ROW----"<<std::endl;
                     }
@@ -474,7 +410,6 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile *tile, boo
                 {
                     if (vBoard[i][col]->getColour() == vBoard[j][col]->getColour() && vBoard[i][col]->getShape() == vBoard[j][col]->getShape())
                     {
-                        // vBoard[row][col] = nullptr;
                         pass = false;
                         std::cout<<"----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED COLUMN----"<<std::endl;
                     }
@@ -486,16 +421,16 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile *tile, boo
     return pass;
 }
 
+//checks if the point is in the boundaries of the board
 Tile *Board::inBoundCheck(int row, int col)
 {
-    int maxRowSize = vBoard.size() - 1;
-    int maxColSize = vBoard[0].size() - 1;
+    int maxRowSize = getVSize() - 1;
+    int maxColSize = getHSize() - 1;
     Tile *tile = nullptr;
     //if within board
     if (row <= maxRowSize && row >= 0 && col <= maxColSize && col >= 0)
     {
         tile = vBoard[row][col];
-        // return vBoard[row][col];
     }
     return tile;
 }
@@ -506,8 +441,8 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
     bool pass = false;
     bool quirkle = false;
     //check if tile is within the range of the board
-    int maxRowSize = vBoard.size();
-    int maxColSize = vBoard[0].size();
+    int maxRowSize = getVSize();
+    int maxColSize = getHSize();
     //if the row and col is within the range
     if (row <= maxRowSize && row >= 0 && col <= maxColSize && col >= 0)
     {
@@ -535,7 +470,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                 }
                 else
                 {
-                    int fixType = 2;
+                    int fixType = NON_FIX;
                     int minRange = col;
                     int maxRange = col;
                     bool boxPass = true;
@@ -560,7 +495,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                 {
                                     if (!colorShapeCheckV(tile, thisBox, fixType))
                                     {
-                                        std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL"<<std::endl;
+                                        std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES"<<std::endl;
                                         boxPass = false;
                                     }
                                 }
@@ -590,13 +525,14 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL"<<std::endl;
+                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES"<<std::endl;
                                             boxPass = false;
                                         }
                                     }
                                 }
                             }
                         }
+                        //checks for any duplicates from the row
                         if (boxPass)
                         {
                             if (!noDuplicateCheck(minRange, maxRange, row, col, tile, true))
@@ -633,7 +569,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL"<<std::endl;
+                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES"<<std::endl;
                                             boxPass = false;
                                         }
                                     }
@@ -643,7 +579,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                     }
                     if (boxPass)
                     {
-                        fixType = 2;
+                        fixType = NON_FIX;
                         minRange = row;
                         maxRange = row;
                         //checks all the connections on down
@@ -667,13 +603,14 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL"<<std::endl;
+                                            std::cout<<"ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES"<<std::endl;
                                             boxPass = false;
                                         }
                                     }
                                 }
                             }
                         }
+                        //checks if any duplicates of tiles in the column
                         if (boxPass)
                         {
                             if (!noDuplicateCheck(minRange, maxRange, row, col, tile, false))
@@ -682,24 +619,25 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                             }
                             else
                             {
-                                if (maxRange - minRange + 1 == 6)
+                                if (maxRange - minRange + 1 == QUIRKLE)
                                     quirkle = true;
                             }
                         }
                     }
                     if (boxPass)
                     {
+                        //once every validation passes, this method will return true 
                         pass = true;
+                        //checks for quirkle
                         if (quirkle)
                         {
                             std::cout << "--------------QUIRKLE!!!!!!---------------" << std::endl;
                         }
                     }
-
-                    //
                 }
             }
         }
+        //Displays Errors
         else {
             std::cout<<"ERROR: THIS TILE SPOT HAS BEEN TAKEN"<<std::endl;
         }
@@ -802,6 +740,7 @@ void Board::resizeBoard(int row, int col)
     }
 }
 
+//For saving game, gets the row of the board 
 std::string Board::getRow(int row)
 {
     std::string outString = "";
@@ -826,22 +765,25 @@ std::string Board::getRow(int row)
     return outString;
 }
 
+//Gets the vertical size of board
 int Board::getVSize()
 {
     return vBoard.size();
 }
 
+//Gets the horizontal size of board
 int Board::getHSize()
 {
     return vBoard[0].size();
 }
 
+//Gets the coordinates that is currently placed by the player on the board
 std::vector<Coordinate *> Board::getCoordPlaced()
 {
     return coordPlaced;
 }
 
-//
+//Loads the board
 void Board::loadBoard(int rows, int cols, std::vector<Coordinate *> coords, std::vector<Tile *> tiles, std::vector<Coordinate *> coordOrder)
 {
     //add columns to first row
@@ -872,84 +814,3 @@ void Board::loadBoard(int rows, int cols, std::vector<Coordinate *> coords, std:
     }
     coordPlaced = coordOrder;
 }
-
-//bool Board::checkValidity(int column,int row,Tile* tile){
-//
-//    bool result=false;
-//
-//    Tile* currTileRight;
-//    Tile* currTileLeft  = nullptr;
-//    Tile* currTileUp  = nullptr;
-//    Tile* currTileDown  = nullptr;
-//
-//    Colour* tmpC = new Colour('R');
-//    Shape* tmpS = new Shape(2);
-//    Tile* tmpTile = new Tile(*tmpC,*tmpS);
-//
-//    board[row][column+1] = &tmpTile;
-//
-//    if(board[row][column+1] != nullptr){
-//        currTileRight = *board[row][column+1];
-//    }
-//    if(board[row][column-1] != nullptr){
-//        currTileRight = *board[row][column-1];
-//    }
-//    if(board[row-1][column] != nullptr){
-//        currTileRight = *board[row-1][column];
-//    }
-//    if(board[row+2][column] != nullptr){
-//        currTileRight = *board[row+2][column];
-//    }
-//
-//
-//
-//    if(currTileRight->getColour() == tile->getColour() || currTileRight->getShape() == tile->getShape()){
-//        result = true;
-//    }else if(currTileLeft->getColour() == tile->getColour() || currTileLeft->getShape() == tile->getShape()){
-//        result = true;
-//
-//    }else if(currTileUp->getColour() == tile->getColour() || currTileUp->getShape() == tile->getShape( )){
-//        result = true;
-//    } else if(currTileDown->getColour() == tile->getColour() || currTileDown->getShape() == tile->getShape()){
-//        result = true;
-//    }
-//
-//    return result;
-//
-//}
-
-//
-//bool Board::makeMove(int column,char cRow,Tile* tile,Player &player){
-//    //conversion of char to a place in the alphabet
-//    int row = cRow - 'A';
-//    if(board[row][column] ==  nullptr){
-//
-//        board[row][column] = &tile;
-//
-//
-//        //all the checks go down here
-//        /* 1. check if the tile is next to a tiles in every direction
-//           2. check if either the color or the shape matches
-//           3.check if the same tile exists in either directions (horizontal and vertical)
-//
-//         so if these pass;
-//
-//         update players points accordingly
-//
-//         */
-//
-//        if(checkValidity(column, row,tile)){
-//            std::cout<<"It's Valid"<<std::endl;
-//            return true;
-//
-//        }else{
-//            board[row][column] =  nullptr;
-//            return false;
-//        }
-//
-//        return true;
-//
-//    }
-//
-//    return false;
-//}

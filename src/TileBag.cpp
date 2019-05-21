@@ -6,7 +6,7 @@
 //  Copyright © 2019 RMIT. All rights reserved.
 //
 
-#include "TileBag.hpp"
+#include "TileBag.h"
 
 TileBag::TileBag() {
     generateRandomTiles();
@@ -28,6 +28,7 @@ void TileBag::generateRandomTiles(){
     Tile* tilesAr[MAX_NUM_TILES];
     int counter = 0;
     
+    //generate the tilebag with the default shapes and colours
     for(int i=1;i<=MAX_NUM_COLOUR_SHAPE;++i){
         for(int j=0;j<MAX_NUM_COLOUR_SHAPE;++j){
             Colour tempColour = colours[j];
@@ -38,22 +39,24 @@ void TileBag::generateRandomTiles(){
             tilesAr[counter++] = tileDuplicate;
         }
     }
-
+    
     
     std::vector<int> arr;
     
     int min = 0;
     int max = MAX_NUM_TILES-1;
     
+    //get the seed as the current time as it will be unique all the time
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine engine(seed);
     std::uniform_int_distribution<int> uniform_dist(min, max);
     
     int value = -1;
     
+    //shuffle the tiles using the randomly generated numbers and add to the tileBag
     for (int i = 0; i != MAX_NUM_TILES; ++i) {
         bool is_in = false;
-        value = uniform_dist(engine);    
+        value = uniform_dist(engine);
         for(int has: arr) {
             if (has == value) {
                 is_in = true;
@@ -71,29 +74,6 @@ void TileBag::generateRandomTiles(){
         arr.push_back(value);
         tiles->addFront(tilesAr[value]);
     }
-    // for(int a: arr) {
-    //     std::cout<<a<<std::endl;
-    // }
-    /*
-     // testing if getting random single tiles work
-     cout<<getRandomSingleTile()->toString()<<endl;
-     
-     //testing the fillPlayerHand
-     LinkedList* thisHand = new LinkedList();
-     fillPlayerHand(thisHand);
-     for(int i = 0; i < thisHand->size(); i++) {
-     cout<<thisHand->get(i)->toString()<<endl;
-     }
-     
-     //testing if toString works
-     cout<<toString()<<endl;
-     
-     //testing if bag generator works
-     for(int i = 0; i < tiles->size(); ++i) {
-     cout << i << "---------" << tiles->get(i)->toString()<<endl;
-     }
-     */
-
 }
 
 //gets the tile at the front of the bag and deletes the tile from the bag once "drawn";
@@ -120,7 +100,7 @@ bool TileBag::fillPlayerHand(LinkedList* hand) {
     if(!isEmpty()) {
         for(int i = hand->size(); i < MAX_NUM_COLOUR_SHAPE ;++i) {
             if(!isEmpty()) {
-            hand->addBack(getRandomSingleTile());
+                hand->addBack(getRandomSingleTile());
             }
             else pass = false;
         }

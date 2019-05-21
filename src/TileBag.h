@@ -1,13 +1,13 @@
 //
-//  TileBag.hpp
+//  TileBag.h
 //  cBot Assignment 2
 //
 //  Created by Gayuru Gunawardana on 29/4/19.
 //  Copyright © 2019 RMIT. All rights reserved.
 //
 
-#ifndef TileBag_hpp
-#define TileBag_hpp
+#ifndef TileBag_h
+#define TileBag_h
 
 #include <stdio.h>
 #include "LinkedList.h"
@@ -15,15 +15,10 @@
 #include <string>
 #include <random>
 #include <algorithm>
-#include <chrono>       // std::chrono::system_clock
+#include <chrono>
 #include "Tile.h"
 
 #include <set>
-
-// using std::cout;
-// using std::endl;
-// using std::find;
-// using std::set;
 
 #define MAX_NUM_COLOUR_SHAPE    6
 #define MAX_NUM_TILES    72
@@ -41,7 +36,6 @@ public:
     Tile* getRandomSingleTile();
     bool isEmpty();
     void addTile(Tile* tile);
-    // bool exists(int arr,int val);
 private:
     LinkedList* tiles;
 };

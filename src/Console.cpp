@@ -6,24 +6,18 @@
 //  Copyright © 2019 RMIT. All rights reserved.
 //
 
-#include "Console.hpp"
+#include "Console.h"
 #include <iostream>
-#include "TileBag.hpp"
-#include "Game.hpp"
+#include "TileBag.h"
+#include "Game.h"
 
+//runs the qwirkle game
 void Console::runGame(){
     std::cout<< "\nWelcome to Qwirkle!\n-------------------\n" << std::endl;
     mainMenu();
-    //testing();
 }
 
-void Console::testing(){
-    TileBag* bag = new TileBag();
-    LinkedList* lol = new LinkedList();
-    bag->fillPlayerHand(lol);
-    lol->printLinkedList();   
-}
-
+//shows the user options in the main menu
 void Console::mainMenu(){
     
     int i;
@@ -32,8 +26,8 @@ void Console::mainMenu(){
     std::cout<< "1. New Game\n2. Load Game\n3. Show Student Information\n4. Quit \n" << std::endl;
     std::cout<<"> ";
     std::cin>>i;
-
-    if (i == 1) {    
+    
+    if (i == 1) {
         std::cout<< "\nStarting a New Game\n" << std::endl;
         //call the new game method on the view
         Game* qwirkle = new Game();
@@ -57,25 +51,25 @@ void Console::mainMenu(){
                 std::cout << "Please try again: " << std::endl;
             }
         }
-
+        
         if(!std::cin.eof()) {
             std::cout << "Game successfully loaded" << std::endl;
             qwirkle->continueLoop();
-        } else {
-            std::cout<<"Goodbye"<<std::endl;
-        }    
+        }else {
+            std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
+        }
     }else if (i==3){
         showStudentInfo();
     } else if(i==4) {
         std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
     } else if(std::cin.eof()) {
-        std::cout<<"Goodbye"<<std::endl;
+        std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
     } else {
         if(std::cin.fail()) {
-            std::cin.clear(); 
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-        std::cout<<"Wrong input please try again"<<std::endl;
+        std::cout<<"\nWrong input Please try again !\n"<<std::endl;
         mainMenu();
     }
     
@@ -100,8 +94,8 @@ void Console::showStudentInfo(){
     std::cout<<"Student ID: s3654762"<<std::endl;
     std::cout<<"Email: s3654762@student.rmit.edu.au\n"<<std::endl;
     
-    std::cout<<"----------------------------------"<<std::endl;
- 
+    std::cout<<"----------------------------------\n"<<std::endl;
+    
     mainMenu();
     
 }

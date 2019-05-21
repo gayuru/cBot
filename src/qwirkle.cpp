@@ -1,16 +1,14 @@
 
 #include "LinkedList.h"
-#include "Console.hpp"
+#include "Console.h"
 #include <iostream>
 
 #define EXIT_SUCCESS    0
 
 int main(void) {
-   LinkedList* list = new LinkedList();
-   delete list;
-
+    //runs the game
     Console* game = new Console();
     game->runGame();
 
-   return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

@@ -1,17 +1,17 @@
 //
-//  Game.hpp
+//  Game.h
 //  cBot Assignment 2
 //
 //  Created by Gayuru Gunawardana on 3/5/19.
 //  Copyright © 2019 RMIT. All rights reserved.
 //
 
-#ifndef Game_hpp
-#define Game_hpp
+#ifndef Game_h
+#define Game_h
 
 #define MAX_PLAYER_NAME_LENGTH    150
 #include "Board.h"
-#include "TileBag.hpp"
+#include "TileBag.h"
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>

@@ -141,6 +141,7 @@ std::string Game::toLowerPlayerName(const std::string &playerName)
 
 void Game::playerTurnN()
 {
+    std::cout << "If you're not sure what to do at any time, enter 'help'" << std::endl;
     std::cout << "Please enter your move:" << std::endl;
 
     //Gets the user input
@@ -207,6 +208,18 @@ void Game::playerTurnN()
             status = "GAME_SAVED";
             return;
         }
+
+        //Lists the commands
+        else if(mainAction == "help"){
+            std::cout << "Here's a list of commands that you can use:" << std::endl;
+            std::cout << "To place a tile: Type 'place <Tile> at <Position on Board>'" << std::endl;
+            std::cout << "To replace a tile you don't want: Type 'replace <Tile>'" << std::endl;
+            std::cout << "To end your turn (whether you have placed tiles or not): Type 'done'" << std::endl;
+            std::cout << "To save the game: Type 'save'" << std::endl;
+            std::cout << "To end the game without saving: Enter an EOF character (eg. ctrl+D, ctrl+Z)" << std::endl;
+            playerTurnN();
+        }
+
         else if (mainAction == "replace" || mainAction == "place")
         {
             //creation of the user input tile

@@ -427,6 +427,10 @@ void Game::playerTurnPrintDetails(Player *player)
     board->printBoard();
     std::cout << std::endl;
     std::cout << "Your hand is " << std::endl;
+    //GameOver move
+    if(player->getHand()->size() == 0){
+        std::cout<< "Player hand is Empty | Finish the game by typing 'done'"<<std::endl;
+    }
     player->getHand()->printLinkedList();
     std::cout << std::endl;
     std::cout << std::endl;

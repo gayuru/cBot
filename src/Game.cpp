@@ -420,18 +420,19 @@ bool Game::playersHandEmpty()
 void Game::playerTurnPrintDetails(Player *player)
 {
     std::cout << std::endl;
-    std::cout << player->getName() << ", it's your turn\n"
-    << std::endl;
+    std::cout << player->getName() << ", it's your turn\n"<< std::endl;
     displayPlayersScore();
     std::cout << std::endl;
     board->printBoard();
     std::cout << std::endl;
-    std::cout << "Your hand is " << std::endl;
+   
     //GameOver move
     if(player->getHand()->size() == 0){
         std::cout<< "Player hand is Empty | Finish the game by typing 'done'"<<std::endl;
+    }else{
+        std::cout << "Your hand is " << std::endl;
+        player->getHand()->printLinkedList();
     }
-    player->getHand()->printLinkedList();
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "> ";

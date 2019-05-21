@@ -60,7 +60,7 @@ bool Board::makeMoveV(char cRow, int col, Tile *tile)
                 dir = "VERTICALLY";
                 loc = " AT COL : " + std::to_string(coordPlaced[0]->getCol());
             }
-            std::cout << "YOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES " << std::endl;
+            std::cout << "\nYOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES \n" << std::endl;
             std::cout << dir << loc << std::endl;
             std::cout << "BASED ON YOUR PREVIOUS TILE PLACEMENT" << std::endl;
         }
@@ -393,7 +393,7 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile *tile, boo
                     if (vBoard[row][i]->getColour() == vBoard[row][j]->getColour() && vBoard[row][i]->getShape() == vBoard[row][j]->getShape())
                     {
                         pass = false;
-                        std::cout << "----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED ROW----" << std::endl;
+                        std::cout << "\n----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED ROW----\n" << std::endl;
                     }
                 }
             }
@@ -410,7 +410,7 @@ bool Board::noDuplicateCheck(int min, int max, int row, int col, Tile *tile, boo
                     if (vBoard[i][col]->getColour() == vBoard[j][col]->getColour() && vBoard[i][col]->getShape() == vBoard[j][col]->getShape())
                     {
                         pass = false;
-                        std::cout << "----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED COLUMN----" << std::endl;
+                        std::cout << "\n----ERROR: THERE IS A DUPLICATE TILE IN THE SAME CONNECTED COLUMN----\n" << std::endl;
                     }
                 }
             }
@@ -494,7 +494,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                 {
                                     if (!colorShapeCheckV(tile, thisBox, fixType))
                                     {
-                                        std::cout << "ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES" << std::endl;
+                                        std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES\n" << std::endl;
                                         boxPass = false;
                                     }
                                 }
@@ -524,7 +524,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout << "ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES" << std::endl;
+                                            std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES\n" << std::endl;
                                             boxPass = false;
                                         }
                                     }
@@ -568,7 +568,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout << "ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES" << std::endl;
+                                            std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES\n" << std::endl;
                                             boxPass = false;
                                         }
                                     }
@@ -602,7 +602,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                                     {
                                         if (!colorShapeCheckV(tile, thisBox, fixType))
                                         {
-                                            std::cout << "ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES" << std::endl;
+                                            std::cout << "\nERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM VERTICAL, BUT NO DUPLICATES\n" << std::endl;
                                             boxPass = false;
                                         }
                                     }
@@ -630,7 +630,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                         //checks for quirkle
                         if (quirkle)
                         {
-                            std::cout << "--------------QUIRKLE!!!!!!---------------" << std::endl;
+                            std::cout << "\nツ ---- QWIRKLE QWIRKLE  ---- ツ\n" << std::endl;
                         }
                     }
                 }
@@ -639,12 +639,12 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
         //Displays Errors
         else
         {
-            std::cout << "ERROR: THIS TILE SPOT HAS BEEN TAKEN" << std::endl;
+            std::cout << "\nERROR: THIS TILE SPOT HAS BEEN TAKEN\n" << std::endl;
         }
     }
     else
     {
-        std::cout << "ERROR: YOU CANNOT PLACE A TILE OUT OF THE BOUNDS OF THE BOARD" << std::endl;
+        std::cout << "\nERROR: YOU CANNOT PLACE A TILE OUT OF THE BOUNDS OF THE BOARD\n" << std::endl;
     }
     return pass;
 }

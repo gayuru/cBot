@@ -56,7 +56,7 @@ void Game::playerNamePlay(std::string playerName)
             //3-4 player support
             if (players.size() >= 2 && players.size() <= 4)
             {
-                std::cout << "You are done" << std::endl;
+                std::cout << "\n☀ Good Luck ☀" << std::endl;
                 invalid = false;
             }
             else
@@ -106,7 +106,7 @@ void Game::playerNamePlay(std::string playerName)
     if (!std::cin.eof())
     {
         playerSize = players.size();
-        std::cout << "\n👉 Let's Play 👈\n"
+        std::cout << "\nΔ Let's Play Δ"
                   << std::endl;
     }
     else
@@ -394,7 +394,7 @@ void Game::endGame(Status status)
     if (status == GAME_SAVED)
     {
         std::cout << "Game Succesfully Saved!" << std::endl;
-        std::cout << "Goodbye 👋🏼👋🏼" << std::endl;
+        std::cout << "Goodbye ❤" << std::endl;
     }
     else if (status == NOT_FINISHED)
     {
@@ -402,15 +402,15 @@ void Game::endGame(Status status)
     }
     else if (status == EOF_FINISH)
     {
-        std::cout << "\nGoodbye 👋🏼👋🏼" << std::endl;
+        std::cout << "\nGoodbye ❤❤" << std::endl;
     }
     else if (status == GAME_OVER)
     {
-        std::cout << "‼️ Game Over ‼️\n"
+        std::cout << "☯ Game Over ☯\n"
                   << std::endl;
         displayPlayersScore();
-        std::cout << getWinningPlayer()->getName() + " has won 🏆" << std::endl;
-        std::cout << "\nGoodbye 👋🏼👋🏼" << std::endl;
+        std::cout << getWinningPlayer()->getName() + " has won ❤❤❤" << std::endl;
+        std::cout << "\nGoodbye ❤❤" << std::endl;
     }
 }
 

@@ -1,8 +1,11 @@
+#ifndef BOARD_H
+#define BOARD_H
 #include "Player.h"
 #include "Coordinate.h"
+#include "Tile.h"
+#include "TileBag.h"
 #include <vector>
 #include <string>
-#include <algorithm>
 
 #define QUIRKLE 6
 #define CURRENT_TILE 1
@@ -58,3 +61,4 @@ public:
     std::vector<Coordinate *> getCoordPlaced();
     void loadBoard(int rows, int cols, std::vector<Coordinate *> coords, std::vector<Tile *> tiles, std::vector<Coordinate *> coordOrder);
 };
+#endif /* BOARD_H */

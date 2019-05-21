@@ -10,6 +10,9 @@
 #define Console_h
 
 #include <stdio.h>
+#include <iostream>
+#include "TileBag.h"
+#include "Game.h"
 
 class Console{
     

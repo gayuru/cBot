@@ -7,9 +7,6 @@
 //
 
 #include "Console.h"
-#include <iostream>
-#include "TileBag.h"
-#include "Game.h"
 
 //runs the qwirkle game
 void Console::runGame(){

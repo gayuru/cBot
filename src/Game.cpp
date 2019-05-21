@@ -7,13 +7,10 @@
 //  Acknowledgement to: https://stackoverflow.com/questions/10828937/how-to-make-cin-take-only-numbers
 
 #include "Game.h"
-#include <iostream>
-#include <fstream>
-#include <iterator>
 
 Game::Game()
 {
-    board = new Board();
+    board = Board();
     tilebag = new TileBag();
     status = NOT_FINISHED;
     currPlayer = 0;
@@ -22,7 +19,6 @@ Game::Game()
 
 Game::~Game()
 {
-    delete board;
     delete tilebag;
     for(unsigned int p = 0; p < players.size(); ++p){
         delete players[p];
@@ -221,7 +217,7 @@ void Game::playerTurnN()
         if (mainAction == "done")
         {
             //calculates the player points after done with his turn
-            players[currPlayer]->addPoints(board->endPoints());
+            players[currPlayer]->addPoints(board.endPoints());
             //fill players hand
             tilebag->fillPlayerHand(players[currPlayer]->getHand());
             std::cout << "\n•• Switching turns ••"
@@ -321,7 +317,7 @@ void Game::playerTurnN()
                     }
 
                     //checks if the move is valid
-                    if (board->makeMoveV(toupper(row), col, currTile))
+                    if (board.makeMoveV(toupper(row), col, currTile))
                     {
                         //removeTile from players hand
                         players[currPlayer]->useTile(currTile);
@@ -461,7 +457,7 @@ void Game::playerTurnPrintDetails(Player *player)
               << std::endl;
     displayPlayersScore();
     std::cout << std::endl;
-    board->printBoard();
+    board.printBoard();
     std::cout << std::endl;
 
     //GameOver move
@@ -559,7 +555,7 @@ void Game::loadGame(std::string filename)
     }
 
     //reads the board
-    board = new Board();
+    board = Board();
     int tilesOnBoard = 0;
     char next;
     inFile >> next;
@@ -596,7 +592,7 @@ void Game::loadGame(std::string filename)
             }
 
             //resizing the board and placing the tiles in their correct positions
-            board->loadBoard(rows, columns, coords, tiles, coordOrder);
+            board.loadBoard(rows, columns, coords, tiles, coordOrder);
         }
         else
         {
@@ -655,7 +651,7 @@ void Game::saveGame()
         outFile << currPlayer << std::endl;
 
         //save the coordinates of placed tiles, in order
-        std::vector<Coordinate *> coordPlaced = board->getCoordPlaced();
+        std::vector<Coordinate *> coordPlaced = board.getCoordPlaced();
         if (coordPlaced.size() == 0)
         {
             outFile << "null" << std::endl;
@@ -670,9 +666,9 @@ void Game::saveGame()
         }
 
         //save board
-        std::string row = board->getRow(0);
-        int cols = board->getHSize();
-        int rows = board->getVSize();
+        std::string row = board.getRow(0);
+        int cols = board.getHSize();
+        int rows = board.getVSize();
         outFile << "  0";
         for (int c = 1; c != cols; c++)
         {
@@ -698,7 +694,7 @@ void Game::saveGame()
         {
             char letter = 'A' + i;
             outFile << letter;
-            outFile << board->getRow(i) << std::endl;
+            outFile << board.getRow(i) << std::endl;
         }
 
         //save tilebag

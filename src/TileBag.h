@@ -6,8 +6,8 @@
 //  Copyright © 2019 RMIT. All rights reserved.
 //
 
-#ifndef TileBag_h
-#define TileBag_h
+#ifndef TILEBAG_H
+#define TILEBAG_H
 
 #include <stdio.h>
 #include "LinkedList.h"
@@ -18,10 +18,9 @@
 #include <chrono>
 #include "Tile.h"
 
-#include <set>
-
 #define MAX_NUM_COLOUR_SHAPE    6
-#define MAX_NUM_TILES    72
+#define MAX_PLAYER_HAND         6
+#define MAX_NUM_TILES           72
 
 class TileBag{
     
@@ -40,4 +39,4 @@ private:
     LinkedList* tiles;
 };
 
-#endif /* TileBag_hpp */
+#endif /* TILEBAG_H */

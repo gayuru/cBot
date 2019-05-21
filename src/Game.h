@@ -6,8 +6,8 @@
 //  Copyright © 2019 RMIT. All rights reserved.
 //
 
-#ifndef Game_h
-#define Game_h
+#ifndef GAME_H
+#define GAME_H
 
 #define MAX_PLAYER_NAME_LENGTH    150
 #include "Board.h"
@@ -17,6 +17,8 @@
 #include <algorithm>
 #include <string> 
 #include <sstream>
+#include <fstream>
+#include <iterator>
 
 
 class Game{
@@ -31,7 +33,7 @@ private:
         GAME_OVER
     };
     
-    Board* board;
+    Board board;
     TileBag* tilebag;
     Status status;
     int playerSize;
@@ -64,4 +66,4 @@ public:
     Player* getWinningPlayer();
 };
 
-#endif /* Game_hpp */
+#endif /* GAME_H */

@@ -98,7 +98,7 @@ bool TileBag::replaceTile(Tile* tile, LinkedList* hand) {
 bool TileBag::fillPlayerHand(LinkedList* hand) {
     bool pass = true;
     if(!isEmpty()) {
-        for(int i = hand->size(); i < MAX_NUM_COLOUR_SHAPE ;++i) {
+        for(int i = hand->size(); i < MAX_PLAYER_HAND ;++i) {
             if(!isEmpty()) {
                 hand->addBack(getRandomSingleTile());
             }

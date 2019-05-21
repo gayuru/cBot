@@ -44,7 +44,7 @@
 		5524562E22729AC3001B8787 /* TileCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileCodes.h; path = src/TileCodes.h; sourceTree = SOURCE_ROOT; };
 		5524562F22729AC4001B8787 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinkedList.h; path = src/LinkedList.h; sourceTree = SOURCE_ROOT; };
 		552456352272CE1E001B8787 /* Console.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Console.cpp; path = src/Console.cpp; sourceTree = SOURCE_ROOT; };
-		552456362272CE1E001B8787 /* Console.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Console.hpp; path = src/Console.hpp; sourceTree = SOURCE_ROOT; };
+		552456362272CE1E001B8787 /* Console.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Console.h; path = src/Console.h; sourceTree = SOURCE_ROOT; };
 		55261569228C64FF002D4EE8 /* Coordinate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Coordinate.cpp; path = src/Coordinate.cpp; sourceTree = SOURCE_ROOT; };
 		5526156A228C64FF002D4EE8 /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Coordinate.h; path = src/Coordinate.h; sourceTree = SOURCE_ROOT; };
 		55ED6A2F2284FD8A000E963A /* qwirkle */ = {isa = PBXFileReference; lastKnownFileType = file; name = qwirkle; path = src/qwirkle; sourceTree = SOURCE_ROOT; };
@@ -52,9 +52,9 @@
 		55ED6A322284FD8A000E963A /* AddTileTest.input */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTileTest.input; sourceTree = "<group>"; };
 		55ED6A332284FD8A000E963A /* AddTileTest.output */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTileTest.output; sourceTree = "<group>"; };
 		55ED6A342284FD8A000E963A /* TileBag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TileBag.cpp; path = src/TileBag.cpp; sourceTree = SOURCE_ROOT; };
-		55ED6A352284FD8B000E963A /* TileBag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TileBag.hpp; path = src/TileBag.hpp; sourceTree = SOURCE_ROOT; };
+		55ED6A352284FD8B000E963A /* TileBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileBag.h; path = src/TileBag.h; sourceTree = SOURCE_ROOT; };
 		55ED6A362284FD8B000E963A /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Board.cpp; path = src/Board.cpp; sourceTree = SOURCE_ROOT; };
-		55ED6A372284FD8B000E963A /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Game.hpp; path = src/Game.hpp; sourceTree = SOURCE_ROOT; };
+		55ED6A372284FD8B000E963A /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = src/Game.h; sourceTree = SOURCE_ROOT; };
 		55ED6A382284FD8B000E963A /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = src/Game.cpp; sourceTree = SOURCE_ROOT; };
 		55ED6A392284FD8B000E963A /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = src/Board.h; sourceTree = SOURCE_ROOT; };
 		55ED6A3A2284FD8B000E963A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = src/Player.h; sourceTree = SOURCE_ROOT; };
@@ -96,13 +96,13 @@
 				55ED6A362284FD8B000E963A /* Board.cpp */,
 				55ED6A392284FD8B000E963A /* Board.h */,
 				55ED6A382284FD8B000E963A /* Game.cpp */,
-				55ED6A372284FD8B000E963A /* Game.hpp */,
+				55ED6A372284FD8B000E963A /* Game.h */,
 				55ED6A3B2284FD8B000E963A /* Player.cpp */,
 				55ED6A3A2284FD8B000E963A /* Player.h */,
 				55ED6A2F2284FD8A000E963A /* qwirkle */,
 				55ED6A302284FD8A000E963A /* Tests */,
 				55ED6A342284FD8A000E963A /* TileBag.cpp */,
-				55ED6A352284FD8B000E963A /* TileBag.hpp */,
+				55ED6A352284FD8B000E963A /* TileBag.h */,
 				5524562822729AC3001B8787 /* LinkedList.cpp */,
 				5524562F22729AC4001B8787 /* LinkedList.h */,
 				5524562C22729AC3001B8787 /* Makefile */,
@@ -113,7 +113,7 @@
 				5524562B22729AC3001B8787 /* Tile.h */,
 				5524562E22729AC3001B8787 /* TileCodes.h */,
 				552456352272CE1E001B8787 /* Console.cpp */,
-				552456362272CE1E001B8787 /* Console.hpp */,
+				552456362272CE1E001B8787 /* Console.h */,
 			);
 			path = "cBot Assignment 2";
 			sourceTree = "<group>";

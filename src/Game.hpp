@@ -17,21 +17,32 @@
 #include <algorithm>
 #include <string> 
 #include <sstream>
+
+
 class Game{
-    private:
+    
+private:
     std::vector<Player*> players;
-    // Player* players[2];
+    
+    enum Status {
+        NOT_FINISHED,
+        GAME_SAVED,
+        EOF_FINISH,
+        GAME_OVER
+    };
+    
     Board* board;
     TileBag* tilebag;
-    std::string status;
+    Status status;
     int playerSize;
     bool tilePlaced;
     int currPlayer;
     void switchPlayers();
     void multipleTilePlacement();
     void updateGameStatus();
-    void endGame(std::string status);
+    void endGame(Status status);
     bool playersHandEmpty();
+    
 public:
     Game();
     void newGame();
@@ -51,4 +62,5 @@ public:
     void continueLoop();
     Player* getWinningPlayer();
 };
+
 #endif /* Game_hpp */

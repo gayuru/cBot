@@ -15,7 +15,7 @@ Game::Game()
 {
     board = new Board();
     tilebag = new TileBag();
-    status = "NOT_FINISHED";
+    status = NOT_FINISHED;
     currPlayer = 0;
     tilePlaced = false;
 }
@@ -26,7 +26,7 @@ void Game::newGame()
     playerNamePlay(playerName);
 
     //loops until the game is finished
-    while (status == "NOT_FINISHED")
+    while (status == NOT_FINISHED)
     {
         playerTurnPrintDetails(players[currPlayer]);
         playerTurnN();
@@ -205,7 +205,7 @@ void Game::playerTurnN()
         else if (mainAction == "save")
         { //playerInput.substr(0,4) == "save"
             saveGame();
-            status = "GAME_SAVED";
+            status = GAME_SAVED;
             return;
         }
 
@@ -338,38 +338,38 @@ void Game::switchPlayers()
 void Game::updateGameStatus()
 {
     if(std::cin.eof()) {
-        status = "EOF_FINISH";
+        status = EOF_FINISH;
     } 
-    else if (status == "GAME_SAVED")
+    else if (status == GAME_SAVED)
     {
         return;
     }
     else if (playersHandEmpty() && tilebag->isEmpty())
     {
-        status = "GAME_OVER";
+        status = GAME_OVER;
     }
     else
     {
-        status = "NOT_FINISHED";
+        status = NOT_FINISHED;
     }
 }
 
 //Stats for ending the game
-void Game::endGame(std::string status)
+void Game::endGame(Status status)
 {
-    if (status == "GAME_SAVED")
+    if (status == GAME_SAVED)
     {
         std::cout << "Game Succesfully Saved!" << std::endl;
         std::cout << "Goodbye 👋🏼👋🏼" << std::endl;
     }
-    else if (status == "NOT_FINISHED")
+    else if (status == NOT_FINISHED)
     {
         std::cout << "Game is not finished yet!" << std::endl;
     }
-    else if (status == "EOF_FINISH") {
-        std::cout << "Goodbye" << std::endl;
+    else if (status == EOF_FINISH) {
+        std::cout << "\nGoodbye" << std::endl;
     }
-    else if (status == "GAME_OVER")
+    else if (status == GAME_OVER)
     {
         std::cout << "\n\n‼️ Game Over ‼️\n"
                   << std::endl;
@@ -649,7 +649,7 @@ void Game::saveGame()
 void Game::continueLoop()
 {
     //loops until the game is finished
-    while (status == "NOT_FINISHED")
+    while (status == NOT_FINISHED)
     {
         playerTurnPrintDetails(players[currPlayer]);
         playerTurnN();

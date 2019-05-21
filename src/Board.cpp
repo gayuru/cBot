@@ -1,6 +1,4 @@
 #include "Board.h"
-#include "Tile.h"
-#include "TileBag.h"
 
 Board::Board()
 {
@@ -443,7 +441,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
     int maxRowSize = getVSize();
     int maxColSize = getHSize();
     //if the row and col is within the range
-    if (row <= maxRowSize && row >= 0 && col <= maxColSize && col >= 0)
+    if (row < maxRowSize && row >= 0 && col < maxColSize && col >= 0)
     {
         //if the tile place selected is a nullptr
         if (vBoard[row][col] == nullptr)

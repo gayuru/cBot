@@ -1,3 +1,6 @@
+#ifndef ASSIGN2_PLAYER_H
+#define ASSIGN2_PLAYER_H
+
 #include "LinkedList.h"
 
 class Player{
@@ -18,3 +21,5 @@ public:
     void useTile(Tile* tile);
     Tile* hasTile(Tile* tile);
 };
+
+#endif /* ASSIGN2_PLAYER_H */

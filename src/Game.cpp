@@ -36,16 +36,7 @@ void Game::newGame()
     playerNamePlay(playerName);
 
     //loops until the game is finished
-    while (status == NOT_FINISHED)
-    {
-        playerTurnPrintDetails(players[currPlayer]);
-        playerTurnN();
-        switchPlayers();
-        updateGameStatus();
-    }
-
-    //ends the game and shows the results
-    endGame(status);
+    continueLoop();
 }
 
 //input and validation for players

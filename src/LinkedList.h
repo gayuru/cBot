@@ -13,7 +13,6 @@ class LinkedList {
     int size();
     void clear();
     Tile* get(int i);
-    Tile* getFront();
     void addFront(Tile* data);
     void addBack(Tile* data);
 

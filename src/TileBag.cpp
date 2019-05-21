@@ -119,14 +119,15 @@ bool TileBag::isEmpty() {
 
 //returns string format of bag: for writing
 std::string TileBag::toString() {
-    std::string thisString = "";
-    for(int i = 0; i < tiles->size(); ++i) {
-        thisString += tiles->get(i)->toString();
-        if(i < tiles->size() - 1) {
-            thisString += ",";
-        }
-    }
-    return thisString;
+    // std::string thisString = "";
+    // for(int i = 0; i < tiles->size(); ++i) {
+    //     thisString += tiles->get(i)->toString();
+    //     if(i < tiles->size() - 1) {
+    //         thisString += ",";
+    //     }
+    // }
+    // return thisString;
+    return tiles->toString();
 }
 
 //adds a single tile to the back of the tile bag

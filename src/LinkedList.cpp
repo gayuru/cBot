@@ -120,12 +120,7 @@ void LinkedList::deleteAt(int i){
 
 //prints out the content in the linkedlist
 void LinkedList::printLinkedList(){
-    for(int i=0;i<this->size();++i) {
-        std::cout<< this->get(i)->toString();
-        if(i < this->size()-1) {
-            std::cout<< ",";
-        }
-    }
+    std::cout<< this->toString();
 }
 
 //to string method to print out tiles

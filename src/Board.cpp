@@ -809,7 +809,6 @@ void Board::loadBoard(int rows, int cols, std::vector<Coordinate *> coords, std:
         int y = coords[i]->getRow();
         int x = coords[i]->getCol();
         Tile *tile = tiles[i];
-        //coordPlaced.push_back(new Coordinate(x,y));
         vBoard[y][x] = tile;
     }
     coordPlaced = coordOrder;

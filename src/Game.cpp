@@ -20,6 +20,15 @@ Game::Game()
     tilePlaced = false;
 }
 
+Game::~Game()
+{
+    delete board;
+    delete tilebag;
+    for(unsigned int p = 0; p < players.size(); ++p){
+        delete players[p];
+    }
+}
+
 //start of a new game
 void Game::newGame()
 {
@@ -546,7 +555,6 @@ void Game::loadGame(std::string filename)
                         tiles.push_back(tile);
                         Coordinate *coord = new Coordinate(line[0] - 'A', (i - 2) / 3);
                         coords.push_back(coord);
-                        //board->makeMoveV(line[0], i - 2, tile);
                         ++tilesOnBoard;
                     }
                 }
@@ -556,7 +564,6 @@ void Game::loadGame(std::string filename)
             
             //resizing the board and placing the tiles in their correct positions
             board->loadBoard(rows, columns, coords, tiles, coordOrder);
-            board->printBoard();
         }
         else
         {
@@ -576,11 +583,7 @@ void Game::loadGame(std::string filename)
     if(line != "null"){
         char colour;
         int shape;
-        inFile >> next;
-        std::cout << next << std::endl;
-    
-    //tiles->addBack(new Tile(colour, shape));
-    
+        inFile >> next;  
         for (int i = 0; i != 72 - handTiles - tilesOnBoard; i++)
         {
             colour = line[3 * i + 1];
@@ -590,8 +593,6 @@ void Game::loadGame(std::string filename)
     }
     tilebag = new TileBag(tiles);
     getline(std::cin, line);
-    
-    std::cout << tilebag->toString() << std::endl;
 }
 
 //saveGame functionality
@@ -612,11 +613,8 @@ void Game::saveGame()
         for (int p = 0; p != playerSize; p++)
         {
             outFile << players[p]->getName() << std::endl;
-            std::cout << players[p]->getName() << std::endl;
             outFile << players[p]->getScore() << std::endl;
-            std::cout << players[p]->getScore() << std::endl;
             outFile << players[p]->getHand()->toString() << std::endl;
-            std::cout << players[p]->getHand()->toString() << std::endl;
         }
         //save whos turn it is
         outFile << currPlayer << std::endl;

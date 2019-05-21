@@ -32,6 +32,7 @@ void Console::mainMenu(){
         //call the new game method on the view
         Game* qwirkle = new Game();
         qwirkle->newGame();
+        delete qwirkle;
     } else if (i==2) {
         //load a Game
         Game* qwirkle = new Game();
@@ -50,13 +51,14 @@ void Console::mainMenu(){
                 std::cerr << "There was a problem opening the file." << std::endl;
                 std::cout << "Please try again: " << std::endl;
             }
-        }
-        
+        }        
         if(!std::cin.eof()) {
             std::cout << "Game successfully loaded" << std::endl;
             qwirkle->continueLoop();
+            delete qwirkle;
         }else {
             std::cout<<"Goodbye 👋🏼👋🏼"<<std::endl;
+            delete qwirkle;
         }
     }else if (i==3){
         showStudentInfo();

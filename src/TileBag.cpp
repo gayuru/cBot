@@ -17,7 +17,7 @@ TileBag::TileBag(LinkedList* load){
 }
 
 TileBag::~TileBag() {
-    delete[] tiles;
+    delete tiles;
 }
 
 //adding 72 tiles into the tilebag and shuffling the tilebag 

@@ -10,7 +10,9 @@ LinkedList::LinkedList() {
 
 //destructor
 LinkedList::~LinkedList() {
-    this->clear();
+    if(this->size() != 0){
+        this->clear();
+    }
 }
 
 //gets the size of the linkedlist
@@ -34,12 +36,8 @@ Tile* LinkedList::get(int i){
 //clears out the linkedlist
 void LinkedList::clear(){
     while(this->head != nullptr){
-        Node* node = this->head;
-        this->head = node->next;
-        delete node;
+        deleteFront();
     }
-    head = nullptr;
-    back = nullptr;
 }
 
 //adds a tile to the back of the linkedlist
@@ -77,8 +75,9 @@ void LinkedList::deleteFront(){
         head = nullptr;
         back = nullptr;
     }else{
-        Node* storage = head->next;
-        head = storage;
+        Node* node = head;
+        head = node->next;
+        delete node;
     }
     --this->counter;
 }

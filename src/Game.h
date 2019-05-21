@@ -45,6 +45,7 @@ private:
     
 public:
     Game();
+    ~Game();
     void newGame();
     void loadGame(std::string filename);
     void saveGame();

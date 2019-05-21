@@ -504,14 +504,16 @@ void Game::loadGame(std::string filename)
     }
     currPlayer = line[0] - '0';
     
-    //reading the coordinates of placed tiles, in order
+    //reading the coordinates of the tiles placed this turn
     getline(inFile, line);
     std::vector<Coordinate *> coordOrder;
-    for (unsigned int i = 0; i < line.size(); i += 5)
-    {
-        int x = line[i + 1] - '0';
-        int y = line[i + 3] - '0';
-        coordOrder.push_back(new Coordinate(x, y));
+    if(line != "null"){
+        for (unsigned int i = 0; i < line.size(); i += 5)
+        {
+            int x = line[i + 1] - '0';
+            int y = line[i + 3] - '0';
+            coordOrder.push_back(new Coordinate(x, y));
+        }
     }
     
     //reads the board
@@ -569,19 +571,22 @@ void Game::loadGame(std::string filename)
     }
     
     //Reading the tilebag
-    char colour;
-    int shape;
-    //char comma;
-    inFile >> next;
-    std::cout << next << std::endl;
-    LinkedList *tiles = new LinkedList();
-    //tiles->addBack(new Tile(colour, shape));
     getline(inFile, line);
-    for (int i = 0; i != 72 - handTiles - tilesOnBoard; i++)
-    {
-        colour = line[3 * i];
-        shape = line[3 * i + 1] - '0';
-        tiles->addBack(new Tile(colour, shape));
+    LinkedList *tiles = new LinkedList();
+    if(line != "null"){
+        char colour;
+        int shape;
+        inFile >> next;
+        std::cout << next << std::endl;
+    
+    //tiles->addBack(new Tile(colour, shape));
+    
+        for (int i = 0; i != 72 - handTiles - tilesOnBoard; i++)
+        {
+            colour = line[3 * i + 1];
+            shape = line[3 * i + 2] - '0';
+            tiles->addBack(new Tile(colour, shape));
+        }
     }
     tilebag = new TileBag(tiles);
     getline(std::cin, line);
@@ -618,11 +623,14 @@ void Game::saveGame()
         
         //save the coordinates of placed tiles, in order
         std::vector<Coordinate *> coordPlaced = board->getCoordPlaced();
-        for (unsigned int i = 0; i != coordPlaced.size(); ++i)
-        {
-            outFile << '(' << coordPlaced[i]->getRow() << ',' << coordPlaced[i]->getCol() << ')';
+        if(coordPlaced.size() == 0){
+            outFile << "null" << std::endl;
+        } else{
+            for (unsigned int i = 0; i != coordPlaced.size(); ++i){
+                outFile << '(' << coordPlaced[i]->getRow() << ',' << coordPlaced[i]->getCol() << ')';
+            }
+            outFile << std::endl;
         }
-        outFile << std::endl;
         
         //save board
         std::string row = board->getRow(0);
@@ -657,7 +665,11 @@ void Game::saveGame()
         }
         
         //save tilebag
-        outFile << tilebag->toString() << std::endl;
+        if(!(tilebag->isEmpty())){
+            outFile << " " << tilebag->toString() << std::endl;
+        }else{
+            outFile << "null" << std::endl;
+        }
     } else {
         updateGameStatus();
     }

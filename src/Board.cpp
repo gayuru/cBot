@@ -1,6 +1,6 @@
 #include "Board.h"
 #include "Tile.h"
-#include "TileBag.hpp"
+#include "TileBag.h"
 
 Board::Board()
 {

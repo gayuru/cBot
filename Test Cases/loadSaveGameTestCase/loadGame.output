@@ -1,0 +1,53 @@
+Enter the filename from which to load a game:
+>There was a problem opening the file.
+Please try again:
+Enter the filename from which to load a game:
+> -------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 
+  -------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |B2|  |  |
+C |  |  |  |  |  |  |Y6|R6|P6|B6|G6|  |
+D |  |  |  |  |  |  |Y3|R3|P3|B3|  |  |
+E |  |  |  |  |  |G4|Y4|  |P4|  |  |  |
+F |  |  |  |R5|B5|G5|Y5|O5|P5|  |  |  |
+G |  |  |  |  |  |G2|Y2|O2|  |  |  |  |
+H |  |  |  |  |  |G1|Y1|O1|P1|R1|B1|  |
+I |  |  |  |  |  |G3|  |O4|  |  |  |  |
+J |  |Y6|R6|B6|P6|G6|  |O6|  |  |  |  |
+K |  |Y5|  |  |  |  |  |O3|P3|  |  |  |
+L |  |  |  |  |  |  |  |  |  |  |  |  |
+-
+6-4,4-4,5-4,2-4,1-4,5-4,2-4,3-4,4-48
+Game successfully loaded
+
+C, it's your turn
+
+• Score for A: 47
+• Score for B: 52
+• Score for C: 35
+• Score for D: 28
+
+  -------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 
+  -------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |  |  |B2|  |  |
+C |  |  |  |  |  |  |Y6|R6|P6|B6|G6|  |
+D |  |  |  |  |  |  |Y3|R3|P3|B3|  |  |
+E |  |  |  |  |  |G4|Y4|  |P4|  |  |  |
+F |  |  |  |R5|B5|G5|Y5|O5|P5|  |  |  |
+G |  |  |  |  |  |G2|Y2|O2|  |  |  |  |
+H |  |  |  |  |  |G1|Y1|O1|P1|R1|B1|  |
+I |  |  |  |  |  |G3|  |O4|  |  |  |  |
+J |  |Y6|R6|B6|P6|G6|  |O6|  |  |  |  |
+K |  |Y5|  |  |  |  |  |O3|P3|  |  |  |
+L |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+O1,R1,R3,B3,B5,Y4
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Goodbye

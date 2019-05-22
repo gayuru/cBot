@@ -1,0 +1,15 @@
+\nWrong input Please try again !\n
+\nError : Please enter the Player names in Uppercase !\n
+Error : Maximum Player Name Length is 150 characters !
+\n Number of players has to be between 2-4 \n
+rob added into the Game. \n
+\nError : Player Name Has Been Used. Enter A New One !\n
+bob added into the Game. \n
+alex added into the Game. \n
+king added into the Game. \n
+You are done
+\n👉 Let's Play 👈\n
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Goodbye

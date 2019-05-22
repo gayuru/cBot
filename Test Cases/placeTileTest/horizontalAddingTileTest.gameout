@@ -1,0 +1,175 @@
+
+Welcome to Qwirkle!
+-------------------
+
+Menu
+----
+1. New Game
+2. Load Game
+3. Show Student Information
+4. Quit 
+
+> Enter the filename from which to load a game:
+> Game successfully loaded
+
+B, it's your turn
+
+• Score for A: 4
+• Score for B: 0
+
+  ----------------
+   0  1  2  3  4  
+  ----------------
+A |  |  |  |  |  |
+B |  |P2|O2|R2|  |
+C |  |  |  |  |  |
+
+Your hand is 
+O4,Y1,R4,Y6,B3,B2
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+----------------Error: UNKNOWN COMMAND--------------
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Error : We can't do that !!
+
+Error : THERE IS NO SUCH TILE IN YOUR HAND
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+You did not input anything at: 'Place ---> [tile??] at {or/and} --> [location??]' Please try again !
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> Error : THERE IS NO SUCH TILE IN YOUR HAND
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+•• Switching turns ••
+Game is not finished yet!
+
+A, it's your turn
+
+• Score for A: 4
+• Score for B: 0
+
+  ----------------
+   0  1  2  3  4  
+  ----------------
+A |  |  |  |  |  |
+B |  |P2|O2|R2|  |
+C |  |  |  |  |  |
+
+Your hand is 
+O6,G4,Y3,G5,G2,Y1
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> Error : THERE IS NO SUCH TILE IN YOUR HAND
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+A, it's your turn
+
+• Score for A: 4
+• Score for B: 0
+
+  ----------------
+   0  1  2  3  4  
+  ----------------
+A |  |  |  |  |  |
+B |  |P2|O2|R2|  |
+C |  |  |O6|  |  |
+D |  |  |  |  |  |
+
+Your hand is 
+G4,Y3,G5,G2,Y1
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+You can't do the following actions on the same turn : Place Tile and ReplaceTile
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+•• Switching turns ••
+Error : THERE IS NO SUCH TILE IN YOUR HAND
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> Enter the name of the file to save:
+> Game Succesfully Saved!
+
+B, it's your turn
+
+• Score for A: 6
+• Score for B: 0
+
+  ----------------
+   0  1  2  3  4  
+  ----------------
+A |  |  |  |  |  |
+B |  |P2|O2|R2|  |
+C |  |  |O6|  |  |
+D |  |  |  |  |  |
+
+Your hand is 
+O4,Y1,R4,Y6,B3,B2
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Goodbye Δ•Δ 

@@ -1,0 +1,89 @@
+
+Welcome to Qwirkle!
+-------------------
+
+Menu
+----
+1. New Game
+2. Load Game
+3. Show Student Information
+4. Quit 
+
+> 
+Wrong input Please try again !
+
+Menu
+----
+1. New Game
+2. Load Game
+3. Show Student Information
+4. Quit 
+
+> 
+Starting a New Game
+
+• Enter a name for Player 1 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> 
+Error : Please enter the Player names in Uppercase !
+
+• Enter a name for Player 1 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> Error : Maximum Player Name Length is 150 characters !
+• Enter a name for Player 1 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> ROB added into the Game. 
+
+• Enter a name for Player 2 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> 
+ Number of players has to be between 2-4 
+
+• Enter a name for Player 2 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> 
+Error : Player Name Has Been Used. Enter A New One !
+
+• Enter a name for Player 2 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> BOB added into the Game. 
+
+• Enter a name for Player 3 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> ALEX added into the Game. 
+
+• Enter a name for Player 4 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> KING added into the Game. 
+
+
+👉 Let's Play 👈
+
+
+ROB, it's your turn
+
+• Score for ROB: 0
+• Score for BOB: 0
+• Score for ALEX: 0
+• Score for KING: 0
+
+  ----
+   0  
+  ----
+A |  |
+
+Your hand is 
+G5,O6,R2,R2,R1,G4
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Goodbye 👋🏼👋🏼

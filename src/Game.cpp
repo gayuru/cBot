@@ -514,7 +514,7 @@ void Game::loadGame(std::string filename)
         int shape;
         for (unsigned int i = 0; i != 6; i++)
         {
-            if (i < line.length() / 3 + 1)
+            if (i < (line.length() + 1) / 3)
             {
                 colour = line[3 * i];
                 shape = line[3 * i + 1] - '0';
@@ -535,7 +535,7 @@ void Game::loadGame(std::string filename)
     //reading the coordinates of the tiles placed this turn
     getline(inFile, line);
     std::vector<Coordinate *> coordOrder;
-    if (line != "null")
+    if (line.substr(0,4) != "null")
     {
         for (unsigned int i = 0; i < line.size(); i += 5)
         {
@@ -600,7 +600,7 @@ void Game::loadGame(std::string filename)
     //Reading the tilebag
     getline(inFile, line);
     LinkedList *tiles = new LinkedList();
-    if (line != "null")
+    if (line.substr(0,4) != "null")
     {
         char colour;
         int shape;

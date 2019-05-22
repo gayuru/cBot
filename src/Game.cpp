@@ -404,14 +404,14 @@ void Game::endGame(Status &status)
     }
     else if (status == EOF_FINISH)
     {
-        std::cout << "\nGoodbye △▽ " << std::endl;
+        std::cout << "\nGoodbye Δ•Δ " << std::endl;
     }
     else if (status == GAME_OVER)
     {
-        std::cout << "\n△ Game Over ▽\n"<< std::endl;
+        std::cout << "\nΔ•Δ Game Over Δ•Δ\n"<< std::endl;
         displayPlayersScore();
-        std::cout << "\n△▽ " << getWinningPlayer()->getName() + " has won △▽" << std::endl;
-        std::cout << "\nGoodbye △▽" << std::endl;
+        std::cout << "\nΔ•Δ " << getWinningPlayer()->getName() + " has won Δ•Δ" << std::endl;
+        std::cout << "\nGoodbye Δ•Δ" << std::endl;
     }
 }
 

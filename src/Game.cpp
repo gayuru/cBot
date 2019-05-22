@@ -316,7 +316,8 @@ void Game::playerTurnN()
                     {
                         //removeTile from players hand
                         players[currPlayer]->useTile(currTile);
-                        tilePlaced = true; //stops a player from replacing a tile after he places
+                        //stops a player from replacing a tile after he places
+                        tilePlaced = true;
                         //loop until the player decides he want to end his turn
                         multipleTilePlacement();
                     }
@@ -403,14 +404,14 @@ void Game::endGame(Status &status)
     }
     else if (status == EOF_FINISH)
     {
-        std::cout << "\nGoodbye ツ ツ " << std::endl;
+        std::cout << "\nGoodbye △▽ " << std::endl;
     }
     else if (status == GAME_OVER)
     {
         std::cout << "\n△ Game Over ▽\n"<< std::endl;
         displayPlayersScore();
-        std::cout << "\nツ " << getWinningPlayer()->getName() + " has won ツ " << std::endl;
-        std::cout << "\nGoodbye ツ ツ" << std::endl;
+        std::cout << "\n△▽ " << getWinningPlayer()->getName() + " has won △▽" << std::endl;
+        std::cout << "\nGoodbye △▽" << std::endl;
     }
 }
 

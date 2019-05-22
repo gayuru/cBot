@@ -52,7 +52,7 @@ void Game::playerNamePlay(std::string playerName)
             //3-4 player support
             if (players.size() >= 2 && players.size() <= 4)
             {
-                std::cout << "\n☀ Good Luck ☀" << std::endl;
+                std::cout << "\n▀▀▀▀▀▀▀▀▀▀▀ Good Luck ▀▀▀▀▀▀▀▀▀▀▀" << std::endl;
                 invalid = false;
             }
             else
@@ -399,14 +399,14 @@ void Game::endGame(Status &status)
     }
     else if (status == EOF_FINISH)
     {
-        std::cout << "\nGoodbye ❤❤" << std::endl;
+        std::cout << "\nGoodbye ツ ツ " << std::endl;
     }
     else if (status == GAME_OVER)
     {
-        std::cout << "☯ Game Over ☯\n"<< std::endl;
+        std::cout << "\n△ Game Over ▽\n"<< std::endl;
         displayPlayersScore();
-        std::cout << getWinningPlayer()->getName() + " has won ❤❤❤" << std::endl;
-        std::cout << "\nGoodbye ❤❤" << std::endl;
+        std::cout << "\nツ " << getWinningPlayer()->getName() + " has won ツ " << std::endl;
+        std::cout << "\nGoodbye ツ ツ" << std::endl;
     }
 }
 

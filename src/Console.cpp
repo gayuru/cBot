@@ -54,14 +54,14 @@ void Console::mainMenu(){
             qwirkle->continueLoop();
             delete qwirkle;
         }else {
-            std::cout<<"Goodbye ❤❤"<<std::endl;
+            std::cout<<"Goodbye ツ ツ"<<std::endl;
         }
     }else if (i==3){
         showStudentInfo();
     } else if(i==4) {
-        std::cout<<"Goodbye ❤❤"<<std::endl;
+        std::cout<<"Goodbye ツ ツ"<<std::endl;
     } else if(std::cin.eof()) {
-        std::cout<<"Goodbye ❤❤"<<std::endl;
+        std::cout<<"Goodbye ツ ツ"<<std::endl;
     } else {
         if(std::cin.fail()) {
             std::cin.clear();

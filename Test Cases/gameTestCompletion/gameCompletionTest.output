@@ -1,0 +1,528 @@
+
+Welcome to Qwirkle!
+-------------------
+
+Menu
+----
+1. New Game
+2. Load Game
+3. Show Student Information
+4. Quit
+
+>
+
+Enter the filename from which to load a game
+
+>
+
+Game successfully loaded
+
+GAYURU, it's your turn
+
+• Score for GAYURU: 38
+• Score for SEAN: 30
+• Score for DREW: 35
+• Score for MINH: 54
+
+  -------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 
+  -------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |
+H |  |  |  |  |  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |  |  |B4|  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+O1,Y5,R4,P3
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+GAYURU, it's your turn
+
+• Score for GAYURU: 38
+• Score for SEAN: 30
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |  |  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |  |  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |  |  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|  |  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+O1,R4,P3
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+GAYURU, it's your turn
+
+• Score for GAYURU: 38
+• Score for SEAN: 30
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |  |  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |  |  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|  |  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+O1,P3
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+•• Switching turns ••
+Game is not finished yet!
+
+SEAN, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 30
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |  |  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |  |  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R6,R1,Y6
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+SEAN, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 30
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |  |  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R6,Y6
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+•• Switching turns ••
+Game is not finished yet!
+
+DREW, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |  |  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P6,R2
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+•• Switching turns ••
+Game is not finished yet!
+
+MINH, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |  |  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+B1,Y1,Y1
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+MINH, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |B1|  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+Y1,Y1
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+MINH, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 54
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |B1|  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |Y1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+Q |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+Y1
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+•• Switching turns ••
+Game is not finished yet!
+
+GAYURU, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 58
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |B1|  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|  |  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |Y1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+Q |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+O1,P3
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+GAYURU, it's your turn
+
+• Score for GAYURU: 43
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 58
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |B1|  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|O1|  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |Y1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+Q |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+P3
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+•• Switching turns ••
+Game is not finished yet!
+
+SEAN, it's your turn
+
+• Score for GAYURU: 48
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 58
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |  |  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |B1|  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|O1|  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |Y1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+Q |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R6,Y6
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+SEAN, it's your turn
+
+• Score for GAYURU: 48
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 58
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |  |  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |Y6|  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |B1|  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|O1|  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |Y1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+Q |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Your hand is 
+R6
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+SEAN, it's your turn
+
+• Score for GAYURU: 48
+• Score for SEAN: 34
+• Score for DREW: 35
+• Score for MINH: 58
+
+  ----------------------------------------------------
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 
+  ----------------------------------------------------
+A |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+B |  |  |  |  |  |  |  |P5|  |  |  |G6|  |  |  |  |  |
+C |  |  |  |  |  |  |  |P3|  |  |  |G4|  |  |  |  |  |
+D |  |  |  |  |  |  |  |P4|  |  |  |G5|R5|B5|O5|Y5|  |
+E |  |  |  |  |  |  |  |P2|  |R3|Y3|G3|  |  |  |  |  |
+F |  |  |  |  |  |G1|  |P1|  |  |Y2|G2|P2|  |  |  |  |
+G |  |  |  |R6|  |G6|B6|P6|R6|O6|Y6|  |P4|  |  |  |  |
+H |  |  |  |R4|  |  |B5|  |R3|  |Y4|Y2|  |  |  |  |  |
+I |  |  |G1|R1|O1|P1|B1|  |R2|  |  |G2|G3|G4|G5|  |  |
+J |  |  |  |  |O3|  |B2|  |R4|  |B3|B2|  |  |  |  |  |
+K |  |  |  |  |O4|  |B4|  |R1|  |B4|  |  |  |  |  |  |
+L |  |Y6|  |  |O2|  |B3|  |  |  |B6|  |  |  |  |  |  |
+M |  |Y5|R5|P5|O5|  |  |  |  |  |B1|  |  |  |  |  |  |
+N |  |Y3|  |  |O6|O2|O4|O3|O1|  |  |  |  |  |  |  |  |
+O |  |Y4|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+P |  |Y1|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+Q |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+Player hand is Empty | Finish the game by typing 'done'
+
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+•• Switching turns ••
+
+Δ•Δ Game Over Δ•Δ
+
+• Score for GAYURU: 48
+• Score for SEAN: 39
+• Score for DREW: 35
+• Score for MINH: 58
+
+Δ•Δ MINH has won Δ•Δ
+
+Goodbye Δ•Δ 

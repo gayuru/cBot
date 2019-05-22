@@ -464,6 +464,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                 if (leftBox == nullptr && rightBox == nullptr && upBox == nullptr && downBox == nullptr)
                 {
                     pass = false;
+                    std::cout<<"ERROR: There is no tile that is next to your placement!"<<std::endl;
                 }
                 else
                 {
@@ -545,6 +546,9 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                     }
                     if (boxPass)
                     {
+                        fixType = NON_FIX;
+                        minRange = row;
+                        maxRange = row;
                         //checks all the connections on up
                         if (upBox != nullptr)
                         {
@@ -576,9 +580,6 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                     }
                     if (boxPass)
                     {
-                        fixType = NON_FIX;
-                        minRange = row;
-                        maxRange = row;
                         //checks all the connections on down
                         if (downBox != nullptr)
                         {

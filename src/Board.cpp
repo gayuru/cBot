@@ -464,7 +464,7 @@ bool Board::checkValidityV(int col, int row, Tile *tile)
                 if (leftBox == nullptr && rightBox == nullptr && upBox == nullptr && downBox == nullptr)
                 {
                     pass = false;
-                    std::cout<<"ERROR: There is no tile that is next to your placement!"<<std::endl;
+                    std::cout<<"\nERROR: There is no tile that is next to your placement!\n"<<std::endl;
                 }
                 else
                 {

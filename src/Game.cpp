@@ -400,7 +400,7 @@ void Game::endGame(Status &status)
     }
     else if (status == NOT_FINISHED)
     {
-        std::cout << "Game is not finished yet!" << std::endl;
+        std::cout << "Δ•Δ Keep Going Δ•Δ" << std::endl;
     }
     else if (status == EOF_FINISH)
     {

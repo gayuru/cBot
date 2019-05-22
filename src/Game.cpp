@@ -19,9 +19,13 @@ Game::Game()
 
 Game::~Game()
 {
-    delete tilebag;
+    if(!tilebag->isEmpty()){
+        delete tilebag;
+    }
     for(unsigned int p = 0; p < players.size(); ++p){
-        delete players[p];
+        if(players[p]->getHand()->size() != 0){
+            delete players[p];
+        }
     }
 }
 

@@ -23,7 +23,9 @@ void Board::clearBoard()
     {
         for (int col = 0; col < maxCol; col++)
         {
-            delete vBoard[row][col];
+            if(vBoard[row][col]!= nullptr) {
+                delete vBoard[row][col];
+            }
         }
     }
 }

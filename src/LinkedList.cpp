@@ -8,9 +8,10 @@ LinkedList::LinkedList() {
 
 //destructor
 LinkedList::~LinkedList() {
-    if(this->size() != 0){
-        this->clear();
-    }
+    this->clear();
+    // if(this->size() != 0){
+    //     this->clear();
+    // }
 }
 
 //gets the size of the linkedlist

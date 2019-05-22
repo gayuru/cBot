@@ -19,14 +19,16 @@ Game::Game()
 
 Game::~Game()
 {
-    if(!tilebag->isEmpty()){
-        delete tilebag;
+    delete tilebag;
+    for(Player* player: players) 
+    {
+        delete player;
     }
-    for(unsigned int p = 0; p < players.size(); ++p){
-        if(players[p]->getHand()->size() != 0){
-            delete players[p];
-        }
-    }
+    // for(unsigned int p = 0; p < players.size(); ++p){
+    //     if(players[p]->getHand()->size() != 0){
+    //         delete players[p];
+    //     }
+    // }
 }
 
 //start of a new game

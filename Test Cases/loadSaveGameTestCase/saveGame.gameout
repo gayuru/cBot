@@ -1,0 +1,67 @@
+
+Welcome to Qwirkle!
+-------------------
+
+Menu
+----
+1. New Game
+2. Load Game
+3. Show Student Information
+4. Quit 
+
+> 
+Starting a New Game
+
+• Enter a name for Player 1 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> A added into the Game. 
+
+• Enter a name for Player 2 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> B added into the Game. 
+
+• Enter a name for Player 3 (uppercase characters only)
+•• Input 'done' if all the players are entered.
+
+> 
+☀ Good Luck ☀
+
+Δ Let's Play Δ
+
+A, it's your turn
+
+• Score for A: 0
+• Score for B: 0
+
+  ----
+   0  
+  ----
+A |  |
+
+Your hand is 
+G3,G5,P5,B3,P1,R1
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> Enter the name of the file to save:
+> Game Succesfully Saved!
+
+B, it's your turn
+
+• Score for A: 0
+• Score for B: 0
+
+  ----
+   0  
+  ----
+A |  |
+
+Your hand is 
+O4,B4,O4,B2,B5,O6
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+> 
+Goodbye ❤❤

@@ -1,0 +1,213 @@
+
+Welcome to Qwirkle!
+-------------------
+
+Menu
+----
+1. New Game
+2. Load Game
+3. Show Student Information
+4. Quit
+
+>
+
+Enter the filename from which to load a game
+
+>
+
+Game successfully loaded
+
+A, it's your turn
+
+• Score for A: 0
+• Score for B: 0
+
+  ----
+   0  
+  ----
+A |  |
+
+Your hand is 
+Y5,P2,O5,O6,G4,Y3
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+----------------Error: UNKNOWN COMMAND--------------
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+Player doesn't have the entered piece in the hand. Please try again!
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+ERROR: YOU CANNOT PLACE A TILE OUT OF THE BOUNDS OF THE BOARD
+
+Try again.
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+Error : We can't do that !!
+
+Error : THERE IS NO SUCH TILE IN YOUR HAND
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+You did not input anything at: 'Place ---> [tile??] at {or/and} --> [location??]' Please try again !
+
+A, it's your turn
+
+• Score for A: 0
+• Score for B: 0
+
+  ----------
+   0  1  2  
+  ----------
+A |  |  |  |
+B |  |P2|  |
+C |  |  |  |
+
+Your hand is 
+Y5,O5,O6,G4,Y3       
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>           
+
+You can't do the following actions on the same turn : Place Tile and ReplaceTile
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES
+
+Try again.
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+Try again.
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+Game is not finished yet!
+
+A, it's your turn
+
+• Score for A: 1
+• Score for B: 0
+
+  ----------
+   0  1  2  
+  ----------
+A |  |  |  |
+B |  |P2|  |
+C |  |  |  |
+
+Your hand is 
+Y5,O6,G4,Y3,R2,O2
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+A, it's your turn
+
+• Score for A: 1
+• Score for B: 0
+
+  -------------
+   0  1  2  3  
+  -------------
+A |  |  |  |  |
+B |  |P2|O2|  |
+C |  |  |  |  |
+
+Your hand is 
+Y5,O6,G4,Y3,R2
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+A, it's your turn
+
+• Score for A: 1
+• Score for B: 0
+
+  ----------------
+   0  1  2  3  4  
+  ----------------
+A |  |  |  |  |  |
+B |  |P2|O2|R2|  |
+C |  |  |  |  |  |
+
+Your hand is 
+Y5,O6,G4,Y3
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+YOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES 
+
+HORIZONTALLY AT ROW : B
+BASED ON YOUR PREVIOUS TILE PLACEMENT
+Try again.
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+YOU CAN'T PLACE THIS TILE THERE! SINCE YOU PLACED AT LEAST 2 TILES, YOU CAN ONLY PLACE YOUR TILES 
+
+HORIZONTALLY AT ROW : B
+BASED ON YOUR PREVIOUS TILE PLACEMENT
+Try again.
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+ERROR: YOU HAVE TO PLACE THE SAME TYPE OF SHAPE/COLOR FROM HORIZONTAL, BUT NO DUPLICATES
+
+Try again.
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+You can't do the following actions on the same turn : Place Tile and ReplaceTile
+
+If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+
+•• Switching turns ••
+Game is not finished yet!
+
+B, it's your turn
+
+• Score for A: 4
+• Score for B: 0
+
+  ----------------
+   0  1  2  3  4  
+  ----------------
+A |  |  |  |  |  |
+B |  |P2|O2|R2|  |
+C |  |  |  |  |  |
+
+Your hand is 
+O4,Y1,R4,Y6,B3,B2
+
+> If you're not sure what to do at any time, enter 'help'
+Please enter your move:
+>
+Goodbye

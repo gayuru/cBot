@@ -260,8 +260,16 @@ void Game::playerTurnN()
                 //replace the tile with the front of the bag
                 if (players[currPlayer]->hasTile(currTile) != nullptr)
                 {
-                    tilebag->replaceTile(currTile, players[currPlayer]->getHand());
-                    players[currPlayer]->useTile(currTile);
+                    if(tilebag->replaceTile(currTile, players[currPlayer]->getHand())) 
+                    {
+                        players[currPlayer]->useTile(currTile);
+                    }
+                    else 
+                    {
+                        std::cout << "\nYou can't replace a tile, TILEBAG IS EMPTY!!\n"
+                              << std::endl;
+                    }
+
                 }
                 else
                 {

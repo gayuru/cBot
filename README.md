@@ -1,7 +1,7 @@
 # cBot [![CodeFactor](https://www.codefactor.io/repository/github/gayuru/cbot/badge/master)](https://www.codefactor.io/repository/github/gayuru/cbot/overview/master)
 
 
-:video_game: cBot is a command-line game inspired by the board game Qwirkle written in C++. 
+:video_game: cBot is a command-line game inspired by the board game Qwirkle written in C++. <br><br>
 In the implemented Game Qwirkle,
   - A maximum of 4 players can get involved in playing
   - The players will get a randomly shuffled hand of 6 tiles
@@ -32,7 +32,7 @@ $ make all
 ```sh
 $ ./qwirkle
 ```
-:video_game: and you should be welcomed with the following screen :video_game:
+and you should be welcomed with the following screen :bulb:
 ![cBot1](https://imgur.com/Ui7FWkT.jpg)
 
 - A Preloaded Game

@@ -1,6 +1,5 @@
-# cBot 
----
-[![CodeFactor](https://www.codefactor.io/repository/github/gayuru/cbot/badge/master)](https://www.codefactor.io/repository/github/gayuru/cbot/overview/master)
+# cBot [![CodeFactor](https://www.codefactor.io/repository/github/gayuru/cbot/badge/master)](https://www.codefactor.io/repository/github/gayuru/cbot/overview/master)
+
 
 :video_game: cBot is a command-line game inspired by the board game Qwirkle written in C++. 
 In the implemented Game Qwirkle,
@@ -19,9 +18,7 @@ In the implemented Game Qwirkle,
 
 For more game rules :arrow_right: [Qwirkle Game Rules](https://www.ultraqwirkle.com/game-rules.php)
 
-![cBot1](https://imgur.com/aGhju6l.png)
-
-### Installation
+## Installation ##
 
 - Do following commands and all should be good..
 
@@ -37,9 +34,12 @@ $ ./qwirkle
 ```
 :video_game: and you should be welcomed with the following screen :video_game:
 ![cBot1](https://imgur.com/Ui7FWkT.jpg)
-### Developers
----
 
+- A Preloaded Game
+![cBot1](https://imgur.com/aGhju6l.png)
+
+Developers
+---
 - [Gayuru Gunawardena](https://gayurug.com)
 - [Minh Le](https://github.com/rmit-s3722599-Minh-Le)
 - [Sean Lokke](https://github.com/seanlokeee)
